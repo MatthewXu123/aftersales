@@ -52,4 +52,9 @@ public class CustomerServiceImpl implements CustomerService{
 		return customerRepository.findById(id).orElse(null);
 	}
 
+	@Override
+	public Customer getOneByDeptId(int deptId) {
+		return customerRepository.findByDeptId(deptId);
+	}
+
 }

@@ -19,10 +19,10 @@
                 <span class="span-issue" th:text="#{missue.create-time} + ${#dates.format(issue.createTime,'yyyy-MM-dd')}"></span>
                 <span class="span-issue" th:text="#{missue.issue-code} + ${issue.code}"></span>
                 <span class="span-issue" th:text="#{missue.issue-status} + #{'public.status.' + ${issue.processStatus.getDescription()}}"></span>
-                <span class="span-issue word-omit" th:text="#{missue.issue-description} + ${issue.toString()}"></span>
+                <span class="span-issue word-omit whitespace-nowrap" th:text="#{missue.issue-description} + ${issue.toString()}"></span>
             </div>
-            <img th:if="${issue.processStatus == 'PENDING'}" class="img-enter" th:src="@{/static/icon/plus-icon1.svg}" th:code="${issue.code}">
-            <img th:unless="${issue.processStatus == 'PENDING'}" class="img-plus" th:src="@{/static/icon/enter-icon3.svg}" th:code="${issue.code}">
+            <img th:if="${issue.processStatus.description == 'PENDING'}" class="img-dis" th:src="@{/static/icon/plus-icon1.svg}" th:code="${issue.code}">
+            <img th:unless="${issue.processStatus.description == 'PENDING'}" class="img-enter" th:src="@{/static/icon/enter-icon3.svg}" th:code="${issue.code}">
         </div>
         </div>
         <div class="div-noissue flex-container" th:if="${issueList == null || issueList.size() ==0}" >
@@ -40,9 +40,19 @@
         $(".img-enter").click(function(){
         	window.location.href = "/aftersales/mrecord?issueCode=" + $(this).attr("code");
         });
-        $(".img-plus").click(function(){
+        $(".img-dis").click(function(){
         	window.location.href = "/aftersales/missue/" +  $(this).attr("code") + "/distribution";
         });
+        $(".word-omit").click(function(){
+         	if($(this).css("white-space") == "nowrap"){
+         		$(this).removeClass("whitespace-nowrap");
+         		$(this).addClass("whitespace-preline");
+         	}
+         	else{
+         		$(this).removeClass("whitespace-preline");
+         		$(this).addClass("whitespace-nowrap");
+         	}
+         })
     </script>
 </body>
 

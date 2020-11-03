@@ -19,6 +19,8 @@ public interface CustomerService {
 	
 	Customer getOneById(int id);
 	
+	Customer getOneByDeptId(int deptId);
+	
 	Customer saveOne(Customer customer);
 	
 	List<Customer> saveAll(Collection<Customer> customers);

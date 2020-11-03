@@ -53,10 +53,6 @@ public class Customer{
     @JsonIgnore
 	private List<Product> ownedProductList;
     
-    @OneToMany(mappedBy = "repairCustomer")
-    @JsonIgnore
-	private List<Product> repairProductList;
-    
 	private String code;
 	
 	private Integer deptId;
@@ -67,6 +63,8 @@ public class Customer{
 	
 	@Enumerated(EnumType.STRING)
 	private CustomerCategory customerCategory;
+	
+	private boolean isOwnerCustomer;
 	
 	private boolean isShownPolicy;
 	
@@ -125,14 +123,6 @@ public class Customer{
 		this.ownedProductList = ownedProductList;
 	}
 
-	public List<Product> getRepairProductList() {
-		return repairProductList;
-	}
-
-	public void setRepairProductList(List<Product> repairProductList) {
-		this.repairProductList = repairProductList;
-	}
-
 	public void setCode(String code) {
 		this.code = code;
 	}
@@ -159,6 +149,14 @@ public class Customer{
 
 	public void setLoginCode(String loginCode) {
 		this.loginCode = loginCode;
+	}
+
+	public boolean getIsOwnerCustomer() {
+		return isOwnerCustomer;
+	}
+
+	public void setIsOwnerCustomer(boolean isOwnerCustomer) {
+		this.isOwnerCustomer = isOwnerCustomer;
 	}
 
 	public boolean getIsShownPolicy() {

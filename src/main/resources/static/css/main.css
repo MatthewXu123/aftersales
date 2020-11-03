@@ -188,7 +188,7 @@
     background-color: #f5f5f5;
     border-radius: 1.5rem;
 }
-.img-enter,.img-plus{
+.img-enter,.img-dis{
     width: 5rem;
     margin-right: 2rem;
 }
@@ -219,4 +219,21 @@
 .div-noissue{
 	width:100%;
 	height:100%;
+}
+.div-customer{
+	width: 50rem;
+    height: 8rem;
+    margin-top: 1.5rem;
+    margin-bottom: 1.5rem;
+    background-color: #f5f5f5;
+    border-radius: 1.5rem;
+    justify-content: flex-start; 
+    -webkit-justify-content: flex-start;
+}
+.span-customer{
+	font-family:'RG';
+	font-size:3rem;
+}
+.radio-customer {
+	zoom:250%;
 }

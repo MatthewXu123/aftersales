@@ -56,11 +56,6 @@ public class Product {
 	@JsonIgnore
 	private Customer ownerCustomer;
 	
-	@ManyToOne
-	@JoinColumn(name = "repair_customer_id", referencedColumnName = "id")
-	@JsonIgnore
-	private Customer repairCustomer;
-	
 	@OneToMany(mappedBy = "product")
 	@JsonIgnore
 	private List<Issue> issues;
@@ -159,14 +154,6 @@ public class Product {
 
 	public void setOwnerCustomer(Customer ownerCustomer) {
 		this.ownerCustomer = ownerCustomer;
-	}
-
-	public Customer getRepairCustomer() {
-		return repairCustomer;
-	}
-
-	public void setRepairCustomer(Customer repairCustomer) {
-		this.repairCustomer = repairCustomer;
 	}
 
 	public void setIssues(List<Issue> issues) {

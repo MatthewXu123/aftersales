@@ -235,7 +235,7 @@ public class UploadController extends BaseController {
 				
 				HumidifierAlarm humidifierAlarm = new HumidifierAlarm();
 				humidifierAlarm.setDescription(description);
-				humidifierAlarm.setSecDescripiton(secDescription);
+				humidifierAlarm.setSecDescription(secDescription);
 				humidifierAlarm.setCode(alarmCode);
 				humidifierAlarm.setHumidifierType(humidifierType);
 				if(StringUtils.isNotBlank(alarmCode)){

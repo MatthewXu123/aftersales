@@ -13,10 +13,10 @@
             <img class="icon-return" th:src="@{/static/icon/return.svg}">
             <span class="span-header" th:text="#{missuedis.header}"></span>
         </div>
-        <div class="flex-container">
-        	<div th:each="customer : ${customerList}">
-        		<input type="radio" id="${customer.id}">
-        		<span th:text="${customer.name}"></span>
+        <div class="flex-container-column">
+        	<div class="div-customer flex-container" th:each="customer : ${customerList}">
+        		<input class="radio-customer" type="radio" th:id="${customer.id}">
+        		<span class="span-customer" th:text="${customer.name}"></span>
         	</div>
         </div>
         <div class="div-submit flex-container">
@@ -27,6 +27,19 @@
     <script th:src="@{/static/js/jquery/jquery.min.js}" type="text/javascript"></script>
     <script th:src="@{/static/js/common.js}" type="text/javascript"></script>
     <script th:inline="javascript">
+    var repairCustomerId = "";
+    $(".div-customer").click(function(){
+		repairCustomerId = $(this).children(".radio-customer").attr("id");
+		$(".radio-customer").each(function(){
+			if($(this).attr("id") != repairCustomerId)
+				$(this).prop("checked",false);
+			else
+				$(this).prop("checked",true);
+		})
+	});
+    $(".span-submit").click(function(){
+    	window.location.href="/aftersales/"
+    })
     </script>
 </body>
 

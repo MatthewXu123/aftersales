@@ -21,6 +21,7 @@ import org.hibernate.annotations.UpdateTimestamp;
 
 import com.carel.persistence.constant.EvaluationLevel;
 import com.carel.persistence.constant.ProcessStatus;
+import com.carel.persistence.entity.community.Customer;
 import com.carel.persistence.entity.product.HumidifierAlarm;
 import com.carel.persistence.entity.product.Product;
 import com.carel.util.DateUtil;
@@ -40,6 +41,10 @@ public class Issue{
 	@ManyToOne
 	@JoinColumn(name = "pid", referencedColumnName = "id")
 	private Product product;
+
+	@OneToOne
+	@JoinColumn(name="repair_customer_id", referencedColumnName = "id")
+	private Customer customer;
 	
 	@OneToOne(mappedBy = "issue")
 	@JsonIgnore
@@ -97,6 +102,14 @@ public class Issue{
 
 	public void setProduct(Product product) {
 		this.product = product;
+	}
+	
+	public Customer getCustomer() {
+		return customer;
+	}
+
+	public void setCustomer(Customer customer) {
+		this.customer = customer;
 	}
 
 	public MaintenanceRecord getMaintenanceRecord() {
@@ -213,5 +226,13 @@ public class Issue{
 		this.updateTime = updateTime;
 	}
 
-	
+	@Override
+	public String toString() {
+		return "用户名：" + username +
+				"；\n联系方式：" + userPhone + 
+				"；\n安装地点：" + product.getInstallationInfo().getAddress() + 
+				"；\n故障原因：" + hAlarm.getCode() + "-" + hAlarm.getSecDescription() + 
+				"；\n其他：" + comment;
+	}
+
 }

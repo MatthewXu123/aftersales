@@ -13,7 +13,7 @@ $(function(){
     	}else{
     		$(this).removeClass("border-red");
     	}
-    })
+    });
 })
 
 function resizeFontSize(){

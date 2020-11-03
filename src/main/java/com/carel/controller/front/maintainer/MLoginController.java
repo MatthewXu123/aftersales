@@ -1,6 +1,8 @@
 
 package com.carel.controller.front.maintainer;
 
+import java.util.List;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
@@ -15,6 +17,8 @@ import com.alibaba.fastjson.JSONObject;
 import com.carel.controller.BaseController;
 import com.carel.persistence.entity.community.Customer;
 import com.carel.persistence.entity.product.Product;
+
+import me.chanjar.weixin.cp.bean.WxCpDepart;
 
 /**
  * Description:
@@ -55,6 +59,16 @@ public class MLoginController extends BaseController{
 				Integer pid = getPid();
 				Product product = productService.getOneById(pid);
 				if(product.getOwnerCustomer() == null){
+					if(!customer.getIsOwnerCustomer()){
+						long customerId = (long)customer.getDeptId();
+						List<WxCpDepart> list = wxCpDepartmentService.list(customerId);
+						for (WxCpDepart wxCpDepart : list) {
+							if(wxCpDepart.getId() == customerId){
+								customer = customerService.getOneByDeptId(wxCpDepart.getParentId().intValue());
+								break;
+							}
+						}
+					}
 					product.setOwnerCustomer(customer);
 					productService.saveOne(product);
 				}

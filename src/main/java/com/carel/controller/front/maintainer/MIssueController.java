@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.carel.controller.BaseController;
+import com.carel.persistence.entity.community.Customer;
 import com.carel.persistence.entity.main.Issue;
 import com.carel.persistence.entity.product.Product;
 
@@ -40,13 +41,18 @@ public class MIssueController extends BaseController{
 			Integer pid = getPid();
 			if(pid != null){
 				Product product = productService.getOneById(pid);
-				if(customerService.getOneByLoginCode(loginCode) != null){
+				Customer customer = customerService.getOneByLoginCode(loginCode);
+				Issue issue = issueService.getOneByPid(pid);
+				Issue issue2 = issueService.getOneByCustomerId(customer.getId());
+				if(customer.getIsOwnerCustomer() || (issue2 != null && issue.getCode().equals(issue2.getCode())))
+					issueList.add(issue);
+				/*if(customerService.getOneByLoginCode(loginCode) != null){
 					Issue issue = issueService.getOneByPid(pid);
 					if(issue != null)
 						issueList.add(issue);
 				}else if(customerService.getOneByLoginCode(loginCode) != null){
 					issueList = issueService.getAllByPid(pid);
-				}
+				}*/
 				model.addAttribute("product", product);
 			}
 			model.addAttribute("issueList", issueList);
@@ -77,8 +83,7 @@ public class MIssueController extends BaseController{
 	
 	@PostMapping(value = {"/{issueCode}/distribution"})
 	public String postUIssueDistribution(@ModelAttribute @PathVariable(required = false) String issueCode, 
-			@RequestParam Integer bindCustomerId,
-			@RequestParam Integer disCustomerId, 
+			@RequestParam Integer repairCustomerId, 
 			Model model){
 		try {
 			Integer pid = getPid();

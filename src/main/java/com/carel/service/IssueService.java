@@ -18,6 +18,8 @@ public interface IssueService {
 	
 	Issue getOneByPid(int pid);
 	
+	Issue getOneByCustomerId(int customerId);
+	
 	List<Issue> getAllByPid(int pid);
 	
 	Issue getOneById(int id);

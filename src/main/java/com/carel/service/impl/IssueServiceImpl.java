@@ -56,5 +56,10 @@ public class IssueServiceImpl implements IssueService{
 	public Issue getOneByCode(String code) {
 		return issueRepository.findByCode(code);
 	}
+
+	@Override
+	public Issue getOneByCustomerId(int customerId) {
+		return issueRepository.findByCustomerId(customerId);
+	}
 	
 }
