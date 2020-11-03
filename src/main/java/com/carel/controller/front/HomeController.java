@@ -12,7 +12,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.alibaba.fastjson.JSONObject;
 import com.carel.controller.BaseController;
-import com.carel.persistence.common.RestResult;
 import com.carel.persistence.entity.product.Product;
 
 /**

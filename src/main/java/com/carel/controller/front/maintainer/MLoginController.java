@@ -1,7 +1,6 @@
 
 package com.carel.controller.front.maintainer;
 
-import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
@@ -52,9 +51,14 @@ public class MLoginController extends BaseController{
 			if(customer == null)
 				return resultFactory.getFailResultJSON();
 			else{
+				// To bind the product with the owner customer.
 				Integer pid = getPid();
 				Product product = productService.getOneById(pid);
-				product.setCustomer(customer);
+				if(product.getOwnerCustomer() == null){
+					product.setOwnerCustomer(customer);
+					productService.saveOne(product);
+				}
+					
 				httpSession.setAttribute("loginCode", loginCode);
 				return resultFactory.getSuccessResultJSON();
 			}

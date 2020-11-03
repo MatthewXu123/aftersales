@@ -33,6 +33,11 @@ public class ProdcutServiceImpl implements ProductService{
 	public Product getOneBySNAndPCode(String sn, String pcode) {
 		return productRepository.findBySerialNumberAndProductInfoProductCode(sn, pcode);
 	}
+
+	@Override
+	public Product saveOne(Product product) {
+		return productRepository.save(product);
+	}
 	
 	
 

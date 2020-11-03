@@ -52,10 +52,14 @@ public class Product {
 	private Date productionDate;
 	
 	@ManyToOne
-	@JoinColumn(name = "customer_id", referencedColumnName = "id")
+	@JoinColumn(name = "owner_customer_id", referencedColumnName = "id")
 	@JsonIgnore
-	//private Order order;
-	private Customer customer;
+	private Customer ownerCustomer;
+	
+	@ManyToOne
+	@JoinColumn(name = "repair_customer_id", referencedColumnName = "id")
+	@JsonIgnore
+	private Customer repairCustomer;
 	
 	@OneToMany(mappedBy = "product")
 	@JsonIgnore
@@ -149,12 +153,20 @@ public class Product {
 		return issues;
 	}
 
-	public Customer getCustomer() {
-		return customer;
+	public Customer getOwnerCustomer() {
+		return ownerCustomer;
 	}
 
-	public void setCustomer(Customer customer) {
-		this.customer = customer;
+	public void setOwnerCustomer(Customer ownerCustomer) {
+		this.ownerCustomer = ownerCustomer;
+	}
+
+	public Customer getRepairCustomer() {
+		return repairCustomer;
+	}
+
+	public void setRepairCustomer(Customer repairCustomer) {
+		this.repairCustomer = repairCustomer;
 	}
 
 	public void setIssues(List<Issue> issues) {
@@ -207,13 +219,4 @@ public class Product {
 		return getWarrantyDate() == null ? false : new Date().before(getWarrantyDate());
 	}
 	
-	public String getInstallationAddress(){
-		if (this.installationInfo != null)
-			return this.installationInfo.getProvince() + " " 
-				+ this.installationInfo.getCity() + " "
-				+ this.installationInfo.getDistrict() + " "
-				+ this.installationInfo.getStreet() + " "
-				+ this.installationInfo.getAddress();
-		return "";
-	}
 }

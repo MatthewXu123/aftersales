@@ -49,9 +49,13 @@ public class Customer{
 //	@JsonIgnore
 //	private List<Order> orders;
     
-    @OneToMany(mappedBy = "customer")
+    @OneToMany(mappedBy = "ownerCustomer")
     @JsonIgnore
-	private List<Product> productList;
+	private List<Product> ownedProductList;
+    
+    @OneToMany(mappedBy = "repairCustomer")
+    @JsonIgnore
+	private List<Product> repairProductList;
     
 	private String code;
 	
@@ -113,12 +117,20 @@ public class Customer{
 		return code;
 	}
 
-	public List<Product> getProductList() {
-		return productList;
+	public List<Product> getOwnedProductList() {
+		return ownedProductList;
 	}
 
-	public void setProductList(List<Product> productList) {
-		this.productList = productList;
+	public void setOwnedProductList(List<Product> ownedProductList) {
+		this.ownedProductList = ownedProductList;
+	}
+
+	public List<Product> getRepairProductList() {
+		return repairProductList;
+	}
+
+	public void setRepairProductList(List<Product> repairProductList) {
+		this.repairProductList = repairProductList;
 	}
 
 	public void setCode(String code) {

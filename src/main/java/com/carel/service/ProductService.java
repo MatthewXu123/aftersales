@@ -19,4 +19,6 @@ public interface ProductService {
 	
 	Product getOneBySNAndPCode(String sn, String pcode);
 	
+	Product saveOne(Product product);
+	
 }

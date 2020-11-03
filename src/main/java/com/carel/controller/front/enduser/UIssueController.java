@@ -1,8 +1,6 @@
 
 package com.carel.controller.front.enduser;
 
-import java.util.List;
-
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 
@@ -20,11 +18,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.carel.controller.BaseController;
-import com.carel.persistence.entity.community.Customer;
 import com.carel.persistence.entity.main.Issue;
 import com.carel.persistence.entity.product.Product;
-
-import me.chanjar.weixin.cp.bean.WxCpDepart;
 
 /**
  * Description:
@@ -87,14 +82,13 @@ public class UIssueController extends BaseController{
 				//When the new issue is submitted, we send the message to the related customer.
 				
 				wxCpMsgService.sendMsgToParty(wxCpMsgProperty.getNewIssue() + getDistributionURL(request), 
-						String.valueOf(product.getCustomer().getDeptId()),
+						String.valueOf(product.getOwnerCustomer().getDeptId()),
 						new Object[]{
 								issueCode,
 								userIssue.getUsername(), 
 								userIssue.getUserPhone(), 
-								product.getInstallationAddress(),
+								product.getInstallationInfo().getAddress(),
 								userIssue.getAlarmCode(),
-								null,
 								userIssue.getComment()
 								});
 			}else{
