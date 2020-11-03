@@ -10,6 +10,7 @@ import org.springframework.stereotype.Component;
 import com.carel.component.ResultFactory;
 import com.carel.property.wxcpmsg.WxCpMsgProperty;
 import com.carel.service.CustomerService;
+import com.carel.service.HumidifierAlarmService;
 import com.carel.service.InstallationInfoService;
 import com.carel.service.IssueService;
 import com.carel.service.MaintenanceRecordService;
@@ -59,6 +60,9 @@ public class BaseController {
 	
 	@Autowired
 	protected MaintenanceRecordService maintenanceRecordService;
+	
+	@Autowired
+	protected HumidifierAlarmService humidifierAlarmService;
 	
 	@Autowired 
 	protected WxCpConfigStorage wxCpConfigStorage;

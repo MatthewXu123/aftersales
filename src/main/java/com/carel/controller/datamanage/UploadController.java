@@ -9,12 +9,14 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.commons.lang3.StringUtils;
 import org.apache.poi.EncryptedDocumentException;
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.usermodel.Workbook;
 import org.apache.poi.ss.usermodel.WorkbookFactory;
+import org.apache.poi.util.StringUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
@@ -29,8 +31,10 @@ import org.springframework.web.multipart.MultipartFile;
 import com.alibaba.fastjson.JSONObject;
 import com.carel.controller.BaseController;
 import com.carel.persistence.constant.CustomerCategory;
+import com.carel.persistence.constant.HumidifierType;
 import com.carel.persistence.entity.community.Customer;
 import com.carel.persistence.entity.community.Sales;
+import com.carel.persistence.entity.product.HumidifierAlarm;
 
 /**
  * Description:
@@ -188,6 +192,62 @@ public class UploadController extends BaseController {
 			salesService.saveAll(salesMap.values());
 		} catch (EncryptedDocumentException | IOException e) {
 			logger.error("",e);
+			return resultFactory.getFailResultJSON();
+		}
+		return resultFactory.getSuccessResultJSON();
+	}
+	
+	@PostMapping("/halarms_huh")
+	@ResponseBody
+	public JSONObject getHalarmsHUH(@ModelAttribute("filepath")String filepath){
+		return getHAlarmsSaved(filepath, HumidifierType.HUH);
+	}
+	
+	@PostMapping("/halarms_hut")
+	@ResponseBody
+	public JSONObject getHalarmsHUT(@ModelAttribute("filepath")String filepath){
+		return getHAlarmsSaved(filepath, HumidifierType.HUT);
+	}
+	
+	/**
+	 * 
+	 * Description:
+	 * @param filePath
+	 * @param humidifierType
+	 * @return
+	 * @author Matthew Xu
+	 * @date Nov 3, 2020
+	 */
+	public JSONObject getHAlarmsSaved(String filePath, HumidifierType humidifierType){
+		try {
+			InputStream is = UploadController.class.getClassLoader().getResourceAsStream(filePath);
+			Workbook workbook = WorkbookFactory.create(is);
+			Sheet sheet = workbook.getSheetAt(0);
+			int rowNum = sheet.getLastRowNum();
+			List<HumidifierAlarm> list = new ArrayList<>();
+			for(int i = 1; i < rowNum; i++){
+				Row row = sheet.getRow(i);
+				if(row == null)
+					break;
+				String description = getCellString(row, 0);
+				String secDescription = getCellString(row, 1);
+				String alarmCode = getCellString(row, 2);
+				
+				HumidifierAlarm humidifierAlarm = new HumidifierAlarm();
+				humidifierAlarm.setDescription(description);
+				humidifierAlarm.setSecDescripiton(secDescription);
+				humidifierAlarm.setCode(alarmCode);
+				humidifierAlarm.setHumidifierType(humidifierType);
+				if(StringUtils.isNotBlank(alarmCode)){
+					HumidifierAlarm oldOne = humidifierAlarmService.getOneByCodeAndType(alarmCode, humidifierType);
+					if(oldOne != null){
+						humidifierAlarm.setId(oldOne.getId());
+					}
+				}
+				list.add(humidifierAlarm);
+			}	
+			humidifierAlarmService.saveAll(list);
+		} catch (Exception e) {
 			return resultFactory.getFailResultJSON();
 		}
 		return resultFactory.getSuccessResultJSON();
