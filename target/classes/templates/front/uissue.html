@@ -37,10 +37,10 @@
                 	</div>
                 	<div class="div-form-cause flex-container">
                     	<span class="span-form" th:text="#{umain.failure}"></span>
-                    	<input name="alarmCode" class="input-alarmCode" type="hidden">
-                    	<select class="select-cause" th:value="${issue != null ? issue.alarmCode : ''}">
+                    	<input name="alarmId" class="input-alarmCode" type="hidden">
+                    	<select class="select-cause" th:value="${issue != null ? issue.hAlarm.id : ''}">
                     		<div th:each="alarm : ${product.productInfo.humidifierAlarms}">
-                        		<option class="option-alarmCode" th:value="${alarm.code}" th:text="${alarm.code} + ' ' + ${alarm.description}"></option>
+                        		<option class="option-alarmCode" th:value="${alarm.id}" th:text="${alarm.code} + '-' + ${alarm.secDescription}"></option>
                     		</div>
                     	</select>
                 	</div>

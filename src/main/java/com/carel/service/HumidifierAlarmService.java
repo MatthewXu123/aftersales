@@ -15,6 +15,8 @@ public interface HumidifierAlarmService {
 
 	List<HumidifierAlarm> saveAll(List<HumidifierAlarm> humidifierAlarms);
 	
+	HumidifierAlarm getOneById(Integer alarmId);
+	
 	HumidifierAlarm getOneByCode(String alarmCode);
 	
 	HumidifierAlarm getOneByCodeAndType(String code, HumidifierType humidifierType);

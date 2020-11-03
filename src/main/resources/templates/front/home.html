@@ -13,11 +13,16 @@
 				<option class="option-i18n" value="zh-CN">中文</option>
 				<option class="option-i18n" value="en-US">English</option>
 			</select>
-			<div class="flex-container display-none div-sn">
-				<input class="input-sn" type="text" th:placeholder="#{home.sn}">
-				<img class="img-enter" th:src="@{/static/icon/enter-icon3.svg}">
+			<div class="flex-container-column display-none div-sn">
+				<div class="flex-container">
+					<input class="input-sn" type="text" th:placeholder="#{home.sn}">
+					<img class="img-enter" th:src="@{/static/icon/enter-icon3.svg}">
+				</div>
+				<!-- <div>
+					<a class="a-snwhere display-none" th:href="@{/static/img/huh.jpg}" th:text="#{home.sn-where}"></a>
+				</div> -->
 			</div>
-			<a class="a-snwhere display-none" th:href="@{/static/img/huh.jpg}" th:text="#{home.sn-where}"></a>
+			
 			<div id="div_home" class="fade-in-section">
 				<div id="div_home_u" class="div-home-user flex-container-column">
 					<img class="img-home-user" th:src="@{/static/icon/user-icon.svg}">

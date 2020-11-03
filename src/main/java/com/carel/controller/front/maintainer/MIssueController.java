@@ -9,11 +9,17 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.carel.controller.BaseController;
 import com.carel.persistence.entity.main.Issue;
 import com.carel.persistence.entity.product.Product;
+
+import me.chanjar.weixin.cp.bean.WxCpDepart;
 
 /**
  * Description:
@@ -45,6 +51,58 @@ public class MIssueController extends BaseController{
 			}
 			model.addAttribute("issueList", issueList);
 			return "/front/missue";
+		} catch (Exception e) {
+			logger.error("",e);
+			return "/front/error";
+		}
+		
+	}
+	
+	@GetMapping(value = {"/{issueCode}/distribution"})
+	public String getUIssueDistribution(@ModelAttribute @PathVariable(required = false) String issueCode, Model model){
+		try {
+			Integer pid = getPid();
+			if(pid != null){
+				Issue issue = issueCode == null ? null : issueService.getOneByCode(issueCode);
+				Product product = productService.getOneById(pid);
+				model.addAttribute("customerList", wxCpDepartmentService.list((long)product.getOwnerCustomer().getDeptId()));
+			}
+			return "/front/missuedis";
+		} catch (Exception e) {
+			logger.error("",e);
+			return "/front/error";
+		}
+		
+	}
+	
+	@PostMapping(value = {"/{issueCode}/distribution"})
+	public String postUIssueDistribution(@ModelAttribute @PathVariable(required = false) String issueCode, 
+			@RequestParam Integer bindCustomerId,
+			@RequestParam Integer disCustomerId, 
+			Model model){
+		try {
+			Integer pid = getPid();
+			if(pid != null){
+/*				Issue issue = issueCode == null ? null : issueService.getOneByCode(issueCode);
+				Product product = productService.getOneById(pid);
+				if(!bindCustomerId.equals(disCustomerId)){
+					Customer disCustomer = customerService.getOneById(disCustomerId);
+					wxCpMsgService.sendMsgToParty(wxCpMsgProperty.getNewIssue(), 
+							disCustomer.getDeptId(),
+							new Object[]{
+									issueCode,
+									issue.getUsername(), 
+									issue.getUserPhone(), 
+									product.getInstallationAddress(),
+									issue.getAlarmCode(),
+									null,
+									issue.getComment(),
+									""
+									});
+				}
+				model.addAttribute("deptList", wxCpDepartmentService.list(customerId));*/
+			}
+			return "/front/uissue";
 		} catch (Exception e) {
 			logger.error("",e);
 			return "/front/error";

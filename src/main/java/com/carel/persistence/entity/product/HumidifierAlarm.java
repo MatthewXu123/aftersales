@@ -38,7 +38,7 @@ public class HumidifierAlarm {
 	
 	private String description;
 	
-	private String secDescripiton;
+	private String secDescription;
 	
 	@Enumerated(EnumType.STRING)
 	private HumidifierType humidifierType;
@@ -82,12 +82,12 @@ public class HumidifierAlarm {
 		this.description = description;
 	}
 	
-	public String getSecDescripiton() {
-		return secDescripiton;
+	public String getSecDescription() {
+		return secDescription;
 	}
 
-	public void setSecDescripiton(String secDescripiton) {
-		this.secDescripiton = secDescripiton;
+	public void setSecDescription(String secDescription) {
+		this.secDescription = secDescription;
 	}
 
 	public HumidifierType getHumidifierType() {

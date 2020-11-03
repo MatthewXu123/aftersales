@@ -18,6 +18,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.carel.controller.BaseController;
 import com.carel.persistence.entity.main.Issue;
+import com.carel.persistence.entity.product.HumidifierAlarm;
 import com.carel.persistence.entity.product.Product;
 
 /**
@@ -54,6 +55,7 @@ public class UIssueController extends BaseController{
 	public String updateUserIssue(
 			@PathVariable(required = false) String issueCode,
 			@Valid Issue userIssue,
+			@RequestParam Integer alarmId,
 			@RequestParam MultipartFile p1,
 			@RequestParam MultipartFile p2,
 			@RequestParam MultipartFile p3,
@@ -76,6 +78,7 @@ public class UIssueController extends BaseController{
 				userIssue.setPhoto3(p3.getBytes());
 				userIssue.setProduct(product);
 				userIssue.setCode(userIssue.getCode());
+				userIssue.sethAlarm(humidifierAlarmService.getOneById(alarmId));
 				issueCode = issueService.saveNewPendingIssue(userIssue).getCode();
 				
 				//When the new issue is submitted, we send the message to the related customer.
@@ -87,7 +90,7 @@ public class UIssueController extends BaseController{
 								userIssue.getUsername(), 
 								userIssue.getUserPhone(), 
 								product.getInstallationInfo().getAddress(),
-								userIssue.getAlarmCode(),
+								userIssue.gethAlarm().getSecDescription(),
 								userIssue.getComment()
 								});
 			}else{
@@ -111,6 +114,7 @@ public class UIssueController extends BaseController{
 				userIssue.setProduct(product);
 				userIssue.setCode(oldIssue.getCode());
 				userIssue.setProcessStatus(oldIssue.getProcessStatus());
+				userIssue.sethAlarm(humidifierAlarmService.getOneById(alarmId));
 				issueCode = issueService.saveIssue(userIssue).getCode();
 			}
 			return "redirect:/uissue/" + issueCode;
@@ -120,63 +124,11 @@ public class UIssueController extends BaseController{
 		}
 	}
 	
-	@GetMapping(value = {"/{issueCode}/distribution"})
-	public String getUIssueDistribution(@ModelAttribute @PathVariable(required = false) String issueCode, Model model){
-		try {
-			Integer pid = getPid();
-			if(pid != null){
-				Issue issue = issueCode == null ? null : issueService.getOneByCode(issueCode);
-				Product product = productService.getOneById(pid);
-				long customerId = 2869;
-				model.addAttribute("deptList", wxCpDepartmentService.list(customerId));
-			}
-			return "/front/uissue";
-		} catch (Exception e) {
-			logger.error("",e);
-			return "/front/error";
-		}
-		
-	}
-	
-	@PostMapping(value = {"/{issueCode}/distribution"})
-	public String postUIssueDistribution(@ModelAttribute @PathVariable(required = false) String issueCode, 
-			@RequestParam Integer bindCustomerId,
-			@RequestParam Integer disCustomerId, 
-			Model model){
-		try {
-			Integer pid = getPid();
-			if(pid != null){
-/*				Issue issue = issueCode == null ? null : issueService.getOneByCode(issueCode);
-				Product product = productService.getOneById(pid);
-				if(!bindCustomerId.equals(disCustomerId)){
-					Customer disCustomer = customerService.getOneById(disCustomerId);
-					wxCpMsgService.sendMsgToParty(wxCpMsgProperty.getNewIssue(), 
-							disCustomer.getDeptId(),
-							new Object[]{
-									issueCode,
-									issue.getUsername(), 
-									issue.getUserPhone(), 
-									product.getInstallationAddress(),
-									issue.getAlarmCode(),
-									null,
-									issue.getComment(),
-									""
-									});
-				}
-				model.addAttribute("deptList", wxCpDepartmentService.list(customerId));*/
-			}
-			return "/front/uissue";
-		} catch (Exception e) {
-			logger.error("",e);
-			return "/front/error";
-		}
-		
-	}
 	
 	private String getDistributionURL(HttpServletRequest request){
 		StringBuffer requestURL = request.getRequestURL();
 		requestURL.append("/distribution");
-		return "\n\n<a href=\"" + requestURL.toString() + "\">点击进行分配</a>";
+		return "\n<a href=\"" + requestURL.toString() + "\">点击进行分配</a>";
 	}
 	
 }

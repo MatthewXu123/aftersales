@@ -42,4 +42,9 @@ public class HumidifierAlarmServiceImpl implements HumidifierAlarmService{
 		return humidifierAlarmRepository.findByCodeAndHumidifierType(code, humidifierType);
 	}
 
+	@Override
+	public HumidifierAlarm getOneById(Integer alarmId) {
+		return humidifierAlarmRepository.findById(alarmId).orElse(null);
+	}
+
 }

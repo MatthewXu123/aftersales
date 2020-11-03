@@ -2,7 +2,7 @@ $(function() {
 	var evaluationLevel = "";
 	if(issue != null){
 		$(".option-alarmCode").each(function(){
-			if($(this).val() == issue.alarmCode)
+			if($(this).val() == issue.hAlarm.id)
 				$(this).attr("selected",true);
 		})
 	}
