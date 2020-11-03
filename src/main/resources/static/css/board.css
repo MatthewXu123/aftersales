@@ -1,0 +1,56 @@
+.div-product{
+    height: 55rem;
+    background-color: #EEEEEE;
+}
+.div-product-u{
+    height: 68%;
+    background-color: #EEEEEE;
+}
+.img-product{
+    height: 30rem;
+}
+.span-product{
+    font-family: 'RG';
+    font-size: 2rem;
+    margin-top: 0.6rem;
+    font-weight: bold;
+}
+.span-product-special{
+    margin-bottom: 3rem;
+}
+.div-product-details{
+    align-items: flex-start !important;
+    height: 20rem;
+    justify-content: start !important;
+    margin-right: 0.8rem;
+}
+.div-product-details2{
+	margin-top: 1rem;
+}
+.div-fun-button{
+    width: 13rem;
+    height: 13rem;
+    background-color: #EEEEEE;
+    margin: 3rem 2rem 1rem 2rem;
+    border-radius: 1.5rem;
+}
+.div-container-fun{
+    height: 20rem;
+    justify-content: flex-start;
+    -webkit-justify-content: flex-start;
+    margin-left: 5.5rem;
+}
+.div-container-fun-u{
+    height: 25%;
+    justify-content: flex-start;
+    -webkit-justify-content: flex-start;
+    margin-left: 5.5rem;
+}
+.img-fun{
+    width: 8rem;
+    height: 8rem;
+}
+.span-fun{
+    font-family: 'RCR';
+    font-size: 2rem;
+}

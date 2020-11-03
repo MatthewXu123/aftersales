@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <link th:href="@{/static/css/common.css}" rel="stylesheet" type="text/css" />
+    <link th:href="@{/static/css/main.css}" rel="stylesheet" type="text/css" />
+    <title th:text="#{minstall.title}"></title>
+</head>
+
+<body>
+    <div class="div-container flex-container-column">
+        <div class="div-header flex-container">
+            <img class="icon-return" th:src="@{/static/icon/return.svg}">
+            <span class="span-header" th:text="#{minstall.header}"></span>
+        </div>
+        <div id="div-main-install" class="div-main flex-container">
+            <div id="div_install" class="div-main-sub flex-container-column">
+                <div class="div-form-first flex-container">
+                    <span class="span-form" th:text="#{minstall.installer-name}"></span>
+                    <input id="input_installerName" class="input-form form-notblank" type="text" th:value="${installationInfo != null ? installationInfo.installerName : ''}">
+                </div>
+                <div class="div-form flex-container">
+                    <span class="span-form" th:text="#{minstall.installer-phone}"></span>
+                    <input id="input_installerPhone" class="input-form form-notblank" type="text" th:value="${installationInfo != null ? installationInfo.installerPhone : ''}">
+                </div>
+                <div class="div-form-address flex-container-column">
+                    <div class="div-address flex-container">
+                        <span class="span-form" th:text="#{minstall.address}"></span>
+                    </div>
+                    <div  id="div_address"  class="flex-container" data-toggle="distpicker">
+                        <select id="select_province" class="select-address form-notblank" th:data-province="${installationInfo != null ? installationInfo.province : ''}"></select>
+                        <select id="select_city"  class="select-address form-notblank" th:data-city="${installationInfo != null ? installationInfo.city : ''}"></select>
+                        <select id="select_district" class="select-address" th:data-district="${installationInfo != null ? installationInfo.district : ''}"></select>
+                    </div>
+                </div>
+                 <div class="div-form-description flex-container-column">
+                    <span class="span-form-description" th:text="#{minstall.address-detail}"></span>
+                    <textarea id="textarea_address" class="textarea-address form-notblank"></textarea>
+                </div>
+                <div class="div-form-description flex-container-column">
+                    <span class="span-form-description" th:text="#{minstall.comment}"></span>
+                    <textarea id="textarea_comment" class="textarea-description"></textarea>
+                </div>
+            </div>
+        </div>
+        <div class="div-submit flex-container" th:if="${installationInfo == null}">
+            <button id="btn_form" class="span-submit" th:text="#{public.submit}"></button>
+        </div>
+    </div>
+
+    <script th:src="@{/static/js/jquery/jquery.min.js}" type="text/javascript"></script>
+    <script th:src="@{/static/js/jquery/distpicker.min.js}" type="text/javascript"></script>
+    <script th:src="@{/static/js/minstall.js}" type="text/javascript"></script>
+    <script th:src="@{/static/js/common.js}" type="text/javascript"></script>
+    <script th:inline="javascript">
+    	var installationInfo = /*[[${installationInfo}]]*/;
+        $(".icon-return").click(function(){
+        	window.location.href = "/aftersales/mboard";
+        })
+    </script>
+</body>
+
+</html>

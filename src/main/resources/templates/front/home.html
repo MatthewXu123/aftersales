@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<link th:href="@{/static/css/common.css}" rel="stylesheet" type="text/css" />
+<link th:href="@{/static/css/home.css}" rel="stylesheet" type="text/css" />
+<title th:text="#{home.title}"></title>
+</head>
+<body>
+	<div class="div-home-container">
+		<div class="div-home-bg flex-container-column" >
+			<select class="select-i18n">
+				<option class="option-i18n" value="zh-CN">中文</option>
+				<option class="option-i18n" value="en-US">English</option>
+			</select>
+			<div class="flex-container display-none">
+				<input class="input-sn" type="text" th:placeholder="#{home.sn}">
+				<img class="img-enter" th:src="@{/static/icon/enter-icon3.svg}">
+			</div>
+			<a class="a-snwhere display-none" th:href="@{/static/img/huh.jpg}" th:text="#{home.sn-where}"></a>
+			<div id="div_home" class="fade-in-section">
+				<div id="div_home_u" class="div-home-user flex-container-column">
+					<img class="img-home-user" th:src="@{/static/icon/user-icon.svg}">
+					<span class="span-home-user" th:text="#{home.user}"></span>
+				</div>
+				<div id="div_home_m" class="div-home-user flex-container-column">
+					<img class="img-home-user" th:src="@{/static/icon/maintainer-icon.svg}">
+					<span class="span-home-user" th:text="#{home.maintainer}"></span>
+				</div>
+			</div>
+		</div>
+		<div class="div-home-system flex-container">
+			<span class="span-home-system">
+				<span class="color-green">A</span>fter <span class="color-green">S</span>ales <span class="color-green">S</span>ystem
+			</span>
+		</div>
+	</div>
+	
+	<script th:src="@{/static/js/jquery/jquery.min.js}" type="text/javascript"></script>
+	<script th:src="@{/static/js/jquery/jquery.cookie.js}" type="text/javascript"></script>
+	<script th:src="@{/static/js/common.js}" type="text/javascript"></script>
+	<script th:src="@{/static/js/home.js}" type="text/javascript"></script>
+	<script th:inline="javascript">
+		var pid = /*[[${pid}]]*/;
+		var i18nVal = $.cookie('i18n_cookie');
+		$("#div_home_u").click(function(){
+			window.location.href = "/aftersales/uboard";
+		});
+		$("#div_home_m").click(function(){
+			window.location.href = "/aftersales/mlogin";
+		});
+		$(".option-i18n").each(function(){
+			if(i18nVal == $(this).val())
+				$(this).attr("selected",true);
+		});
+		$(".select-i18n").change(function(){
+			var url = window.location.href;
+			var selectLang = $(this).children('option:selected').val();
+			if(url.indexOf("lang") != -1){
+				window.location.href = url.substring(0,url.indexOf("lang")) + "lang=" + selectLang;
+			}else{
+				window.location.href = window.location.href + "&lang=" + selectLang;
+			}
+			
+   		});
+	</script>
+</body>
+</html>

@@ -1,0 +1,44 @@
+.div-login-container{
+    height: 100%;
+    background-image: url(../../img/bg_home@3x.png);
+    background-repeat: round;
+}
+.div-login{
+    width: 18rem;
+    height: 12rem;
+    border-radius: 0.8rem;
+    background-color: #EEEEEE;
+}
+.icon-login{
+    width: 1.4rem;
+}
+.span-system{
+    font-family: 'RCB';
+    font-size: 2rem;
+}
+.div-form{
+    margin-top: 0.5rem;
+    margin-bottom: 0.5rem;
+}
+.input-loginform{
+    margin-left: 0.5rem;
+    border: none;
+    border-bottom: black solid 1px;
+    background-color: #EEEEEE;
+}
+.btn-login{
+    background-color: #078B75;
+    border: none;
+    width: 5rem;
+    height: 1.5rem;
+    border-radius: 0.2rem;
+    color: white;
+    margin-top: 0.4rem;
+}
+.span-reme{
+    font-size: 0.8rem;
+    font-family: 'RG';
+}
+.div-reme{
+    margin-top: 0.8rem;
+}

@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <link th:href="@{/static/css/common.css}" rel="stylesheet" type="text/css" />
+    <link th:href="@{/static/css/main.css}" rel="stylesheet" type="text/css" />
+    <title th:text="#{umain.title}"></title>
+</head>
+
+<body>
+    <div class="div-container flex-container-column">
+        <div class="div-header flex-container">
+            <img class="icon-return" th:src="@{/static/icon/return.svg}">
+            <span class="span-header" th:text="#{umain.maintenance}"></span>
+        </div>
+        <div class="div-tab flex-container" th:if="${issue != null}">
+            <div id="div-subtab-maintenance" class="div-subtab flex-container">
+                <span class="span-tab span-tab1" th:text="#{umain.maintenance}"></span>
+            </div>
+            <div id="div-subtab-process" class="div-subtab flex-container">
+                <span class="span-tab span-tab2" th:text="#{umain.process-rate}"></span>
+            </div>
+        </div>
+        <div id="div-main-maintenance" class="div-main flex-container">
+            <form id="form_main" th:action="@{/uissue/} + ${issueId !=null ? issueId : ''}" method="post" enctype="multipart/form-data">
+            	<div th:if="${issue} ne null">
+            		<input name="id" type="hidden" th:value="${issue.id}">
+            	</div>
+            	<div class="div-main-sub flex-container-column">
+                	<div class="div-form-first flex-container">
+                    	<span class="span-form" th:text="#{umain.customer-name}"></span>
+                    	<input name="username" class="input-form form-notblank" type="text" th:value="${issue != null ? issue.username : ''}">
+                	</div>
+                	<div class="div-form flex-container">
+                    	<span class="span-form" th:text="#{umain.customer-phone}"></span>
+                    	<input name="userPhone" class="input-form form-notblank form-phone" type="text" th:value="${issue != null ? issue.userPhone : ''}">
+                	</div>
+                	<div class="div-form-cause flex-container">
+                    	<span class="span-form" th:text="#{umain.failure}"></span>
+                    	<input name="alarmCode" class="input-alarmCode" type="hidden">
+                    	<select class="select-cause" th:value="${issue != null ? issue.alarmCode : ''}">
+                    		<div th:each="alarm : ${product.productInfo.humidifierAlarms}">
+                        		<option class="option-alarmCode" th:value="${alarm.code}" th:text="${alarm.code} + ' ' + ${alarm.description}"></option>
+                    		</div>
+                    	</select>
+                	</div>
+                	<div class="div-form-photo flex-container-column">
+                    	<span class="span-form-description testtxt" th:text="#{umain.photo}"></span>
+                    	<div class="div-photo-group flex-container">
+                        	<div id="div_photo1" class="div-photo flex-container">
+                        		<img class="img-delete" th:src="@{/static/icon/delete-icon.svg}">
+                            	<img id="1"class="img-plus" th:src="@{/static/icon/plus-icon.svg}">
+                        		<input name="p1" id="photo1" class="input-photo" type="file" accept="image/*">
+                        		<input name="photo1Val" class="input-photoval" type="hidden">
+                        	</div>
+                        	<div id="div_photo2" class="div-photo flex-container">
+                        		<img class="img-delete" th:src="@{/static/icon/delete-icon.svg}">
+                            	<img id="2" name="photo2Val" class="img-plus" th:src="@{/static/icon/plus-icon.svg}">
+                        		<input name="p2" id="photo2" class="input-photo" type="file" accept="image/*">
+                        		<input name="photo2Val" class="input-photoval" type="hidden">
+                        	</div>
+                        	<div id="div_photo3" class="div-photo flex-container">
+                        		<img class="img-delete" th:src="@{/static/icon/delete-icon.svg}">
+                            	<img id="3" name="photo3Val" class="img-plus" th:src="@{/static/icon/plus-icon.svg}">
+                        		<input name="p3" id="photo3"  class="input-photo" type="file" accept="image/*">
+                        		<input name="photo3Val" class="input-photoval" type="hidden">
+                        	</div>
+                    	</div>
+                	</div>
+                	<div class="div-form-description flex-container-column">
+                    	<span class="span-form-description" th:text="#{umain.comment}"></span>
+                    	<textarea name="comment" class="textarea-description"  th:text="${issue != null ? issue.comment : ''}"></textarea>
+                	</div>
+            	</div>
+            </form>
+        </div>
+        <div id="div-main-process" class="div-main flex-container" th:if="${issue != null}">
+            <div class="div-main-sub2 flex-container-column">
+                <div class="div-issue flex-container-column">
+                    <span class="span-issue font-family-rm" th:text="#{umain.issue-code} + ${issue.code}"></span>
+                    <span class="span-issue" th:text="#{umain.issue-createtime} + ${#dates.format(issue.createTime,'yyyy-MM-dd')}"></span>
+                    <span class="span-issue" th:text="#{umain.issue-status} + #{'public.status.' + ${issue.processStatus.getDescription()}}"></span>
+                    <span class="span-issue span-hint" th:text="#{umain.evaluation-hello}"></span>
+                    <span class="span-issue span-issue2" th:text="#{umain.evaluation-request}"></span>
+                </div>
+                <div class="div-evaluation flex-container">
+                    <img value="UNSATISFIED" class="img-evaluation" th:src="@{/static/icon/bad-icon.svg}">
+                    <img value="COMMON" class="img-evaluation" th:src="@{/static/icon/common-icon.svg}">
+                    <img value="SATISFIED" class="img-evaluation" th:src="@{/static/icon/good-icon.svg}">
+                </div>
+                <div class="div-evaluation-description flex-container-column">
+                    <span class="span-form-description" th:text="#{umain.evaluation-improve}"></span>
+                    <textarea id="textarea_eva" class="textarea-description"></textarea>
+                </div>
+            </div>
+        </div>
+        <div class="div-submit flex-container">
+            <button id="btn_form" class="span-submit" th:text="#{public.submit}"></button>
+        </div>
+    </div>
+
+    <script th:src="@{/static/js/jquery/jquery.min.js}" type="text/javascript"></script>
+    <script th:src="@{/static/js/jquery/jquery.cookie.js}" type="text/javascript"></script>
+    <script th:src="@{/static/js/uissue.js}" type="text/javascript"></script>
+    <script th:src="@{/static/js/common.js}" type="text/javascript"></script>
+    <script th:inline="javascript">
+       var issue = /*[[${issue}]]*/;
+       var i18nVal = $.cookie('i18n_cookie');
+       $(".icon-return").click(function(){
+    	   window.location.href = "/aftersales/uboard";
+   		})
+    </script>
+</body>
+
+</html>

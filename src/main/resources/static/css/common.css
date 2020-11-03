@@ -1,0 +1,189 @@
+@font-face{
+	font-family: RCB;
+	src: url(../fonts/roboto/RobotoCondensed-Bold.ttf);
+}
+@font-face{
+	font-family: RM;
+	src: url(../fonts/roboto/Roboto-Medium.ttf);
+}
+@font-face{
+	font-family: RG;
+	src: url(../fonts/roboto/Roboto-Regular.ttf);
+}
+@font-face{
+	font-family: RCR;
+	src: url(../fonts/roboto/RobotoCondensed-Regular.ttf);
+}
+html, body{ 
+    margin:0; height:100%; 
+}
+textarea{
+	border-color:#EEEEEE;
+}
+.div-header{
+	height: 7%;
+	width: 100%;
+}
+.div-container{
+	height: 100%;
+	justify-content: flex-start !important;
+	-webkit-justify-content: flex-start !important;
+}
+.div-tab{
+	height: 6%;
+	width: 100%;
+}
+.div-subtab{
+	width: 50%;
+	height: 100%;
+}
+.span-header{
+    font-family: 'RM';
+    font-size: 3rem;
+}
+.input-form{
+	height: 3rem;
+    margin-bottom: 1.8rem;
+    margin-left: 1rem;
+    background-color: #EEEEEE;
+	border: none;
+	font-family: 'RG';
+	font-size: 2.8rem;
+	width:25rem;
+}
+.border-selected{
+	border-bottom: 0.6rem solid #078B75;
+}
+.div-submit{
+    background-color: #078B75;
+    width: 46rem;
+    height: 6rem;
+    border-radius: 1rem;
+    position: fixed;
+    bottom: 1rem;
+}
+.div-submit2{
+    width: 100%;
+    border-radius: 1rem;
+    position: fixed;
+    bottom: 1rem;
+}
+.div-submit-half{
+	background-color: #078B75;
+    width: 23rem; 
+    height: 6rem;
+    border-radius: 1rem;
+	bottom: 1rem;
+	margin-left: 1rem;
+	margin-right: 1rem;
+}
+.span-submit{
+	width: 100%;
+    height: 100%;
+	font-family: 'RG';
+	font-size: 2.5rem;
+	color: #EEEEEE;
+	border: none;
+    background-color: transparent;
+}
+.color-green{
+	color: #078B75;
+}
+.icon-return{
+    width: 4rem;
+    position: fixed;
+    left: 0.5rem;
+}
+.select-cause{
+    width: 20rem; 
+    height: 2.5rem;
+    margin-bottom: 2rem;
+    margin-left: 1rem;
+    border: none;
+    font-family: 'RG';
+    font-size: 2rem;
+}
+.img-plus{
+	width:3.5rem;
+}
+.border-red{
+	border: red solid 1px !important;
+}
+.font-family-rm{
+	font-family:'RM' !important;
+}
+/* .touch_action {
+	-webkit-touch-callout: none;
+	-webkit-user-select: none;
+	-khtml-user-select: none;
+	-moz-user-select: none;
+	-ms-user-select: none;
+	user-select: none;
+} */
+
+.flex-container {
+	display: -webkit-flex;
+	display: flex;
+	-webkit-align-items: center;
+	align-items: center;
+	-webkit-justify-content: center;
+	justify-content: center;
+}
+
+.flex-container-column {
+	display: -webkit-flex;
+	display: flex;
+	-webkit-align-items: center;
+	align-items: center;
+	-webkit-justify-content: center;
+	justify-content: center;
+	flex-direction: column;
+}
+.flex-container-left {
+	display: -webkit-flex;
+	display: flex;
+	-webkit-align-items: flex-start;
+	align-items: flex-start;
+	-webkit-justify-content: center;
+	justify-content: center;
+	flex-direction: column;
+}
+
+.flex-container-wrap{
+    flex-flow: wrap;
+	justify-content: left !important;
+	display: -webkit-flex;
+	display: flex;
+	-webkit-align-items: center;
+	align-items: center;
+	-webkit-justify-content: center;
+}
+input::-ms-input-placeholder{
+        text-align: center;
+}
+input::-webkit-input-placeholder{
+        text-align: center;
+}
+.word-omit{
+	width:40rem;/*要显示文字的宽度*/
+	overflow:hidden; /*超出的部分隐藏起来。*/ 
+	white-space:nowrap;/*不显示的地方用省略号...代替*/
+	text-overflow:ellipsis;/* 支持 IE */
+}
+.span-noissue{
+	font-family: 'RM';
+    font-size: 3rem;
+}
+.fade-in-section {
+  opacity: 0;
+  transform: translateY(20vh);
+  visibility: hidden;
+  transition: opacity 1200ms ease-out, transform 600ms ease-out,
+  visibility 1200ms ease-out;
+  will-change: opacity, transform, visibility;
+}
+.fade-in-section.is-visible {
+  opacity: 1;
+  transform: none;
+  visibility: visible;
+}

@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<link th:href="@{/static/css/common.css}" rel="stylesheet" type="text/css" />
+<link th:href="@{/static/css/board.css}" rel="stylesheet" type="text/css" />
+<title th:text="#{mboard.title}"></title>
+</head>
+<body>
+	<div class="div-container">
+        <div class="div-header flex-container">
+            <img class="icon-return" th:src="@{/static/icon/return.svg}">
+            <span class="span-header" th:text="#{mboard.header}"></span>
+        </div>
+        <div class="div-product flex-container-column">
+            <img class="img-product" th:if="${#strings.contains(product.productInfo.productCode,'HUH')}" th:src="@{/static/img/huh.jpg}">
+            <img class="img-product" th:if="${#strings.contains(product.productInfo.productCode,'HUT')}" th:src="@{/static/img/hut.jpg}">
+            <div class="div-product-details2 flex-container" th:if="${product != null}">
+                <div class="div-product-details flex-container-column">
+                    <span class="span-product" th:text="#{board.product-name} + #{board.product-desc}"></span>
+                    <span class="span-product" th:text="#{board.product-code} + ${product.productInfo.productCode}"></span>
+                    <span class="span-product" th:text="#{board.serial-number} + ${product.serialNumber}"></span>
+                    <span class="span-product span-product-special" th:if="${product.installationInfo != null}" th:text="#{board.installation-date} + ${#dates.format(product.installationInfo.createTime,'yyyy-MM-dd')}"></span>
+                </div>
+                <div class="div-product-details flex-container-column" th:if="${product.installationInfo != null}">
+                    <span class="span-product" th:text="#{board.electronic-warranty}"></span>
+                    <span class="span-product" th:text="#{board.warranty-status} + (${product.isInWarranty} ? #{board.warranty-in} : #{board.warranty-notin})"></span>
+                    <span class="span-product" th:text="#{board.warranty-period} + ${#dates.format(product.warrantyDate,'yyyy-MM-dd')}"></span>
+                </div>
+            </div>
+        </div>
+        <div class="div-container-fun flex-container">
+            <div id="div_install" class="flex-container-column" th:if="${product != null}">
+                <div class="div-fun-button flex-container-column">
+                    <img class="img-fun" th:src="@{/static/icon/install-icon.svg}">
+                </div>
+                <span class="span-fun" th:text="#{board.install}"></span>
+            </div>
+            <div id="div_issue" class="flex-container-column">
+                <div class="div-fun-button flex-container-column">
+                    <img class="img-fun" th:src="@{/static/icon/issue-icon.svg}">
+                </div>
+                <span class="span-fun"  th:text="#{board.issue}"></span>
+            </div>
+            <div id="div_partlist" class="flex-container-column">
+                <div class="div-fun-button flex-container-column">
+                    <img class="img-fun" th:src="@{/static/icon/partlist-icon.svg}">
+                </div>
+                <span class="span-fun" th:text="#{board.partlist}"></span>
+            </div>
+        </div>
+        <div class="div-container-fun flex-container">
+        	<div id="div_manual" class="flex-container-column">
+                <div class="div-fun-button flex-container-column">
+                    <img class="img-fun" th:src="@{/static/icon/manual-icon.svg}">
+                </div>
+                <span class="span-fun" th:text="#{board.manual}"></span>
+            </div>
+            <div id="div_video" class="flex-container-column">
+                <div class="div-fun-button flex-container-column">
+                    <img class="img-fun" th:src="@{/static/icon/video-icon.svg}">
+                </div>
+                <span class="span-fun" th:text="#{board.guide-video}"></span>
+            </div>
+            <div id="div_policy" class="flex-container-column" th:if="${isShownPolicy}">
+                <div class="div-fun-button flex-container-column">
+                    <img class="img-fun" th:src="@{/static/icon/maintainance-policy-icon.svg}">
+                </div>
+                <span class="span-fun"  th:text="#{board.maintenance-policy}"></span>
+            </div>
+        </div>
+    </div>
+    <script th:src="@{/static/js/jquery/jquery.min.js}" type="text/javascript"></script>
+    <script th:src="@{/static/js/common.js}" type="text/javascript"></script>
+    <script th:inline="javascript">
+    	var product = /*[[${product}]]*/;
+        $("#div_install").click(function(){
+        	if(product != null && product != undefined)
+            window.location.href = "/aftersales/minstall";
+        })
+         $("#div_issue").click(function(){
+        	window.location.href = "/aftersales/missue";
+        })
+        $("#div_manual").click(function(){
+            window.location.href = "/aftersales/manual";
+        })
+        $("#div_policy").click(function(){
+            window.location.href = "/aftersales/policy";
+        })
+        $("#div_video").click(function(){
+            window.location.href = "/front/video.html";
+        })
+        $("#div_partlist").click(function(){
+            window.location.href = "/front/partlist.html";
+        })
+        $(".icon-return").click(function(){
+        	window.location.href = "/aftersales/mlogin?pid=" + product.id;
+    	})
+    </script>
+</body>
+</html>

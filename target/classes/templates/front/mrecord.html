@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <link th:href="@{/static/css/common.css}" rel="stylesheet" type="text/css" />
+    <link th:href="@{/static/css/repair.css}" rel="stylesheet" type="text/css" />
+    <link th:href="@{/static/css/main.css}" rel="stylesheet" type="text/css" />
+    <title th:text="#{mrecord.title}"></title>
+</head>
+<body>
+    <div class="div-container flex-container-column">
+        <div class="div-header flex-container">
+            <img class="icon-return" th:src="@{/static/icon/return.svg}">
+            <span class="span-header"  th:text="#{mrecord.header}"></span>
+        </div>
+        <div class="div-main2 flex-container-column">
+            <div class="div-issue flex-container-left">
+            	<span class="span-issue2" th:text="#{missue.create-time} + ${#dates.format(issue.createTime,'yyyy-MM-dd')}"></span>
+                <span class="span-issue2" th:text="#{missue.issue-code} + ${issue.code}"></span>
+                <span class="span-issue2" th:text="#{umain.customer-name} + ${issue.username}"></span>
+                <span class="span-issue2" th:text="#{umain.customer-phone} + ${issue.userPhone}"></span>
+                <span class="span-issue2" th:text="#{umain.failure} + ${issue.alarmCode}"></span>
+                <span class="span-issue2" th:text="#{umain.photo}"></span>
+                <div class="div-photo2 flex-container">
+                    <img class="img-issue" th:src="@{'/uissue/' + ${issue.id} + '/1'}" th:if="${issue.photo1 != null && issue.photo1.length != 0}">
+                    <img class="img-issue" th:src="@{'/uissue/' + ${issue.id} + '/2'}" th:if="${issue.photo2 != null && issue.photo2.length != 0}">
+                    <img class="img-issue" th:src="@{'/uissue/' + ${issue.id} + '/3'}" th:if="${issue.photo3 != null && issue.photo3.length != 0}">
+                </div>
+                <span class="span-issue2 span-issue-bottom" th:text="#{umain.comment} + ${issue.comment}"></span>
+            </div>
+            <!-- MaintenanceRecord Form -->
+            <form id="form_record" th:action="@{/mrecord} + '?issueCode=' + ${issueCode}" method="post"  enctype="multipart/form-data">
+            <input id="processStatus" name="processStatus" type="hidden">
+            <div class="div-form2 flex-container">
+            	<span class="span-form" th:text="#{umain.customer-name}"></span>
+          		<input th:value="${maintenanceRecord != null ? maintenanceRecord.maintainerName : ''}" name="maintainerName" class="input-form form-notblank form-phone" type="text">
+            </div>
+            <div class="div-form2 flex-container">
+            	<span class="span-form" th:text="#{umain.customer-phone}"></span>
+          		<input th:value="${maintenanceRecord != null ? maintenanceRecord.maintainerPhone : ''}" name="maintainerPhone" class="input-form form-notblank form-phone" type="text">
+            </div>
+            <div class="div-form-special flex-container">
+                <span class="span-form" th:text="#{umain.failure}"></span>
+                <input name="alarmCode" class="input-alarmCode" type="hidden">
+                <select class="select-cause" th:value="${maintenanceRecord != null ? maintenanceRecord.alarmCode : ''}">
+                    <div th:each="alarm : ${issue.product.productInfo.humidifierAlarms}">
+                        <option class="option-alarmCode" th:value="${alarm.code}" th:text="${alarm.code} + ' ' + ${alarm.description}"></option>
+                    </div>
+                </select>
+            </div>
+            <div class="div-form-photo flex-container-column">
+            	<span class="span-form-description testtxt" th:text="#{umain.photo}"></span>
+                    <div class="div-photo-group flex-container">
+                        <div id="div_photo1" class="div-photo flex-container">
+                        	<img class="img-delete" th:src="@{/static/icon/delete-icon.svg}">
+                            <img id="1"class="img-plus" th:src="@{/static/icon/plus-icon.svg}">
+                        	<input name="p1" id="photo1" class="input-photo" type="file" accept="image/*">
+                        	<input name="photo1Val" class="input-photoval" type="hidden">
+                        </div>
+                        <div id="div_photo2" class="div-photo flex-container">
+                        	<img class="img-delete" th:src="@{/static/icon/delete-icon.svg}">
+                            <img id="2" name="photo2Val" class="img-plus" th:src="@{/static/icon/plus-icon.svg}">
+                        	<input name="p2" id="photo2" class="input-photo" type="file" accept="image/*">
+                        	<input name="photo2Val" class="input-photoval" type="hidden">
+                        </div>
+                        <div id="div_photo3" class="div-photo flex-container">
+                        	<img class="img-delete" th:src="@{/static/icon/delete-icon.svg}">
+                            <img id="3" name="photo3Val" class="img-plus" th:src="@{/static/icon/plus-icon.svg}">
+                        	<input name="p3" id="photo3"  class="input-photo" type="file" accept="image/*">
+                        	<input name="photo3Val" class="input-photoval" type="hidden">
+                        </div>
+                    </div>
+            </div>
+            <div class="div-form-description2 flex-container-column">
+                <span class="span-form-description" th:text="#{umain.comment}"></span>
+                <textarea name="comment" class="textarea-description"></textarea>
+            </div>
+            </form>
+        </div>
+        <div class="div-submit2 flex-container" th:if="${maintenanceRecord == null || (maintenanceRecord != null && maintenanceRecord.processStatus.getDescription() != 'FINISHED')}">
+        	<div class="div-submit-half flex-container">
+                <button class="span-submit" th:text="#{mrecord.status-fixed}" status="FINISHED"></button>
+            </div>
+            <div class="div-submit-half flex-container">
+                <button class="span-submit" th:text="#{mrecord.status-notyet}" status="IN_PROGRESS"></button>
+            </div>
+        </div>
+    </div>
+
+    <script th:src="@{/static/js/jquery/jquery.min.js}" type="text/javascript"></script>
+    <script th:src="@{/static/js/jquery/distpicker.min.js}" type="text/javascript"></script>
+    <script th:src="@{/static/js/common.js}" type="text/javascript"></script>
+    <script th:src="@{/static/js/mrecord.js}" type="text/javascript"></script>
+    <script th:inline="javascript">
+    	var issue = /*[[${issue}]]*/;
+    	var maintenanceRecord = /*[[${maintenanceRecord}]]*/;
+        $(".icon-return").click(function(){
+        	window.location.href = "/aftersales/missue";
+        })
+    </script>
+</body>
+
+</html>

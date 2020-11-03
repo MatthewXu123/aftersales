@@ -1,0 +1,222 @@
+.div-main{
+    height: 60%;
+    margin-top: 6rem;
+}
+#div-main-process{
+	height: 50%;
+}
+.div-main-sub{
+    width: 55rem;
+    background-color: #EEEEEE;
+    border-radius: 1.5rem;
+    justify-content: flex-start !important;
+    -webkit-justify-content: flex-start !important;
+    overflow: scroll;
+}
+.div-main-sub2{
+    width: 55rem;
+    background-color: #EEEEEE;
+    margin-top: 6rem; 
+    border-radius: 1.5rem;
+    justify-content: flex-start !important;
+    -webkit-justify-content: flex-start !important;
+    overflow: scroll;
+}
+.div-form{
+    width: 46rem;
+    height: 2.5rem;
+    border-bottom: solid;
+    justify-content: left;
+    -webkit-justify-content: left;
+    margin-bottom: 3.5rem;
+}
+.div-form-cause{
+    width: 46rem;
+    height: 2.5rem;
+    justify-content: left;
+    -webkit-justify-content: left;
+    margin-bottom: 2rem;
+}
+.div-form-photo{
+    width: 46rem;
+    height: 20rem;
+    justify-content: left;
+    -webkit-justify-content: left;
+    margin-bottom: 1.5rem;
+    
+}
+.div-form-description{
+    width: 46rem;
+    height: 24rem;
+    justify-content: left;
+    -webkit-justify-content: left;
+    margin-bottom: 3.5rem;
+}
+.div-evaluation-description{
+    width: 50rem;
+    height: 24rem;
+    justify-content: left;
+    -webkit-justify-content: left;
+    margin-bottom: 5rem;
+}
+.div-form-first{
+    width: 46rem;
+    height: 2.5rem;
+    border-bottom: solid;
+    justify-content: left;
+    -webkit-justify-content: left;
+    margin-bottom: 3.5rem;
+    margin-top: 4rem;
+}
+.div-photo{
+    width: 11rem;
+    height: 15rem;
+    background-color: #D4D5D9;
+    font-family: 'RG';
+	font-size: 3.5rem;
+	/* display:inline-block; */
+	position:sticky;
+}
+.img-delete{
+    position: absolute;
+    width: 4rem;
+    top: 0px;
+    right: 0px;
+    display: block;
+}
+.textarea-description{
+    height: 16rem;
+    width: 46rem;
+    font-size: 1.5rem;
+    font-family: 'RG';
+}
+.div-photo-group{
+    width: 46rem;
+    height: 20rem;
+    justify-content: space-between;
+    -webkit-justify-content: space-between;
+      &:before,
+      &:after {
+          content: '';
+          display: block;
+    }
+    /* justify-content: space-evenly;
+    -webkit-justify-content: space-evenly; */
+}
+.div-issue{
+    width: 50rem;
+    justify-content: flex-start;
+    -webkit-justify-content: flex-start;
+    margin-top: 2rem;
+    margin-bottom: 2rem;
+    /* height: 100%; */
+    /* justify-content: left; */
+    /* margin-top: 1rem; */
+    align-items: flex-start;
+    -webkit-align-items: flex-start;
+    /* margin-left: 2rem; */
+}
+.div-issue-content{
+    width: 46rem;
+    height: 10rem;
+    justify-content: left;
+    -webkit-justify-content: left;
+    margin-top: 0.5rem;
+}
+.img-evaluation{
+    width: 10rem;
+}
+.div-evaluation-prompt{
+    margin-top: 8rem;
+}
+.span-tab{
+	font-family: 'RM';
+    color: #078B75;
+    font-size: 2.5rem;
+}
+.span-form{
+	font-family: 'RG';
+    font-size: 2.5rem;
+	margin-bottom: 2rem;
+}
+.span-form-description{
+	font-family: 'RG';
+    font-size: 2.5rem;
+	margin-bottom: 1rem;
+	margin-right: auto;
+}
+.span-photo{
+	font-family: 'RG';
+	font-size: 3.5rem;
+}
+.span-issue{
+	font-family: 'RG';
+	font-size: 2.5rem;
+	margin-top: 1rem;
+	/* word-break: break-all; */
+}
+.select-address{
+    display: block;
+    width: 100%;
+    height: calc(1.5em + .75rem + 2px);
+    padding: .375rem .75rem;
+    font-family: 'RG';
+    font-size: 2.2rem;
+    color: #495057;
+    background-color: #fff;
+    background-clip: padding-box;
+    border: 1px solid #ced4da;
+    border-radius: .25rem;
+    transition: border-color .15s ease-in-out,box-shadow .15s ease-in-out;
+}
+.div-address{
+    width: 46rem;
+    justify-content: left !important;
+    -webkit-justify-content: left !important;
+}
+.div-form-address{
+    width: 46rem;
+    margin-bottom: 3.5rem;
+}
+.div-issuelist{
+    justify-content: flex-start !important;
+}
+.div-issue-container{
+    width: 50rem;
+    margin-top: 1.5rem;
+    margin-bottom: 1.5rem;
+    background-color: #f5f5f5;
+    border-radius: 1.5rem;
+}
+.img-enter{
+    width: 5rem;
+    margin-right: 2rem;
+}
+.input-photo{
+	display:none;
+}
+.div-evaluation{
+	justify-content: space-evenly;
+	-webkit-justify-content: space-evenly;
+    width: 50rem;
+    margin-bottom: 1rem;
+}
+#div-main-install, #div-main-issue{
+	margin-top:0rem !important;
+}
+#div_install{
+	height:100% !important;
+}
+.textarea-address{
+	width: 46rem;
+    height: 6rem;
+    font-size: 1.5rem;
+    font-family: 'RG';
+}
+.div-issue2{
+	margin-left:2rem !important;
+}
+.div-noissue{
+	width:100%;
+	height:100%;
+}

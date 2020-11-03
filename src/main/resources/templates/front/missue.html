@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <link th:href="@{/static/css/common.css}" rel="stylesheet" type="text/css" />
+    <link th:href="@{/static/css/main.css}" rel="stylesheet" type="text/css" />
+    <title th:text="#{missue.title}"></title>
+</head>
+
+<body>
+    <div class="div-container flex-container-column">
+        <div class="div-header flex-container">
+            <img class="icon-return" th:src="@{/static/icon/return.svg}">
+            <span class="span-header" th:text="#{missue.header}"></span>
+        </div>
+        <div th:if="${issueList != null && issueList.size() != 0}" >
+        <div class="div-issue-container flex-container" th:each="issue : ${issueList}">
+            <div class="div-issue div-issue2 flex-container-column">
+                <span class="span-issue" th:text="#{missue.create-time} + ${#dates.format(issue.createTime,'yyyy-MM-dd')}"></span>
+                <span class="span-issue" th:text="#{missue.issue-code} + ${issue.code}"></span>
+                <span class="span-issue" th:text="#{missue.issue-status} + #{'public.status.' + ${issue.processStatus.getDescription()}}"></span>
+                <span class="span-issue word-omit" th:text="#{missue.issue-description} + ${issue.toString()}"></span>
+            </div>
+            <img class="img-enter" th:src="@{/static/icon/enter-icon3.svg}" th:code="${issue.code}">
+        </div>
+        </div>
+        <div class="div-noissue flex-container" th:if="${issueList == null || issueList.size() ==0}" >
+       		<span class="span-noissue" th:text="#{missue.noissue}"></span>
+        </div>
+    </div>
+
+    <script th:src="@{/static/js/jquery/jquery.min.js}" type="text/javascript"></script>
+    <script th:src="@{/static/js/common.js}" type="text/javascript"></script>
+    <script th:inline="javascript">
+    	var installationInfo = /*[[${installationInfo}]]*/;
+        $(".icon-return").click(function(){
+        	window.location.href = "/aftersales/mboard";
+        })
+        $(".img-enter").click(function(){
+        	window.location.href = "/aftersales/mrecord?issueCode=" + $(this).attr("code");
+        })
+    </script>
+</body>
+
+</html>

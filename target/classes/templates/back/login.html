@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<link th:href="@{static/css/common.css}" rel="stylesheet" type="text/css" />
+<link th:href="@{static/css/back/login.css}" rel="stylesheet" type="text/css" />
+<title>Login</title>
+</head>
+<body>
+	<div class="div-login-container flex-container-column">
+        <span class="span-system">
+            <span class="color-green">A</span>fter <span class="color-green">S</span>ales <span class="color-green">S</span>ystem
+        </span>
+        <div class="div-login flex-container-column">
+        	<form th:action="@{/login}" method="POST">
+        		<div class="div-form flex-container">
+                	<img class="icon-login" th:src="@{static/icon/user2-icon.svg}">
+                	<input class="input-loginform" type="text" placeholder="username">
+            	</div>
+            	<div class="div-form flex-container">
+                	<img class="icon-login" th:src="@{static/icon/pwd-icon.svg}">
+                	<input class="input-loginform"  type="password" placeholder="password">
+            	</div>
+            	<button type="submit" class="btn-login">Login</button>
+            	<div class="div-reme flex-container">
+                	<span class="span-reme">Remember Me</span>
+                	<input type="checkbox">
+            	</div>
+        	</form>
+            
+        </div>
+    </div>
+	<script th:src="@{static/js/common.js}" type="java/script"></script>
+</body>
+</html>
