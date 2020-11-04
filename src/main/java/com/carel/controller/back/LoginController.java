@@ -23,7 +23,7 @@ public class LoginController {
 	
 	@PostMapping
 	public String getLoginVerified(@RequestParam String username, @RequestParam String password){
-		if(username.equals("admin") && password.equals("123456afs"))
+		if(username.equals("admin") && password.equals("123456ass"))
 			return "/back/index";
 		else
 			return "/back/login";
