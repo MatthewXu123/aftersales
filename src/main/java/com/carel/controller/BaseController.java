@@ -15,6 +15,7 @@ import com.carel.service.InstallationInfoService;
 import com.carel.service.IssueService;
 import com.carel.service.MaintenanceRecordService;
 import com.carel.service.PhotoService;
+import com.carel.service.ProductInfoService;
 import com.carel.service.ProductService;
 import com.carel.service.SalesService;
 import com.carel.wxcp.service.WxCpMsgService;
@@ -42,6 +43,9 @@ public class BaseController {
 	
 	@Autowired
 	protected ProductService productService;
+	
+	@Autowired
+	protected ProductInfoService productInfoService;
 	
 	@Autowired
 	protected IssueService issueService;

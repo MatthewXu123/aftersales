@@ -18,5 +18,5 @@ public interface CustomerRepository extends JpaRepository<Customer, Integer>{
 	
 	Customer findByCode(String code);
 	
-	Customer findByDeptId(int deptId);
+	Customer findByWxcpDeptId(int deptId);
 }

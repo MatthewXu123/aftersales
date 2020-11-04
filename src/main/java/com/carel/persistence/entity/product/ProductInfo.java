@@ -6,6 +6,8 @@ import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -15,6 +17,7 @@ import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.TypeDef;
 import org.hibernate.annotations.UpdateTimestamp;
 
+import com.carel.persistence.constant.HumidifierType;
 import com.carel.persistence.jpa.postgres.arrays.PostgresStringArray;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
@@ -31,7 +34,8 @@ public class ProductInfo{
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
-	private String productCode;
+    @Enumerated(EnumType.STRING)
+	private HumidifierType humidifierType;
 	
 	@OneToMany(mappedBy = "productInfo")
 	@JsonIgnore
@@ -60,12 +64,12 @@ public class ProductInfo{
 		this.id = id;
 	}
 
-	public String getProductCode() {
-		return productCode;
+	public HumidifierType getHumidifierType() {
+		return humidifierType;
 	}
 
-	public void setProductCode(String productCode) {
-		this.productCode = productCode;
+	public void setHumidifierType(HumidifierType humidifierType) {
+		this.humidifierType = humidifierType;
 	}
 
 	public List<HumidifierAlarm> getHumidifierAlarms() {

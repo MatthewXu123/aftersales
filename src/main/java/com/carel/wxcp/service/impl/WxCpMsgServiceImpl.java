@@ -7,6 +7,9 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.carel.persistence.entity.main.Issue;
+import com.carel.persistence.entity.product.Product;
+import com.carel.property.wxcpmsg.WxCpMsgProperty;
 import com.carel.wxcp.service.WxCpMsgService;
 
 import me.chanjar.weixin.common.error.WxErrorException;
@@ -29,6 +32,9 @@ public class WxCpMsgServiceImpl implements WxCpMsgService{
 	
 	@Autowired
 	WxCpConfigStorage wxCpConfigStorage;
+	
+	@Autowired
+	WxCpMsgProperty wxCpMsgProperty;
 	
 	@Override
 	public void sendMsgToUser() {
@@ -59,4 +65,18 @@ public class WxCpMsgServiceImpl implements WxCpMsgService{
 		return MessageFormat.format(content, params);
 	}
 
+	@Override
+	public void sendNewIssueMsg(String content,String partyId, Issue issue, Product product) {
+		sendMsgToParty(content, 
+				partyId,
+				new Object[]{
+						issue.getCode(),
+						issue.getUsername(), 
+						issue.getUserPhone(), 
+						product.getInstallationInfo().getAddress(),
+						issue.gethAlarm().getCode() + " " + issue.gethAlarm().getSecDescription(),
+						issue.getComment(),
+						});
+	}
+	
 }

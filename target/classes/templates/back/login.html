@@ -15,17 +15,19 @@
         	<form th:action="@{/login}" method="POST">
         		<div class="div-form flex-container">
                 	<img class="icon-login" th:src="@{static/icon/user2-icon.svg}">
-                	<input class="input-loginform" type="text" placeholder="username">
+                	<input class="input-loginform" type="text" placeholder="username" name="username">
             	</div>
             	<div class="div-form flex-container">
                 	<img class="icon-login" th:src="@{static/icon/pwd-icon.svg}">
-                	<input class="input-loginform"  type="password" placeholder="password">
+                	<input class="input-loginform"  type="password" placeholder="password" name="password">
             	</div>
-            	<button type="submit" class="btn-login">Login</button>
-            	<div class="div-reme flex-container">
+            	<div class="div-form flex-container">
+            		<button type="submit" class="btn-login">Login</button>
+            	</div>
+            	<!-- <div class="div-reme flex-container">
                 	<span class="span-reme">Remember Me</span>
                 	<input type="checkbox">
-            	</div>
+            	</div> -->
         	</form>
             
         </div>

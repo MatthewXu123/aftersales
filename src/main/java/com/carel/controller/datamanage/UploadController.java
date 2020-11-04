@@ -16,7 +16,6 @@ import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.usermodel.Workbook;
 import org.apache.poi.ss.usermodel.WorkbookFactory;
-import org.apache.poi.util.StringUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
@@ -35,6 +34,8 @@ import com.carel.persistence.constant.HumidifierType;
 import com.carel.persistence.entity.community.Customer;
 import com.carel.persistence.entity.community.Sales;
 import com.carel.persistence.entity.product.HumidifierAlarm;
+import com.carel.persistence.entity.product.Product;
+import com.carel.persistence.entity.product.ProductInfo;
 
 /**
  * Description:
@@ -67,6 +68,68 @@ public class UploadController extends BaseController {
 		}
 	}
 	
+	@PostMapping("/productinfo")
+	@ResponseBody
+	public JSONObject getProductInfo(@ModelAttribute("filepath")String filepath){
+		try {
+			InputStream is = UploadController.class.getClassLoader().getResourceAsStream(filepath);
+			Workbook workbook = WorkbookFactory.create(is);
+			Sheet sheet = workbook.getSheetAt(0);
+			int rowNum = sheet.getLastRowNum();
+			List<ProductInfo> productInfoList = new ArrayList<>();
+			// We get the data from the second row because the first line is always the headers.
+			for(int i = 1; i <= rowNum; i++){
+				Row row = sheet.getRow(i);
+				String humidifierType = getCellString(row, 0);
+				if(row == null || StringUtils.isBlank(humidifierType))
+					break;
+				ProductInfo newProductInfo = new ProductInfo();
+				newProductInfo.setHumidifierType(HumidifierType.valueOf(humidifierType));
+				productInfoList.add(newProductInfo);
+			}
+			productInfoService.saveAll(productInfoList);
+		} catch (EncryptedDocumentException | IOException e) {
+			logger.error("",e);
+			return resultFactory.getFailResultJSON();
+		}
+		return resultFactory.getSuccessResultJSON();
+	}
+	
+	@PostMapping("/product")
+	@ResponseBody
+	public JSONObject getProduct(@ModelAttribute("filepath")String filepath){
+		try {
+			InputStream is = UploadController.class.getClassLoader().getResourceAsStream(filepath);
+			Workbook workbook = WorkbookFactory.create(is);
+			Sheet sheet = workbook.getSheetAt(0);
+			int rowNum = sheet.getLastRowNum();
+			List<Product> productList = new ArrayList<>();
+			// We get the data from the second row because the first line is always the headers.
+			for(int i = 1; i <= rowNum; i++){
+				Row row = sheet.getRow(i);
+				if(row == null)
+					break;
+				Product newProduct = new Product();
+				String productCode = getCellString(row, 0);
+				String serialNumber = getCellString(row, 1);
+				String humidifierType = getCellString(row, 2);
+				newProduct.setProductCode(productCode);
+				newProduct.setSerialNumber(serialNumber);
+				newProduct.setProductInfo(productInfoService.getOneByType(HumidifierType.valueOf(humidifierType)));
+				
+				Product product = productService.getOneBySN(serialNumber);
+				if(product != null)
+					newProduct.setId(product.getId());
+				productList.add(newProduct);
+			}
+			productService.saveAll(productList);
+		} catch (EncryptedDocumentException | IOException e) {
+			logger.error("",e);
+			return resultFactory.getFailResultJSON();
+		}
+		return resultFactory.getSuccessResultJSON();
+	}
+	
 	@PostMapping("/customer")
 	@ResponseBody
 	public JSONObject getCustomer(@ModelAttribute("filepath")String filepath){
@@ -77,7 +140,7 @@ public class UploadController extends BaseController {
 			int rowNum = sheet.getLastRowNum();
 			List<Customer> customerList = new ArrayList<>();
 			// We get the data from the second row because the first line is always the headers.
-			for(int i = 1; i < rowNum; i++){
+			for(int i = 1; i <= rowNum; i++){
 				Row row = sheet.getRow(i);
 				if(row == null)
 					break;
@@ -86,6 +149,8 @@ public class UploadController extends BaseController {
 				String customerCode = getCellString(row, 1);
 				newCustomer.setCode(customerCode);
 				newCustomer.setCustomerCategory(CustomerCategory.valueOf(getCellString(row, 2)));
+				newCustomer.setIsOwnerCustomer(Double.valueOf(getCellString(row, 3)).intValue() == 1);
+				newCustomer.setWxcpDeptId(String.valueOf(Double.valueOf(getCellString(row, 4)).intValue()));
 				
 				Customer customer = customerService.getOneByCode(customerCode);
 				if(customer != null)
@@ -110,7 +175,7 @@ public class UploadController extends BaseController {
 			int rowNum = sheet.getLastRowNum();
 			List<Sales> salesList = new ArrayList<>();
 			// We get the data from the second row because the first line is always the headers.
-			for(int i = 1; i < rowNum; i++){
+			for(int i = 1; i <= rowNum; i++){
 				Row row = sheet.getRow(i);
 				if(row == null)
 					break;
@@ -149,7 +214,7 @@ public class UploadController extends BaseController {
 			Map<String, Customer> customerMap = new HashMap<>();
 			// SalesName, Sales
 			Map<String, Sales> salesMap = new HashMap<>();
-			for(int i = 1; i < rowNum; i++){
+			for(int i = 1; i <= rowNum; i++){
 				Row row = sheet.getRow(i);
 				if(row == null)
 					break;
@@ -225,7 +290,8 @@ public class UploadController extends BaseController {
 			Sheet sheet = workbook.getSheetAt(0);
 			int rowNum = sheet.getLastRowNum();
 			List<HumidifierAlarm> list = new ArrayList<>();
-			for(int i = 1; i < rowNum; i++){
+			ProductInfo productInfo = productInfoService.getOneByType(humidifierType);
+			for(int i = 1; i <= rowNum; i++){
 				Row row = sheet.getRow(i);
 				if(row == null)
 					break;
@@ -238,6 +304,7 @@ public class UploadController extends BaseController {
 				humidifierAlarm.setSecDescription(secDescription);
 				humidifierAlarm.setCode(alarmCode);
 				humidifierAlarm.setHumidifierType(humidifierType);
+				humidifierAlarm.setProductInfo(productInfo);
 				if(StringUtils.isNotBlank(alarmCode)){
 					HumidifierAlarm oldOne = humidifierAlarmService.getOneByCodeAndType(alarmCode, humidifierType);
 					if(oldOne != null){

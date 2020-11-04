@@ -27,6 +27,7 @@
     <script th:src="@{/static/js/jquery/jquery.min.js}" type="text/javascript"></script>
     <script th:src="@{/static/js/common.js}" type="text/javascript"></script>
     <script th:inline="javascript">
+    var issueCode = /*[[${issueCode}]]*/;
     var repairCustomerId = "";
     $(".div-customer").click(function(){
 		repairCustomerId = $(this).children(".radio-customer").attr("id");
@@ -38,7 +39,20 @@
 		})
 	});
     $(".span-submit").click(function(){
-    	window.location.href="/aftersales/"
+    	$.ajax({
+    		url:'/aftersales/missue/' + issueCode + "/distribution",
+    		method:'POST',
+    		data:{
+    			"repairCustomerId":repairCustomerId
+    		},
+    		dataType:'json',
+    		success:function(result){
+    			if(result.status == 200){
+    				window.location.href='/aftersales/missue/' + issueCode + "/distribution";
+    			}
+    			
+    		}
+    	})
     })
     </script>
 </body>

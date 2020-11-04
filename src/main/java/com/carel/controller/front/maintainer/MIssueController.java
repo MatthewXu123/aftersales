@@ -14,13 +14,13 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.alibaba.fastjson.JSONObject;
 import com.carel.controller.BaseController;
 import com.carel.persistence.entity.community.Customer;
 import com.carel.persistence.entity.main.Issue;
 import com.carel.persistence.entity.product.Product;
-
-import me.chanjar.weixin.cp.bean.WxCpDepart;
 
 /**
  * Description:
@@ -71,7 +71,7 @@ public class MIssueController extends BaseController{
 			if(pid != null){
 				Issue issue = issueCode == null ? null : issueService.getOneByCode(issueCode);
 				Product product = productService.getOneById(pid);
-				model.addAttribute("customerList", wxCpDepartmentService.list((long)product.getOwnerCustomer().getDeptId()));
+				model.addAttribute("customerList", wxCpDepartmentService.list(Long.valueOf(product.getOwnerCustomer().getWxcpDeptId())));
 			}
 			return "/front/missuedis";
 		} catch (Exception e) {
@@ -82,36 +82,31 @@ public class MIssueController extends BaseController{
 	}
 	
 	@PostMapping(value = {"/{issueCode}/distribution"})
-	public String postUIssueDistribution(@ModelAttribute @PathVariable(required = false) String issueCode, 
+	@ResponseBody
+	public JSONObject postUIssueDistribution(@ModelAttribute @PathVariable(required = false) String issueCode, 
 			@RequestParam Integer repairCustomerId, 
 			Model model){
 		try {
 			Integer pid = getPid();
 			if(pid != null){
-/*				Issue issue = issueCode == null ? null : issueService.getOneByCode(issueCode);
+				Issue issue = issueCode == null ? null : issueService.getOneByCode(issueCode);
 				Product product = productService.getOneById(pid);
-				if(!bindCustomerId.equals(disCustomerId)){
-					Customer disCustomer = customerService.getOneById(disCustomerId);
-					wxCpMsgService.sendMsgToParty(wxCpMsgProperty.getNewIssue(), 
-							disCustomer.getDeptId(),
-							new Object[]{
-									issueCode,
-									issue.getUsername(), 
-									issue.getUserPhone(), 
-									product.getInstallationAddress(),
-									issue.getAlarmCode(),
-									null,
-									issue.getComment(),
-									""
-									});
+				int ownerCustomerId = product.getOwnerCustomer().getId();
+				Customer repairCustomer = customerService.getOneById(repairCustomerId);
+				if(repairCustomerId != ownerCustomerId){
+					wxCpMsgService.sendNewIssueMsg(wxCpMsgProperty.getNewIssue(),
+							repairCustomer.getWxcpDeptId(), 
+							issue, 
+							product);
 				}
-				model.addAttribute("deptList", wxCpDepartmentService.list(customerId));*/
+				issue.setCustomer(repairCustomer);
+				issueService.saveIssue(issue);
 			}
-			return "/front/uissue";
 		} catch (Exception e) {
 			logger.error("",e);
-			return "/front/error";
+			return resultFactory.getFailResultJSON();
 		}
+		return resultFactory.getSuccessResultJSON();
 		
 	}
 	

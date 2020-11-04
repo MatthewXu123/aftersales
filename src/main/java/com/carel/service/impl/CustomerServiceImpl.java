@@ -54,7 +54,7 @@ public class CustomerServiceImpl implements CustomerService{
 
 	@Override
 	public Customer getOneByDeptId(int deptId) {
-		return customerRepository.findByDeptId(deptId);
+		return customerRepository.findByWxcpDeptId(deptId);
 	}
 
 }

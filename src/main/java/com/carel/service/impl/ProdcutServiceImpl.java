@@ -1,6 +1,8 @@
 
 package com.carel.service.impl;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -31,14 +33,17 @@ public class ProdcutServiceImpl implements ProductService{
 
 	@Override
 	public Product getOneBySNAndPCode(String sn, String pcode) {
-		return productRepository.findBySerialNumberAndProductInfoProductCode(sn, pcode);
+		return productRepository.findBySerialNumberAndProductCode(sn, pcode);
 	}
 
 	@Override
 	public Product saveOne(Product product) {
 		return productRepository.save(product);
 	}
-	
-	
+
+	@Override
+	public List<Product> saveAll(List<Product> productList) {
+		return productRepository.saveAll(productList);
+	}
 
 }

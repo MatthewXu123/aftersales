@@ -82,17 +82,10 @@ public class UIssueController extends BaseController{
 				issueCode = issueService.saveNewPendingIssue(userIssue).getCode();
 				
 				//When the new issue is submitted, we send the message to the related customer.
-				
-				wxCpMsgService.sendMsgToParty(wxCpMsgProperty.getNewIssue() + getDistributionURL(request), 
-						String.valueOf(product.getOwnerCustomer().getDeptId()),
-						new Object[]{
-								issueCode,
-								userIssue.getUsername(), 
-								userIssue.getUserPhone(), 
-								product.getInstallationInfo().getAddress(),
-								userIssue.gethAlarm().getSecDescription(),
-								userIssue.getComment()
-								});
+				wxCpMsgService.sendNewIssueMsg(wxCpMsgProperty.getNewIssue() + getDistributionURL(request), 
+						product.getOwnerCustomer().getWxcpDeptId(), 
+						userIssue, 
+						product);
 			}else{
 				Issue oldIssue = issueService.getOneByCode(issueCode);
 				//If we need delete the original photo or update the new photo...

@@ -14,6 +14,7 @@ import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.test.annotation.Rollback;
 import org.springframework.test.context.junit4.SpringRunner;
 
+import com.carel.persistence.constant.HumidifierType;
 import com.carel.persistence.entity.product.ProductInfo;
 
 /**
@@ -34,7 +35,6 @@ public class ProductInfoRepositoryTest {
 	public void testSaveOne() {
 		ProductInfo productInfo = new ProductInfo();
 		//productInfo.setPartlist(new String[]{"1","2","3"});
-		productInfo.setProductCode("product_code2");
 		//productInfo.setErrorlist(new String[]{"4","5","6"});
 		productInfo.setCreateTime(new Date());
 		productInfo.setUpdateTime(new Date());
@@ -43,8 +43,8 @@ public class ProductInfoRepositoryTest {
 	
 	@Test
 	public void testFindById(){
-		Optional<ProductInfo> productInfo = productInfoRepository.findById(1);
-		Assert.assertTrue(productInfo.get().getId() == 1);
+		ProductInfo findByHumidifierType = productInfoRepository.findByHumidifierType(HumidifierType.HUH);
+		System.out.println(findByHumidifierType.getHumidifierType());
 	}
 	
 }

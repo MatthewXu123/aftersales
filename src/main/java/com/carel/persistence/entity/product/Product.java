@@ -44,6 +44,8 @@ public class Product {
 	private ProductInfo productInfo;
 
 	private String serialNumber;
+	
+	private String productCode;
 
 	private String orderNumber;
 
@@ -101,6 +103,14 @@ public class Product {
 
 	public void setSerialNumber(String serialNumber) {
 		this.serialNumber = serialNumber;
+	}
+
+	public String getProductCode() {
+		return productCode;
+	}
+
+	public void setProductCode(String productCode) {
+		this.productCode = productCode;
 	}
 
 	public String getOrderNumber() {

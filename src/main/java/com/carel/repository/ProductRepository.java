@@ -15,5 +15,5 @@ public interface ProductRepository extends JpaRepository<Product, Integer>{
 
 	Product findBySerialNumber(String serialNumber);
 	
-	Product findBySerialNumberAndProductInfoProductCode(String serialNumber, String productCode);
+	Product findBySerialNumberAndProductCode(String serialNumber, String productCode);
 }

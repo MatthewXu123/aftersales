@@ -29,7 +29,7 @@
 	<script th:inline="javascript">
 		var product = /*[[${product}]]*/;
 		$(".icon-return").click(function(){
-        	window.location.href = "/aftersales/home?sn=" + product.serialNumber + "&pcode=" + product.productInfo.productCode;
+        	window.location.href = "/aftersales/home?sn=" + product.serialNumber + "&pcode=" + product.productCode;
     	})
 	</script>
 </body>

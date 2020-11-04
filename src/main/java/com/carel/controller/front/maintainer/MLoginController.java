@@ -60,7 +60,7 @@ public class MLoginController extends BaseController{
 				Product product = productService.getOneById(pid);
 				if(product.getOwnerCustomer() == null){
 					if(!customer.getIsOwnerCustomer()){
-						long customerId = (long)customer.getDeptId();
+						long customerId = Long.valueOf(customer.getWxcpDeptId());
 						List<WxCpDepart> list = wxCpDepartmentService.list(customerId);
 						for (WxCpDepart wxCpDepart : list) {
 							if(wxCpDepart.getId() == customerId){

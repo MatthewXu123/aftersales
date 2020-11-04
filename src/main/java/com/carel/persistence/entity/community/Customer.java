@@ -55,7 +55,7 @@ public class Customer{
     
 	private String code;
 	
-	private Integer deptId;
+	private String wxcpDeptId;
 	
 	private String partyName;
 	
@@ -127,12 +127,12 @@ public class Customer{
 		this.code = code;
 	}
 
-	public Integer getDeptId() {
-		return deptId;
+	public String getWxcpDeptId() {
+		return wxcpDeptId;
 	}
 
-	public void setDeptId(Integer deptId) {
-		this.deptId = deptId;
+	public void setWxcpDeptId(String wxcpDeptId) {
+		this.wxcpDeptId = wxcpDeptId;
 	}
 
 	public String getPartyName() {

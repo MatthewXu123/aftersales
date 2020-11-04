@@ -13,12 +13,12 @@
             <span class="span-header" th:text="#{uboard.user-board}"></span>
         </div>
         <div class="div-product flex-container-column">
-            <img class="img-product" th:if="${#strings.contains(product.productInfo.productCode,'HUH')}" th:src="@{/static/img/huh.jpg}">
-            <img class="img-product" th:if="${#strings.contains(product.productInfo.productCode,'HUT')}" th:src="@{/static/img/hut.jpg}">
+            <img class="img-product" th:if="${#strings.contains(product.productInfo.humidifierType.description,'HUH')}" th:src="@{/static/img/huh.jpg}">
+            <img class="img-product" th:if="${#strings.contains(product.productInfo.humidifierType.description,'HUT')}" th:src="@{/static/img/hut.jpg}">
             <div class="div-product-details2 flex-container">
                 <div class="div-product-details flex-container-column">
                     <span class="span-product" th:text="#{board.product-name} + #{board.product-desc}"></span>
-                    <span class="span-product" th:text="#{board.product-code} + ${product.productInfo.productCode}"></span>
+                    <span class="span-product" th:text="#{board.product-code} + ${product.productCode}"></span>
                     <span class="span-product span-product-special" th:if="${product.installationInfo != null}" th:text="#{board.installation-date} + ${#dates.format(product.installationInfo.createTime,'yyyy-MM-dd')}"></span>
                 </div>
                 <div class="div-product-details flex-container-column" th:if="${product.installationInfo != null}">
@@ -64,7 +64,7 @@
             window.location.href = "/aftersales/policy";
         })
         $(".icon-return").click(function(){
-        	window.location.href = "/aftersales/home?sn=" + product.serialNumber + "&pcode=" + product.productInfo.productCode;
+        	window.location.href = "/aftersales/home?sn=" + product.serialNumber + "&pcode=" + product.productCode;
     	})
     </script>
 </body>

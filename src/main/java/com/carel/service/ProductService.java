@@ -1,6 +1,8 @@
 
 package com.carel.service;
 
+import java.util.List;
+
 import org.springframework.stereotype.Service;
 
 import com.carel.persistence.entity.product.Product;
@@ -20,5 +22,7 @@ public interface ProductService {
 	Product getOneBySNAndPCode(String sn, String pcode);
 	
 	Product saveOne(Product product);
+	
+	List<Product> saveAll(List<Product> productList);
 	
 }

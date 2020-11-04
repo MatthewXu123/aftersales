@@ -2,8 +2,8 @@ package com.carel.persistence.constant;
 
 public enum HumidifierType {
 
-	HUH("huh"),
-	HUT("hut");
+	HUH("HUH"),
+	HUT("HUT");
 	
 	private String description;
 	
