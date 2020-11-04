@@ -13,8 +13,14 @@
             <span class="span-header" th:text="#{manual.header}"></span>
         </div>
         <div class="flex-container" th:switch="${productCodeNum}">
-        	<a th:case="1" href="http://wei.hvacrhome.cn/kale/web/viewer.html?file=http://wei.hvacrhome.cn/file/upload/202004/22/1535543829.pdf">各种加湿应用的明智之选</a>
-        	<a th:case="2" href="http://wei.hvacrhome.cn/kale/web/viewer.html?file=http://wei.hvacrhome.cn/file/upload/202004/21/1445015229.pdf">电热型加湿器前所未有的精密控制与高可靠性</a>
+        	<div th:case="1" class="flex-container-column div-pdf" id="ue">
+        		<img class="img-pdf" th:src="@{/static/img/pdf_ue.jpg}">
+        		<span class="span-pdf">各种加湿应用的明智之选</span>
+        	</div>
+        	<div th:case="2" class="flex-container-column div-pdf" id="ur">
+        		<img class="img-pdf" th:src="@{/static/img/pdf_ur.jpg}">
+        		<span class="span-pdf">电热型加湿器前所未有的精密控制与高可靠性</span>
+        	</div>
         	<span class="span-nopdf" th:case="*" th:text="#{manual.nopdf}"></span>
         </div>
 		
@@ -24,6 +30,13 @@
 	<script th:inline="javascript">
 		$(".icon-return").click(function(){
 			window.history.go(-1);
+		});
+		$(".div-pdf").click(function(){
+			var id = $(this).attr("id");
+			if(id == "ue")
+				window.location.href = "http://wei.hvacrhome.cn/kale/web/viewer.html?file=http://wei.hvacrhome.cn/file/upload/202004/22/1535543829.pdf";
+			else if(id == "ur")
+				window.location.href = "http://wei.hvacrhome.cn/kale/web/viewer.html?file=http://wei.hvacrhome.cn/file/upload/202004/21/1445015229.pdf";
 		})
 	</script>
 </body>

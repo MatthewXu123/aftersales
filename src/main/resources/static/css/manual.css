@@ -6,3 +6,24 @@ a{
 	font-family:'RG';
     margin-top: 50%;
 }
+.span-pdf{
+	font-family: 'RG';
+    font-size: 2rem;
+    margin-top: 1rem;
+    font-weight: bold;
+    width: 100%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    text-align: right;
+}
+.img-pdf{
+	width:100%;
+}
+.div-pdf{
+    width: 42rem;
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+    border-bottom: 1px #707070 solid;
+}
+}
