@@ -74,7 +74,7 @@ public class WxCpMsgServiceImpl implements WxCpMsgService{
 						issue.getUsername(), 
 						issue.getUserPhone(), 
 						product.getInstallationInfo().getAddress(),
-						issue.gethAlarm().getCode() + " " + issue.gethAlarm().getSecDescription(),
+						issue.gethAlarm() != null ? (issue.gethAlarm().getCode() + " " + issue.gethAlarm().getSecDescription()) : "",
 						issue.getComment(),
 						});
 	}

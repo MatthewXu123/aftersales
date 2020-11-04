@@ -5,6 +5,7 @@ import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -50,7 +51,13 @@ public class UploadController extends BaseController {
 	private final Logger logger = LoggerFactory.getLogger(UploadController.class);
 
 	private static final String TMP_PATH = "WEB-INF/classes/data";
-
+	
+	private static final String[] params = { "SERIAL NUMBER", "ITEM CODE"};
+	
+	private static final List<String> HUH_LIST = Arrays.asList("UE","HUT");
+	
+	private static final List<String> HUT_LIST = Arrays.asList("UR","HUH");
+	
 	@ModelAttribute
 	public void getFile(@RequestParam MultipartFile file, Model model) {
 		try {
@@ -85,6 +92,10 @@ public class UploadController extends BaseController {
 					break;
 				ProductInfo newProductInfo = new ProductInfo();
 				newProductInfo.setHumidifierType(HumidifierType.valueOf(humidifierType));
+				
+				ProductInfo productInfo = productInfoService.getOneByType(HumidifierType.valueOf(humidifierType));
+				if(productInfo != null)
+					newProductInfo.setId(productInfo.getId());
 				productInfoList.add(newProductInfo);
 			}
 			productInfoService.saveAll(productInfoList);
@@ -104,18 +115,24 @@ public class UploadController extends BaseController {
 			Sheet sheet = workbook.getSheetAt(0);
 			int rowNum = sheet.getLastRowNum();
 			List<Product> productList = new ArrayList<>();
+			
+			int[] paramLocation = getParamLocation(sheet.getRow(0));
+			int serialNumberLocation = paramLocation[0];
+			int itemCodeLocation = paramLocation[1];
+			
 			// We get the data from the second row because the first line is always the headers.
 			for(int i = 1; i <= rowNum; i++){
 				Row row = sheet.getRow(i);
 				if(row == null)
 					break;
 				Product newProduct = new Product();
-				String productCode = getCellString(row, 0);
-				String serialNumber = getCellString(row, 1);
-				String humidifierType = getCellString(row, 2);
+				String serialNumber = getCellString(row, serialNumberLocation);
+				String productCode = getCellString(row, itemCodeLocation);
 				newProduct.setProductCode(productCode);
 				newProduct.setSerialNumber(serialNumber);
-				newProduct.setProductInfo(productInfoService.getOneByType(HumidifierType.valueOf(humidifierType)));
+				HumidifierType humidifierType = getHumidifierType(productCode);
+				if(humidifierType != null)
+					newProduct.setProductInfo(productInfoService.getOneByType(humidifierType));
 				
 				Product product = productService.getOneBySN(serialNumber);
 				if(product != null)
@@ -150,7 +167,7 @@ public class UploadController extends BaseController {
 				newCustomer.setCode(customerCode);
 				newCustomer.setCustomerCategory(CustomerCategory.valueOf(getCellString(row, 2)));
 				newCustomer.setIsOwnerCustomer(Double.valueOf(getCellString(row, 3)).intValue() == 1);
-				newCustomer.setWxcpDeptId(String.valueOf(Double.valueOf(getCellString(row, 4)).intValue()));
+				newCustomer.setWxcpDeptId(StringUtils.isBlank(getCellString(row, 4)) ? "" : String.valueOf(Double.valueOf(getCellString(row, 4)).intValue()));
 				
 				Customer customer = customerService.getOneByCode(customerCode);
 				if(customer != null)
@@ -320,9 +337,29 @@ public class UploadController extends BaseController {
 		return resultFactory.getSuccessResultJSON();
 	}
 	
+	public int[] getParamLocation(Row row) {
+		int[] paramsLocation = new int[params.length];
+		int k = 0;
+		for (int i = 0; i < params.length; i++) {
+			for (int j = 0; j < row.getPhysicalNumberOfCells(); j++) {
+				if (params[i].equalsIgnoreCase(row.getCell(j).toString())) {
+					paramsLocation[k++] = j;
+				}
+			}
+		}
+		return paramsLocation;
+	}
 	
 	private String getCellString(Row row, int cellnum){
 		Cell cell = row.getCell(cellnum);
 		return cell == null ? "" : cell.toString();
+	}
+	
+	private HumidifierType getHumidifierType(String productCode){
+		if(HUH_LIST.contains(productCode.substring(0, 2)) || HUH_LIST.contains(productCode.substring(0, 3)))
+			return HumidifierType.HUH;
+		if(HUT_LIST.contains(productCode.substring(0, 2)) || HUH_LIST.contains(productCode.substring(0, 3)))
+			return HumidifierType.HUT;
+		return null;
 	}
 }

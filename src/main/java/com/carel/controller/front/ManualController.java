@@ -1,9 +1,16 @@
 
 package com.carel.controller.front;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+
+import com.carel.controller.BaseController;
+import com.carel.controller.front.maintainer.MIssueController;
+import com.carel.persistence.entity.product.Product;
 
 /**
  * Description:
@@ -12,10 +19,23 @@ import org.springframework.web.bind.annotation.RequestMapping;
  */
 @Controller
 @RequestMapping("/manual")
-public class ManualController {
+public class ManualController extends BaseController{
 
+	private final Logger logger = LoggerFactory.getLogger(ManualController.class);
+	
 	@GetMapping
-	public String getManual(){
+	public String getManual(Model model){
+		try {
+			Integer pid = getPid();
+			if(pid != null){
+				Product product = productService.getOneById(pid);
+				model.addAttribute("productCodeNum", product.getProductCodeNum());
+			}
+				
+		} catch (Exception e) {
+			logger.error("",e);
+			return "/front/error";
+		}
 		return "/front/manual";
 	}
 }

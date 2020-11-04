@@ -59,7 +59,7 @@ public class IssueServiceImpl implements IssueService{
 
 	@Override
 	public Issue getOneByCustomerId(int customerId) {
-		return issueRepository.findByCustomerId(customerId);
+		return issueRepository.findByCustomerIdAndProcessStatusNot(customerId, ProcessStatus.EVALUATED);
 	}
 	
 }

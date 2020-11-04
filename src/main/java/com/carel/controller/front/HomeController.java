@@ -36,7 +36,12 @@ public class HomeController extends BaseController{
 	
 	@GetMapping
 	public String getHome(){
-		return "/front/home";
+		try {
+			return "/front/home";
+		} catch (Exception e) {
+			logger.error("",e);
+			return "/front/error";
+		}
 	}
 	
 	@PostMapping("/sn_verify")

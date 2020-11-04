@@ -34,7 +34,7 @@ public class ProductRepositoryTest {
 
 	@Test
 	public void testFindBySerialNumberAndProductInfoProductCode(){
-		Product product = productRepository.findBySerialNumberAndProductInfoProductCode("serial_number", "product_code");
+		Product product = productRepository.findBySerialNumberAndProductCode("serial_number", "product_code");
 		Assert.assertTrue(product.getId() == 1);
 	}
 	

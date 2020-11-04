@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.alibaba.fastjson.JSONObject;
 import com.carel.controller.BaseController;
+import com.carel.persistence.constant.ProcessStatus;
 import com.carel.persistence.entity.community.Customer;
 import com.carel.persistence.entity.main.Issue;
 import com.carel.persistence.entity.product.Product;
@@ -44,7 +45,7 @@ public class MIssueController extends BaseController{
 				Customer customer = customerService.getOneByLoginCode(loginCode);
 				Issue issue = issueService.getOneByPid(pid);
 				Issue issue2 = issueService.getOneByCustomerId(customer.getId());
-				if(customer.getIsOwnerCustomer() || (issue2 != null && issue.getCode().equals(issue2.getCode())))
+				if(customer.getIsOwnerCustomer() || (issue != null && issue2 != null && issue.getCode().equals(issue2.getCode())))
 					issueList.add(issue);
 				/*if(customerService.getOneByLoginCode(loginCode) != null){
 					Issue issue = issueService.getOneByPid(pid);
@@ -65,12 +66,22 @@ public class MIssueController extends BaseController{
 	}
 	
 	@GetMapping(value = {"/{issueCode}/distribution"})
-	public String getUIssueDistribution(@ModelAttribute @PathVariable(required = false) String issueCode, Model model){
+	public String getUIssueDistribution(@ModelAttribute @PathVariable(required = false) String issueCode, 
+			@RequestParam(required = false) Integer pid, 
+			@RequestParam(required = false) Boolean isWxcp,
+			Model model){
 		try {
-			Integer pid = getPid();
+			if(pid == null)
+				pid = getPid();
+			else
+				httpSession.setAttribute("pid", pid);
+			
+			Issue issue = issueCode == null ? null : issueService.getOneByCode(issueCode);
+			if(issue == null || issue.getCustomer() != null)
+				return "/front/error";
 			if(pid != null){
-				Issue issue = issueCode == null ? null : issueService.getOneByCode(issueCode);
 				Product product = productService.getOneById(pid);
+				model.addAttribute("isWxcp", isWxcp);
 				model.addAttribute("customerList", wxCpDepartmentService.list(Long.valueOf(product.getOwnerCustomer().getWxcpDeptId())));
 			}
 			return "/front/missuedis";
@@ -91,15 +102,16 @@ public class MIssueController extends BaseController{
 			if(pid != null){
 				Issue issue = issueCode == null ? null : issueService.getOneByCode(issueCode);
 				Product product = productService.getOneById(pid);
-				int ownerCustomerId = product.getOwnerCustomer().getId();
-				Customer repairCustomer = customerService.getOneById(repairCustomerId);
-				if(repairCustomerId != ownerCustomerId){
+				String ownerCustomerId = product.getOwnerCustomer().getWxcpDeptId();
+				Customer repairCustomer = customerService.getOneByDeptId(String.valueOf(repairCustomerId));
+				if(!String.valueOf(repairCustomerId).equals(ownerCustomerId)){
 					wxCpMsgService.sendNewIssueMsg(wxCpMsgProperty.getNewIssue(),
 							repairCustomer.getWxcpDeptId(), 
 							issue, 
 							product);
 				}
 				issue.setCustomer(repairCustomer);
+				issue.setProcessStatus(ProcessStatus.IN_PROGRESS);
 				issueService.saveIssue(issue);
 			}
 		} catch (Exception e) {

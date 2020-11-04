@@ -19,7 +19,7 @@
                 <span class="span-issue2" th:text="#{missue.issue-code} + ${issue.code}"></span>
                 <span class="span-issue2" th:text="#{umain.customer-name} + ${issue.username}"></span>
                 <span class="span-issue2" th:text="#{umain.customer-phone} + ${issue.userPhone}"></span>
-                <span class="span-issue2" th:text="#{umain.failure} + ${issue.alarmCode}"></span>
+                <span class="span-issue2" th:if="${issue.hAlarm != null}" th:text="#{umain.failure} + ${issue.hAlarm.code + issue.hAlarm.secDescription}"></span>
                 <span class="span-issue2" th:text="#{umain.photo}"></span>
                 <div class="div-photo2 flex-container">
                     <img class="img-issue" th:src="@{'/uissue/' + ${issue.id} + '/1'}" th:if="${issue.photo1 != null && issue.photo1.length != 0}">
@@ -39,12 +39,12 @@
             	<span class="span-form" th:text="#{umain.customer-phone}"></span>
           		<input th:value="${maintenanceRecord != null ? maintenanceRecord.maintainerPhone : ''}" name="maintainerPhone" class="input-form form-notblank form-phone" type="text">
             </div>
-            <div class="div-form-special flex-container">
+            <div th:if="${issue.product.productInfo != null}" class="div-form-special flex-container">
                 <span class="span-form" th:text="#{umain.failure}"></span>
                 <input name="alarmCode" class="input-alarmCode" type="hidden">
                 <select class="select-cause" th:value="${maintenanceRecord != null ? maintenanceRecord.alarmCode : ''}">
                     <div th:each="alarm : ${issue.product.productInfo.humidifierAlarms}">
-                        <option class="option-alarmCode" th:value="${alarm.code}" th:text="${alarm.code} + ' ' + ${alarm.description}"></option>
+                        <option class="option-alarmCode" th:value="${alarm.code}" th:text="${alarm.code} + ' ' + ${alarm.secDescription}"></option>
                     </div>
                 </select>
             </div>

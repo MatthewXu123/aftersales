@@ -64,7 +64,7 @@ public class MLoginController extends BaseController{
 						List<WxCpDepart> list = wxCpDepartmentService.list(customerId);
 						for (WxCpDepart wxCpDepart : list) {
 							if(wxCpDepart.getId() == customerId){
-								customer = customerService.getOneByDeptId(wxCpDepart.getParentId().intValue());
+								customer = customerService.getOneByDeptId(String.valueOf(wxCpDepart.getParentId()));
 								break;
 							}
 						}

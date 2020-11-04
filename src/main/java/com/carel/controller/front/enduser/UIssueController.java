@@ -9,7 +9,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -18,7 +17,6 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.carel.controller.BaseController;
 import com.carel.persistence.entity.main.Issue;
-import com.carel.persistence.entity.product.HumidifierAlarm;
 import com.carel.persistence.entity.product.Product;
 
 /**
@@ -55,7 +53,7 @@ public class UIssueController extends BaseController{
 	public String updateUserIssue(
 			@PathVariable(required = false) String issueCode,
 			@Valid Issue userIssue,
-			@RequestParam Integer alarmId,
+			@RequestParam(required = false) Integer alarmId,
 			@RequestParam MultipartFile p1,
 			@RequestParam MultipartFile p2,
 			@RequestParam MultipartFile p3,
@@ -78,11 +76,12 @@ public class UIssueController extends BaseController{
 				userIssue.setPhoto3(p3.getBytes());
 				userIssue.setProduct(product);
 				userIssue.setCode(userIssue.getCode());
-				userIssue.sethAlarm(humidifierAlarmService.getOneById(alarmId));
+				if(alarmId != null)
+					userIssue.sethAlarm(humidifierAlarmService.getOneById(alarmId));
 				issueCode = issueService.saveNewPendingIssue(userIssue).getCode();
 				
 				//When the new issue is submitted, we send the message to the related customer.
-				wxCpMsgService.sendNewIssueMsg(wxCpMsgProperty.getNewIssue() + getDistributionURL(request), 
+				wxCpMsgService.sendNewIssueMsg(wxCpMsgProperty.getNewIssue() + getDistributionURL(request, pid, issueCode), 
 						product.getOwnerCustomer().getWxcpDeptId(), 
 						userIssue, 
 						product);
@@ -107,7 +106,8 @@ public class UIssueController extends BaseController{
 				userIssue.setProduct(product);
 				userIssue.setCode(oldIssue.getCode());
 				userIssue.setProcessStatus(oldIssue.getProcessStatus());
-				userIssue.sethAlarm(humidifierAlarmService.getOneById(alarmId));
+				if(alarmId != null)
+					userIssue.sethAlarm(humidifierAlarmService.getOneById(alarmId));
 				issueCode = issueService.saveIssue(userIssue).getCode();
 			}
 			return "redirect:/uissue/" + issueCode;
@@ -118,10 +118,11 @@ public class UIssueController extends BaseController{
 	}
 	
 	
-	private String getDistributionURL(HttpServletRequest request){
+	private String getDistributionURL(HttpServletRequest request, Integer pid, String issueCode){
 		StringBuffer requestURL = request.getRequestURL();
-		requestURL.append("/distribution");
-		return "\n<a href=\"" + requestURL.toString() + "\">点击进行分配</a>";
+		String url = requestURL.substring(0, requestURL.indexOf("uissue"));
+		url += "missue/" + issueCode + "/distribution?isWxcp=true&&pid=" + pid;
+		return "\n<a href=\"" + url + "\">点击进行分配</a>";
 	}
 	
 }

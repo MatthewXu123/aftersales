@@ -26,7 +26,7 @@ public interface IssueRepository extends JpaRepository<Issue, Integer>{
 	
 	Issue findByIdAndProcessStatus(int id, ProcessStatus processStatus);
 	
-	Issue findByCustomerId(int customerId);
+	Issue findByCustomerIdAndProcessStatusNot(int customerId, ProcessStatus processStatus);
 	
 	List<Issue> findByProductId(int pid);
 	

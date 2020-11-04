@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <link th:href="@{static/css/common.css}" rel="stylesheet" type="text/css" />
-<link th:href="@{static/css/video.css}" rel="stylesheet" type="text/css" />
+<link th:href="@{static/css/manual.css}" rel="stylesheet" type="text/css" />
 <title th:text="#{manual.title}"></title>
 </head>
 <body>
@@ -11,6 +11,11 @@
 		<div class="div-header flex-container">
             <img class="icon-return" th:src="@{static/icon/return.svg}">
             <span class="span-header" th:text="#{manual.header}"></span>
+        </div>
+        <div class="flex-container" th:switch="${productCodeNum}">
+        	<a th:case="1" href="http://wei.hvacrhome.cn/kale/web/viewer.html?file=http://wei.hvacrhome.cn/file/upload/202004/22/1535543829.pdf">各种加湿应用的明智之选</a>
+        	<a th:case="2" href="http://wei.hvacrhome.cn/kale/web/viewer.html?file=http://wei.hvacrhome.cn/file/upload/202004/21/1445015229.pdf">电热型加湿器前所未有的精密控制与高可靠性</a>
+        	<span class="span-nopdf" th:case="*" th:text="#{manual.nopdf}"></span>
         </div>
 		
 	</div>

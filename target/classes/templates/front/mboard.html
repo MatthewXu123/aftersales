@@ -13,8 +13,8 @@
             <span class="span-header" th:text="#{mboard.header}"></span>
         </div>
         <div class="div-product flex-container-column">
-            <img class="img-product" th:if="${#strings.contains(product.productInfo.humidifierType.description,'HUH')}" th:src="@{/static/img/huh.jpg}">
-            <img class="img-product" th:if="${#strings.contains(product.productInfo.humidifierType.description,'HUT')}" th:src="@{/static/img/hut.jpg}">
+            <img class="img-product" th:if="${product.productInfo != null && #strings.contains(product.productInfo.humidifierType.description,'HUH')}" th:src="@{/static/img/huh.jpg}">
+            <img class="img-product" th:if="${product.productInfo != null && #strings.contains(product.productInfo.humidifierType.description,'HUT')}" th:src="@{/static/img/hut.jpg}">
             <div class="div-product-details2 flex-container" th:if="${product != null}">
                 <div class="div-product-details flex-container-column">
                     <span class="span-product" th:text="#{board.product-name} + #{board.product-desc}"></span>
@@ -88,10 +88,10 @@
             window.location.href = "/aftersales/policy";
         })
         $("#div_video").click(function(){
-            window.location.href = "/front/video.html";
+            window.location.href = "/aftersales/video";
         })
         $("#div_partlist").click(function(){
-            window.location.href = "/front/partlist.html";
+            window.location.href = "/aftersales/partlist";
         })
         $(".icon-return").click(function(){
         	window.location.href = "/aftersales/mlogin?pid=" + product.id;

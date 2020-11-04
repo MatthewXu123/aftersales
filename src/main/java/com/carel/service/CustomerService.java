@@ -19,7 +19,7 @@ public interface CustomerService {
 	
 	Customer getOneById(int id);
 	
-	Customer getOneByDeptId(int deptId);
+	Customer getOneByDeptId(String deptId);
 	
 	Customer saveOne(Customer customer);
 	

@@ -1,6 +1,6 @@
 $(function() {
 	var evaluationLevel = "";
-	if(issue != null){
+	if(issue != null && issue.hAlarm != null){
 		$(".option-alarmCode").each(function(){
 			if($(this).val() == issue.hAlarm.id)
 				$(this).attr("selected",true);
@@ -16,13 +16,20 @@ $(function() {
 
 function tabInit() {
 	$(".span-tab1").click(function(){
-		$(".div-submit").css("display", "");
-	})
+		if(issue.processStatus != 'PENDING'){
+			$(".div-submit").css("display", "none");
+		}else{
+			$(".div-submit").css("display", "");
+		}
+	});
 	$(".span-tab2").click(function(){
 		if(issue.processStatus != 'FINISHED'){
 			$(".div-submit").css("display", "none");
+		}else{
+			$(".div-submit").css("display", "");
 		}
-	})
+	});
+	$(".span-tab1").click();
 	if(issue != undefined && issue != null){
 		if(issue.processStatus != 'FINISHED'){
 			$("#div-main-process").css("height","25%");

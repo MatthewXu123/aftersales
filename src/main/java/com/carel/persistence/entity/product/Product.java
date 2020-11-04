@@ -216,4 +216,20 @@ public class Product {
 		return getWarrantyDate() == null ? false : new Date().before(getWarrantyDate());
 	}
 	
+	public int getProductCodeNum(){
+		if(productCode != null){
+			if(productCode.startsWith("UE"))
+				return 1;
+			else if (productCode.startsWith("UR")) {
+				return 2;
+			}else if (productCode.startsWith("HUT")) {
+				return 3;
+			}else if (productCode.startsWith("HUH")) {
+				return 4;
+			}
+		}
+		return 0;
+			
+	}
+	
 }

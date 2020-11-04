@@ -231,7 +231,7 @@ public class Issue{
 		return "用户名：" + username +
 				"；\n联系方式：" + userPhone + 
 				"；\n安装地点：" + product.getInstallationInfo().getAddress() + 
-				"；\n故障原因：" + hAlarm.getCode() + "-" + hAlarm.getSecDescription() + 
+				"；\n故障原因：" + (hAlarm != null ? (hAlarm.getCode() + "-" + hAlarm.getSecDescription()) : "") + 
 				"；\n其他：" + comment;
 	}
 
