@@ -87,7 +87,7 @@
 .textarea-description{
     height: 16rem;
     width: 46rem;
-    font-size: 3.5rem;
+    font-size: 2.5rem;
     font-family: 'RG';
 }
 .div-photo-group{
@@ -109,12 +109,8 @@
     -webkit-justify-content: flex-start;
     margin-top: 2rem;
     margin-bottom: 2rem;
-    /* height: 100%; */
-    /* justify-content: left; */
-    /* margin-top: 1rem; */
     align-items: flex-start;
     -webkit-align-items: flex-start;
-    /* margin-left: 2rem; */
 }
 .div-issue-content{
     width: 46rem;

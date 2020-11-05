@@ -17,21 +17,22 @@
             <img class="icon-return" th:src="@{/static/icon/return.svg}">
             <span class="span-header"  th:text="#{mrecord.header}"></span>
         </div>
+        		
         <div class="div-main2 flex-container-column">
             <div class="div-issue flex-container-left">
             	<span class="span-issue2" th:text="#{missue.create-time} + ${#dates.format(issue.createTime,'yyyy-MM-dd')}"></span>
-                <span class="span-issue2" th:text="#{missue.issue-code} + ${issue.code}"></span>
-                <span class="span-issue2" th:text="#{umain.customer-name} + ${issue.username}"></span>
-                <span class="span-issue2" th:text="#{umain.customer-phone} + ${issue.userPhone}"></span>
-                <span class="span-issue2" th:if="${issue.hAlarm != null}" th:text="#{umain.failure} + ${issue.hAlarm.code + issue.hAlarm.secDescription}"></span>
-                <span class="span-issue2" th:text="#{umain.photo}"></span>
-                <div class="div-photo2 flex-container">
-                    <img class="img-issue" th:src="@{'/uissue/' + ${issue.id} + '/1'}" th:if="${issue.photo1 != null && issue.photo1.length != 0}">
-                    <img class="img-issue" th:src="@{'/uissue/' + ${issue.id} + '/2'}" th:if="${issue.photo2 != null && issue.photo2.length != 0}">
-                    <img class="img-issue" th:src="@{'/uissue/' + ${issue.id} + '/3'}" th:if="${issue.photo3 != null && issue.photo3.length != 0}">
-                </div>
-                <span class="span-issue2 span-issue-bottom" th:text="#{umain.comment} + ${issue.comment}"></span>
-            </div>
+            	<span class="span-issue2" th:text="#{missue.issue-code} + ${issue.code}"></span>
+            	<span class="span-issue2" th:text="#{umain.customer-name} + ${issue.username}"></span>
+            	<span class="span-issue2" th:text="#{umain.customer-phone} + ${issue.userPhone}"></span>
+            	<span class="span-issue2" th:if="${issue.hAlarm != null}" th:text="#{umain.failure} + ${issue.hAlarm.code + issue.hAlarm.secDescription}"></span>
+            	<span class="span-issue2" th:text="#{umain.photo}"></span>
+           		<div class="div-photo2 flex-container">
+                	<img class="img-issue" th:src="@{'/uissue/' + ${issue.id} + '/1'}" th:if="${issue.photo1 != null && issue.photo1.length != 0}">
+                	<img class="img-issue" th:src="@{'/uissue/' + ${issue.id} + '/2'}" th:if="${issue.photo2 != null && issue.photo2.length != 0}">
+                	<img class="img-issue" th:src="@{'/uissue/' + ${issue.id} + '/3'}" th:if="${issue.photo3 != null && issue.photo3.length != 0}">
+            	</div>
+            <span class="span-issue2 span-issue-bottom" th:text="#{umain.comment} + ${issue.comment}"></span>
+            </div> 
             <!-- MaintenanceRecord Form -->
             <form id="form_record" th:action="@{/mrecord} + '?issueCode=' + ${issueCode}" method="post"  enctype="multipart/form-data">
             <input id="processStatus" name="processStatus" type="hidden">
