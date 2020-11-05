@@ -3,7 +3,6 @@
 <head>
 <meta charset="UTF-8">
 <link th:href="@{static/css/common.css}" rel="stylesheet" type="text/css" />
-<link th:href="@{static/css/manual.css}" rel="stylesheet" type="text/css" />
 <title th:text="#{manual.title}"></title>
 </head>
 <body>
@@ -13,15 +12,15 @@
             <span class="span-header" th:text="#{manual.header}"></span>
         </div>
         <div class="flex-container" th:switch="${productCodeNum}">
-        	<div th:case="1" class="flex-container-column div-pdf" id="ue">
-        		<img class="img-pdf" th:src="@{/static/img/pdf_ue.jpg}">
-        		<span class="span-pdf">各种加湿应用的明智之选</span>
+        	<div th:case="1" class="flex-container-column div-tutorial" id="ue">
+        		<img class="img-tutorial" th:src="@{/static/img/pdf_ue.jpg}">
+        		<span class="span-tutorial">各种加湿应用的明智之选</span>
         	</div>
-        	<div th:case="2" class="flex-container-column div-pdf" id="ur">
-        		<img class="img-pdf" th:src="@{/static/img/pdf_ur.jpg}">
-        		<span class="span-pdf">电热型加湿器前所未有的精密控制与高可靠性</span>
+        	<div th:case="2" class="flex-container-column div-tutorial" id="ur">
+        		<img class="img-tutorial" th:src="@{/static/img/pdf_ur.jpg}">
+        		<span class="span-tutorial">电热型加湿器前所未有的精密控制与高可靠性</span>
         	</div>
-        	<span class="span-nopdf" th:case="*" th:text="#{manual.nopdf}"></span>
+        	<span class="span-notutorial" th:case="*" th:text="#{manual.nopdf}"></span>
         </div>
 		
 	</div>
@@ -31,7 +30,7 @@
 		$(".icon-return").click(function(){
 			window.history.go(-1);
 		});
-		$(".div-pdf").click(function(){
+		$(".div-tutorial").click(function(){
 			var id = $(this).attr("id");
 			if(id == "ue")
 				window.open("http://wei.hvacrhome.cn/kale/web/viewer.html?file=http://wei.hvacrhome.cn/file/upload/202004/22/1535543829.pdf");

@@ -192,3 +192,28 @@ input::-webkit-input-placeholder{
   transform: none;
   visibility: visible;
 }
+.span-tutorial{
+	font-family: 'RG';
+    font-size: 2rem;
+    margin-top: 1rem;
+    font-weight: bold;
+    width: 100%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    text-align: right;
+}
+.img-tutorial{
+	width:100%;
+}
+.div-tutorial{
+    width: 42rem;
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+    border-bottom: 1px #707070 solid;
+}
+.span-notutorial{
+	font-size:3rem;
+	font-family:'RG';
+    margin-top: 50%;
+}

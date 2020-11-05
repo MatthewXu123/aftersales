@@ -13,8 +13,9 @@
             <span class="span-header" th:text="#{mboard.header}"></span>
         </div>
         <div class="div-product flex-container-column">
-            <img class="img-product" th:if="${product.productInfo != null && #strings.contains(product.productInfo.humidifierType.description,'HUH')}" th:src="@{/static/img/huh.jpg}">
-            <img class="img-product" th:if="${product.productInfo != null && #strings.contains(product.productInfo.humidifierType.description,'HUT')}" th:src="@{/static/img/hut.jpg}">
+            <img class="img-product" th:if="${product.productCodeNum == 1 || product.productCodeNum == 3}" th:src="@{/static/img/board_huh.jpg}">
+            <img class="img-product" th:if="${product.productCodeNum == 2 || product.productCodeNum == 4}" th:src="@{/static/img/board_hut.jpg}">
+            <img class="img-product" th:if="${product.productCodeNum == 0}" th:src="@{/static/img/board_other.png}">
             <div class="div-product-details2 flex-container" th:if="${product != null}">
                 <div class="div-product-details flex-container-column">
                     <span class="span-product" th:text="#{board.product-name} + #{board.product-desc}"></span>

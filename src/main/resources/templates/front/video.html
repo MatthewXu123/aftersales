@@ -3,30 +3,38 @@
 <head>
 <meta charset="UTF-8">
 <link th:href="@{/static/css/common.css}" rel="stylesheet" type="text/css" />
-<link th:href="@{/static/css/video.css}" rel="stylesheet" type="text/css" />
-<title>Guide Video</title>
+<title th:text="#{video.title}"></title>
 </head>
 <body>
 	<div class="div-container">
 		<div class="div-header flex-container">
             <img class="icon-return" th:src="@{/static/icon/return.svg}">
-            <span class="span-header">Guide Video</span>
+            <span class="span-header"  th:text="#{video.header}"></span>
         </div>
-		<div class="div-bg flex-container" >
-            <div class="div-video-container flex-container-column">
-                <video class="video-guide" controls="controls">
-                    <source th:src="@{/static/video/movie.ogg}" type="video/ogg">
-                </video>
-                <span class="span-videodesc">CAREL用户指导视频</span>
-            </div>
-            
-		</div>
+		<div class="flex-container" th:switch="${productCodeNum}">
+        	<div th:case="1" class="flex-container-column div-tutorial" id="ue">
+        		<img class="img-tutorial" th:src="@{/static/img/video_ue.jpg}">
+        		<span class="span-tutorial">电极加湿器视频教程</span>
+        	</div>
+        	<div th:case="2" class="flex-container-column div-tutorial" id="ur">
+        		<img class="img-tutorial" th:src="@{/static/img/video_ur.jpg}">
+        		<span class="span-tutorial">高配版电热加湿器桶维护教程</span>
+        	</div>
+        	<span class="span-notutorial" th:case="*" th:text="#{video.novideo}"></span>
+        </div>
 	</div>
     <script th:src="@{/static/js/jquery/jquery.min.js}" type="text/javascript"></script>
     <script th:src="@{/static/js/common.js}" type="text/javascript"></script>
 	<script type="text/javascript">
 		$(".icon-return").click(function(){
 			window.history.go(-1);
+		});
+		$(".div-tutorial").click(function(){
+			var id = $(this).attr("id");
+			if(id == "ue")
+				window.open("https://mp.weixin.qq.com/s/QWeX4_UcWwM_6Gz7WSSfEA");
+			else if(id == "ur")
+				window.open("https://mp.weixin.qq.com/s/gvogABuM3zzTL57a7TbICA");
 		})
 	</script>
 </body>

@@ -3,8 +3,11 @@
 <head>
 <meta charset="UTF-8">
 <title th:text="#{info.title}"></title>
+<link th:href="@{static/css/common.css}" rel="stylesheet" type="text/css"/>
 </head>
 <body>
-	<span th:text="#{info.msg}"></span>
+	<div class="flex-container">
+		<span class="span-notutorial" th:text="#{info.msg}"></span>
+	</div>
 </body>
 </html>
