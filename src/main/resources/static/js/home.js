@@ -11,7 +11,7 @@ $(function() {
 	if (sn != undefined && sn.length != 0) {
 		$(".input-sn").val(sn);
 	}
-	$(".img-verify").click(function() {
+	$(".img-enter").click(function() {
 		var sn = $(".input-sn").val();
 		if (sn == undefined || sn.length == 0) {
 			$(".input-sn").addClass("border-red");
