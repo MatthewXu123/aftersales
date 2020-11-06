@@ -28,7 +28,7 @@ public class ManualController extends BaseController{
 			Integer pid = getPid();
 			if(pid != null){
 				Product product = productService.getOneById(pid);
-				model.addAttribute("productCodeNum", product.getProductCodeNum());
+				model.addAttribute("productCodeNum", product.getProductInfo().getHumidifierType().getCode());
 			}
 				
 		} catch (Exception e) {

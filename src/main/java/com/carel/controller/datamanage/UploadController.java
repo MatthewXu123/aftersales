@@ -134,9 +134,9 @@ public class UploadController extends BaseController {
 				if(humidifierType != null)
 					newProduct.setProductInfo(productInfoService.getOneByType(humidifierType));
 				
-				Product product = productService.getOneBySN(serialNumber);
-				if(product != null)
-					newProduct.setId(product.getId());
+//				Product product = productService.getOneBySN(serialNumber);
+//				if(product != null)
+//					newProduct.setId(product.getId());
 				productList.add(newProduct);
 			}
 			productService.saveAll(productList);
@@ -168,6 +168,8 @@ public class UploadController extends BaseController {
 				newCustomer.setCustomerCategory(CustomerCategory.valueOf(getCellString(row, 2)));
 				newCustomer.setIsOwnerCustomer(Double.valueOf(getCellString(row, 3)).intValue() == 1);
 				newCustomer.setWxcpDeptId(StringUtils.isBlank(getCellString(row, 4)) ? "" : String.valueOf(Double.valueOf(getCellString(row, 4)).intValue()));
+				newCustomer.setLoginCode(StringUtils.isBlank(getCellString(row, 5)) ? "" : String.valueOf(Double.valueOf(getCellString(row,5)).intValue()));
+				newCustomer.setIsShownPolicy(StringUtils.isNotBlank(getCellString(row, 6)) ? Boolean.valueOf(getCellString(row, 6)) : false);
 				
 				Customer customer = customerService.getOneByCode(customerCode);
 				if(customer != null)
@@ -356,10 +358,14 @@ public class UploadController extends BaseController {
 	}
 	
 	private HumidifierType getHumidifierType(String productCode){
-		if(HUH_LIST.contains(productCode.substring(0, 2)) || HUH_LIST.contains(productCode.substring(0, 3)))
+		if(productCode.startsWith(HumidifierType.HUH.getDescription()))
 			return HumidifierType.HUH;
-		if(HUT_LIST.contains(productCode.substring(0, 2)) || HUH_LIST.contains(productCode.substring(0, 3)))
+		if(productCode.startsWith(HumidifierType.HUT.getDescription()))
 			return HumidifierType.HUT;
-		return null;
+		if(productCode.startsWith(HumidifierType.UR.getDescription()))
+			return HumidifierType.UR;
+		if(productCode.startsWith(HumidifierType.UE.getDescription()))
+			return HumidifierType.UE;
+		return HumidifierType.OTHER;
 	}
 }

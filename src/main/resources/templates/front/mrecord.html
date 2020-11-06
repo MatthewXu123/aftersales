@@ -36,11 +36,11 @@
             <!-- MaintenanceRecord Form -->
             <form id="form_record" th:action="@{/mrecord} + '?issueCode=' + ${issueCode}" method="post"  enctype="multipart/form-data">
             <input id="processStatus" name="processStatus" type="hidden">
-            <div class="div-form2 flex-container">
+            <div class="div-form flex-container">
             	<span class="span-form" th:text="#{umain.customer-name}"></span>
           		<input th:value="${maintenanceRecord != null ? maintenanceRecord.maintainerName : ''}" name="maintainerName" class="input-form form-notblank form-phone" type="text">
             </div>
-            <div class="div-form2 flex-container">
+            <div class="div-form flex-container">
             	<span class="span-form" th:text="#{umain.customer-phone}"></span>
           		<input th:value="${maintenanceRecord != null ? maintenanceRecord.maintainerPhone : ''}" name="maintainerPhone" class="input-form form-notblank form-phone" type="text">
             </div>
