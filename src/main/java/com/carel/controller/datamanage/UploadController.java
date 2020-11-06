@@ -31,7 +31,6 @@ import org.springframework.web.multipart.MultipartFile;
 import com.alibaba.fastjson.JSONObject;
 import com.carel.controller.BaseController;
 import com.carel.persistence.constant.CustomerCategory;
-import com.carel.persistence.constant.HumidifierType;
 import com.carel.persistence.entity.community.Customer;
 import com.carel.persistence.entity.community.Sales;
 import com.carel.persistence.entity.product.HumidifierAlarm;
@@ -87,13 +86,15 @@ public class UploadController extends BaseController {
 			// We get the data from the second row because the first line is always the headers.
 			for(int i = 1; i <= rowNum; i++){
 				Row row = sheet.getRow(i);
-				String humidifierType = getCellString(row, 0);
-				if(row == null || StringUtils.isBlank(humidifierType))
+				String description = getCellString(row, 0);
+				String type = getCellString(row, 1);
+				if(row == null || StringUtils.isBlank(type))
 					break;
 				ProductInfo newProductInfo = new ProductInfo();
-				newProductInfo.setHumidifierType(HumidifierType.valueOf(humidifierType));
+				newProductInfo.setDescription(description);
+				newProductInfo.setType(type);
 				
-				ProductInfo productInfo = productInfoService.getOneByType(HumidifierType.valueOf(humidifierType));
+				ProductInfo productInfo = productInfoService.getOneByType(type);
 				if(productInfo != null)
 					newProductInfo.setId(productInfo.getId());
 				productInfoList.add(newProductInfo);
@@ -130,13 +131,13 @@ public class UploadController extends BaseController {
 				String productCode = getCellString(row, itemCodeLocation);
 				newProduct.setProductCode(productCode);
 				newProduct.setSerialNumber(serialNumber);
-				HumidifierType humidifierType = getHumidifierType(productCode);
-				if(humidifierType != null)
-					newProduct.setProductInfo(productInfoService.getOneByType(humidifierType));
+				newProduct.setProductInfo(getProductInfoType(productCode));
 				
 //				Product product = productService.getOneBySN(serialNumber);
 //				if(product != null)
 //					newProduct.setId(product.getId());
+				if(productList.contains(newProduct) || productService.getOneBySN(serialNumber) != null)
+					continue;
 				productList.add(newProduct);
 			}
 			productService.saveAll(productList);
@@ -284,13 +285,15 @@ public class UploadController extends BaseController {
 	@PostMapping("/halarms_huh")
 	@ResponseBody
 	public JSONObject getHalarmsHUH(@ModelAttribute("filepath")String filepath){
-		return getHAlarmsSaved(filepath, HumidifierType.HUH);
+		getHAlarmsSaved(filepath, "ur");
+		return getHAlarmsSaved(filepath, "huh");
 	}
 	
 	@PostMapping("/halarms_hut")
 	@ResponseBody
 	public JSONObject getHalarmsHUT(@ModelAttribute("filepath")String filepath){
-		return getHAlarmsSaved(filepath, HumidifierType.HUT);
+		getHAlarmsSaved(filepath, "ue");
+		return getHAlarmsSaved(filepath, "hut");
 	}
 	
 	/**
@@ -302,14 +305,14 @@ public class UploadController extends BaseController {
 	 * @author Matthew Xu
 	 * @date Nov 3, 2020
 	 */
-	public JSONObject getHAlarmsSaved(String filePath, HumidifierType humidifierType){
+	public JSONObject getHAlarmsSaved(String filePath, String type){
 		try {
 			InputStream is = UploadController.class.getClassLoader().getResourceAsStream(filePath);
 			Workbook workbook = WorkbookFactory.create(is);
 			Sheet sheet = workbook.getSheetAt(0);
 			int rowNum = sheet.getLastRowNum();
 			List<HumidifierAlarm> list = new ArrayList<>();
-			ProductInfo productInfo = productInfoService.getOneByType(humidifierType);
+			ProductInfo productInfo = productInfoService.getOneByType(type);
 			for(int i = 1; i <= rowNum; i++){
 				Row row = sheet.getRow(i);
 				if(row == null)
@@ -322,10 +325,9 @@ public class UploadController extends BaseController {
 				humidifierAlarm.setDescription(description);
 				humidifierAlarm.setSecDescription(secDescription);
 				humidifierAlarm.setCode(alarmCode);
-				humidifierAlarm.setHumidifierType(humidifierType);
 				humidifierAlarm.setProductInfo(productInfo);
 				if(StringUtils.isNotBlank(alarmCode)){
-					HumidifierAlarm oldOne = humidifierAlarmService.getOneByCodeAndType(alarmCode, humidifierType);
+					HumidifierAlarm oldOne = humidifierAlarmService.getOneByCodeAndType(alarmCode, type);
 					if(oldOne != null){
 						humidifierAlarm.setId(oldOne.getId());
 					}
@@ -357,15 +359,11 @@ public class UploadController extends BaseController {
 		return cell == null ? "" : cell.toString();
 	}
 	
-	private HumidifierType getHumidifierType(String productCode){
-		if(productCode.startsWith(HumidifierType.HUH.getDescription()))
-			return HumidifierType.HUH;
-		if(productCode.startsWith(HumidifierType.HUT.getDescription()))
-			return HumidifierType.HUT;
-		if(productCode.startsWith(HumidifierType.UR.getDescription()))
-			return HumidifierType.UR;
-		if(productCode.startsWith(HumidifierType.UE.getDescription()))
-			return HumidifierType.UE;
-		return HumidifierType.OTHER;
+	public ProductInfo getProductInfoType(String productCode){
+		ProductInfo productInfo = productInfoService.getOneByType(productCode.substring(0,2).toLowerCase());
+		ProductInfo productInfo2 = productInfoService.getOneByType(productCode.substring(0,3).toLowerCase());
+		return productInfo != null ? productInfo : (productInfo2 != null ? productInfo2 : productInfoService.getOneByType("other")); 
+		
 	}
+	
 }

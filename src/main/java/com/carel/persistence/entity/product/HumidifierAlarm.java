@@ -5,8 +5,6 @@ import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -15,8 +13,6 @@ import javax.persistence.ManyToOne;
 
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
-
-import com.carel.persistence.constant.HumidifierType;
 
 /**
  * Description:
@@ -39,9 +35,6 @@ public class HumidifierAlarm {
 	private String description;
 	
 	private String secDescription;
-	
-	@Enumerated(EnumType.STRING)
-	private HumidifierType humidifierType;
 	
 	@Column(updatable = false)
     @CreationTimestamp
@@ -88,14 +81,6 @@ public class HumidifierAlarm {
 
 	public void setSecDescription(String secDescription) {
 		this.secDescription = secDescription;
-	}
-
-	public HumidifierType getHumidifierType() {
-		return humidifierType;
-	}
-
-	public void setHumidifierType(HumidifierType humidifierType) {
-		this.humidifierType = humidifierType;
 	}
 
 	public Date getCreateTime() {

@@ -2,7 +2,7 @@ $(function() {
 	$(".span-home-system").css("display","none");
 	// Verify the SN
 	var sn = $.cookie('sn');
-	var uri = document.referrer;
+	/*var uri = document.referrer;
 	var name = window.name;
 	window.onload = function(){
 		uri = "";
@@ -11,7 +11,7 @@ $(function() {
 		$(".display-none").css("display","none");
 		$("#div_home").attr("class", "fade-in-section.is-visible");
 		$(".span-home-system").css("display","");
-	}
+	}*/
 	if (sn != undefined && sn.length != 0) {
 		$(".input-sn").val(sn);
 	}

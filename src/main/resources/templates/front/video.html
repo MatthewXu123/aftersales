@@ -11,12 +11,12 @@
             <img class="icon-return" th:src="@{/static/icon/return.svg}">
             <span class="span-header"  th:text="#{video.header}"></span>
         </div>
-		<div class="flex-container" th:switch="${productCodeNum}">
-        	<div th:case="1" class="flex-container-column div-tutorial" id="ue">
+		<div class="flex-container" th:switch="${productInfoType}">
+        	<div th:case="ue" class="flex-container-column div-tutorial" id="ue">
         		<img class="img-tutorial" th:src="@{/static/img/video_ue.jpg}">
         		<span class="span-tutorial">电极加湿器视频教程</span>
         	</div>
-        	<div th:case="2" class="flex-container-column div-tutorial" id="ur">
+        	<div th:case="ur" class="flex-container-column div-tutorial" id="ur">
         		<img class="img-tutorial" th:src="@{/static/img/video_ur.jpg}">
         		<span class="span-tutorial">高配版电热加湿器桶维护教程</span>
         	</div>

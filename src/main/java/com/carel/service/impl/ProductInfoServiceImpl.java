@@ -6,7 +6,6 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.carel.persistence.constant.HumidifierType;
 import com.carel.persistence.entity.product.ProductInfo;
 import com.carel.repository.ProductInfoRepository;
 import com.carel.service.ProductInfoService;
@@ -23,8 +22,8 @@ public class ProductInfoServiceImpl implements ProductInfoService{
 	ProductInfoRepository productInfoRepository;
 	
 	@Override
-	public ProductInfo getOneByType(HumidifierType humidifierType) {
-		return productInfoRepository.findByHumidifierType(humidifierType);
+	public ProductInfo getOneByType(String type) {
+		return productInfoRepository.findByType(type);
 	}
 
 	@Override

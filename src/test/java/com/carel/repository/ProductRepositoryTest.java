@@ -28,7 +28,7 @@ public class ProductRepositoryTest {
 	
 	@Test
 	public void testFindBySerialNumber() {
-		Product product = productRepository.findBySerialNumber("serial_number");
+		Product product = productRepository.findBySerialNumberAndOwnerCustomerNotNull("sn1");
 		Assert.assertTrue(product.getSerialNumber().equals("serial_number"));
 	}
 

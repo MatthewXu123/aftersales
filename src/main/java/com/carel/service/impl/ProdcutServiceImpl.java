@@ -23,7 +23,13 @@ public class ProdcutServiceImpl implements ProductService{
 	
 	@Override
 	public Product getOneBySN(String sn) {
-		return productRepository.findBySerialNumber(sn);
+		Product product = productRepository.findBySerialNumberAndOwnerCustomerNotNull(sn);
+		if(product != null)
+			return product;
+		List<Product> productList = productRepository.findBySerialNumber(sn);
+		if(productList != null && productList.size() != 0)
+			return productList.get(0);
+		return null;
 	}
 
 	@Override

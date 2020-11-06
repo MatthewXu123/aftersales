@@ -2,9 +2,7 @@
 package com.carel.repository;
 
 import java.util.Date;
-import java.util.Optional;
 
-import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,7 +12,6 @@ import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.test.annotation.Rollback;
 import org.springframework.test.context.junit4.SpringRunner;
 
-import com.carel.persistence.constant.HumidifierType;
 import com.carel.persistence.entity.product.ProductInfo;
 
 /**
@@ -41,10 +38,5 @@ public class ProductInfoRepositoryTest {
 		ProductInfo save = productInfoRepository.save(productInfo);
 	}
 	
-	@Test
-	public void testFindById(){
-		ProductInfo findByHumidifierType = productInfoRepository.findByHumidifierType(HumidifierType.HUH);
-		System.out.println(findByHumidifierType.getHumidifierType());
-	}
 	
 }

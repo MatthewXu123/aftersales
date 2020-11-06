@@ -6,7 +6,6 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.carel.persistence.constant.HumidifierType;
 import com.carel.persistence.entity.product.HumidifierAlarm;
 import com.carel.repository.HumidifierAlarmRepository;
 import com.carel.service.HumidifierAlarmService;
@@ -33,13 +32,13 @@ public class HumidifierAlarmServiceImpl implements HumidifierAlarmService{
 	}
 
 	@Override
-	public List<HumidifierAlarm> getAllByType(HumidifierType humidifierType) {
-		return humidifierAlarmRepository.findByHumidifierType(humidifierType);
+	public List<HumidifierAlarm> getAllByType(String type) {
+		return humidifierAlarmRepository.findByProductInfoType(type);
 	}
 
 	@Override
-	public HumidifierAlarm getOneByCodeAndType(String code, HumidifierType humidifierType) {
-		return humidifierAlarmRepository.findByCodeAndHumidifierType(code, humidifierType);
+	public HumidifierAlarm getOneByCodeAndType(String code, String type) {
+		return humidifierAlarmRepository.findByCodeAndProductInfoType(code, type);
 	}
 
 	@Override

@@ -3,7 +3,6 @@ package com.carel.service;
 
 import java.util.List;
 
-import com.carel.persistence.constant.HumidifierType;
 import com.carel.persistence.entity.product.ProductInfo;
 
 /**
@@ -13,7 +12,7 @@ import com.carel.persistence.entity.product.ProductInfo;
  */
 public interface ProductInfoService {
 
-	ProductInfo getOneByType(HumidifierType humidifierType);
+	ProductInfo getOneByType(String type);
 	
 	ProductInfo saveOne(ProductInfo productInfo);
 	

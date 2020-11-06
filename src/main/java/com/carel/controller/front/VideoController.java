@@ -28,7 +28,7 @@ public class VideoController extends BaseController{
 			Integer pid = getPid();
 			if(pid != null){
 				Product product = productService.getOneById(pid);
-				model.addAttribute("productCodeNum", product.getProductInfo().getHumidifierType().getCode());
+				model.addAttribute("productInfoType", product.getProductInfo().getType());
 			}
 				
 		} catch (Exception e) {
