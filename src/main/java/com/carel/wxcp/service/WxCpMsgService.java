@@ -18,4 +18,6 @@ public interface WxCpMsgService {
 	void sendMsgToTag();
 	
 	void sendNewIssueMsg(String content, String partyId, Issue issue, Product product);
+	
+	void sendNewEva(String partyId, Issue issue);
 }

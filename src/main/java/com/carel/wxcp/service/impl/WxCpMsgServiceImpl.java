@@ -71,12 +71,26 @@ public class WxCpMsgServiceImpl implements WxCpMsgService{
 				partyId,
 				new Object[]{
 						issue.getCode(),
+						product.getProductInfo().getDescription(),
+						product.getSerialNumber(),
+						product.getProductCode(),
+						product.getInstallationInfo().getAddress(),
 						issue.getUsername(), 
 						issue.getUserPhone(), 
-						product.getInstallationInfo().getAddress(),
 						issue.gethAlarm() != null ? (issue.gethAlarm().getCode() + " " + issue.gethAlarm().getSecDescription()) : "",
 						issue.getComment(),
 						});
+	}
+
+	@Override
+	public void sendNewEva(String partyId, Issue issue) {
+		sendMsgToParty(wxCpMsgProperty.getNewEva(), 
+				partyId, 
+				new Object[]{
+						issue.getCode(),
+						issue.getEvaluationLevel().getSecDescription(),
+						issue.getEvaluationComment()
+				});
 	}
 	
 }

@@ -7,14 +7,17 @@ package com.carel.persistence.constant;
  */
 public enum EvaluationLevel {
 
-	SATISFIED("SATISFIED"),
-	COMMON("COMMON"),
-	UNSATISFIED("UNSATISFIED");
+	SATISFIED("SATISFIED", "满意"),
+	COMMON("COMMON", "一般"),
+	UNSATISFIED("UNSATISFIED", "不满意");
 	
 	private String description;
 	
-	private EvaluationLevel(String description){
+	private String secDescription;
+	
+	private EvaluationLevel(String description,String secDescription){
 		this.description = description;
+		this.secDescription = secDescription;
 	}
 
 	public String getDescription() {
@@ -23,6 +26,14 @@ public enum EvaluationLevel {
 
 	public void setDescription(String description) {
 		this.description = description;
+	}
+
+	public String getSecDescription() {
+		return secDescription;
+	}
+
+	public void setSecDescription(String secDescription) {
+		this.secDescription = secDescription;
 	}
 	
 }

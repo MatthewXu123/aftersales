@@ -17,6 +17,8 @@ public class WxCpMsgProperty {
 
 	private String newIssue;
 	
+	private String newEva;
+	
 	public String getNewIssue() {
 		return newIssue;
 	}
@@ -25,4 +27,12 @@ public class WxCpMsgProperty {
 		this.newIssue = newIssue;
 	}
 
+	public String getNewEva() {
+		return newEva;
+	}
+
+	public void setNewEva(String newEva) {
+		this.newEva = newEva;
+	}
+	
 }
