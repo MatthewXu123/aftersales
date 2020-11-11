@@ -213,7 +213,13 @@ input::-webkit-input-placeholder{
     border-bottom: 1px #707070 solid;
 }
 .span-notutorial{
+	margin-top:5rem;
 	font-size:3rem;
 	font-family:'RG';
-    margin-top: 50%;
+}
+.div-info-container{
+	margin-top:50%;
+}
+.img-praise{
+	width:15rem;
 }

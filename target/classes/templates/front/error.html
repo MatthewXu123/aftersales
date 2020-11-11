@@ -3,16 +3,11 @@
 <head>
 <meta charset="UTF-8">
 <title th:text="#{error.title}"></title>
-<link th:href="@{static/css/common.css}" rel="stylesheet" type="text/css" />
-<style>
-	.img-offline{
-		
-	}
-</style>
+<link th:href="@{/static/css/common.css}" rel="stylesheet" type="text/css" />
 </head>
 <body>
-	<div class="flex-container">
-		<img class="img-offline" th:src="@{/static/img/offline.png}">
+	<div class="div-info-container flex-container-column">
+		<img class="img-praise" th:src="@{/static/img/offline.png}">
 		<span class="span-notutorial" th:text="#{error.msg}"></span>
 	</div>
 </body>

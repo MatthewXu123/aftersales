@@ -4,14 +4,9 @@
 <meta charset="UTF-8">
 <title th:text="#{info.title}"></title>
 <link th:href="@{static/css/common.css}" rel="stylesheet" type="text/css"/>
-<style>
-	.img-praise{
-		
-	}
-</style>
 </head>
 <body>
-	<div class="flex-container">
+	<div class="div-info-container flex-container-column">
 		<img class="img-praise" th:src="@{/static/img/praise.png}">
 		<span class="span-notutorial" th:text="#{info.msg}"></span>
 	</div>
