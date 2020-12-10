@@ -36,4 +36,9 @@ public class ProductInfoServiceImpl implements ProductInfoService{
 		return productInfoRepository.saveAll(productInfoList);
 	}
 
+	@Override
+	public List<ProductInfo> getAll() {
+		return productInfoRepository.findAll();
+	}
+
 }

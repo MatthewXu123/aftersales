@@ -45,9 +45,6 @@ public class BaseController {
 	protected ProductService productService;
 	
 	@Autowired
-	protected ProductInfoService productInfoService;
-	
-	@Autowired
 	protected IssueService issueService;
 	
 	@Autowired
@@ -67,6 +64,9 @@ public class BaseController {
 	
 	@Autowired
 	protected HumidifierAlarmService humidifierAlarmService;
+	
+	@Autowired
+	protected ProductInfoService productInfoService;
 	
 	@Autowired 
 	protected WxCpConfigStorage wxCpConfigStorage;

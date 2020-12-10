@@ -17,4 +17,6 @@ public interface ProductInfoService {
 	ProductInfo saveOne(ProductInfo productInfo);
 	
 	List<ProductInfo> saveAll(List<ProductInfo> productInfoList);
+	
+	List<ProductInfo> getAll();
 } 
