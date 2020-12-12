@@ -1,15 +1,20 @@
 
 package com.carel.controller.datamanage;
 
+import org.hibernate.sql.Update;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.alibaba.fastjson.JSONArray;
+import com.alibaba.fastjson.JSONObject;
 import com.carel.controller.BaseController;
+import com.carel.persistence.entity.product.ProductInfo;
 import com.carel.util.JsonUtil;
 
 /**
@@ -31,6 +36,12 @@ public class ProductInfoController extends BaseController{
 			logger.error("",e);
 			return "/back/error";
 		}
+	}
+	
+	@PostMapping("/update")
+	@ResponseBody
+	public JSONObject update(@RequestBody ProductInfo productInfo){
+		return resultFactory.getSuccessResultJSON();
 	}
 	
 	@GetMapping("/list")

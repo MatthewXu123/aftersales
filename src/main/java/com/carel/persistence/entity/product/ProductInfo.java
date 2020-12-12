@@ -15,6 +15,7 @@ import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.TypeDef;
 import org.hibernate.annotations.UpdateTimestamp;
 
+import com.alibaba.fastjson.annotation.JSONField;
 import com.carel.persistence.jpa.postgres.arrays.PostgresStringArray;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
@@ -36,11 +37,11 @@ public class ProductInfo{
     private String type;
     
 	@OneToMany(mappedBy = "productInfo")
-	@JsonIgnore
+	@JSONField(serialize = false)
 	private List<ReplaceablePart> replaceableParts;
 	
 	@OneToMany(mappedBy = "productInfo")
-	@JsonIgnore
+	@JSONField(serialize = false)
 	private List<HumidifierAlarm> humidifierAlarms;
 	
     @Column(updatable = false)
