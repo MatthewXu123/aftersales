@@ -36,6 +36,7 @@ import com.carel.persistence.entity.community.Sales;
 import com.carel.persistence.entity.product.HumidifierAlarm;
 import com.carel.persistence.entity.product.Product;
 import com.carel.persistence.entity.product.ProductInfo;
+import com.carel.service.CustomerService;
 
 /**
  * Description:
@@ -120,7 +121,8 @@ public class UploadController extends BaseController {
 			int[] paramLocation = getParamLocation(sheet.getRow(0));
 			int serialNumberLocation = paramLocation[0];
 			int itemCodeLocation = paramLocation[1];
-			
+			customerService.saveDefaultOne();
+			Customer defaultCustomer = customerService.getOneByCode(CustomerService.DEFAULT_CUS_CODE);
 			// We get the data from the second row because the first line is always the headers.
 			for(int i = 1; i <= rowNum; i++){
 				Row row = sheet.getRow(i);
@@ -132,7 +134,7 @@ public class UploadController extends BaseController {
 				newProduct.setProductCode(productCode);
 				newProduct.setSerialNumber(serialNumber);
 				newProduct.setProductInfo(getProductInfoType(productCode));
-				
+				newProduct.setOwnerCustomer(defaultCustomer);
 //				Product product = productService.getOneBySN(serialNumber);
 //				if(product != null)
 //					newProduct.setId(product.getId());
@@ -178,6 +180,7 @@ public class UploadController extends BaseController {
 				customerList.add(newCustomer);
 			}
 			customerService.saveAll(customerList);
+			customerService.saveDefaultOne();
 		} catch (EncryptedDocumentException | IOException e) {
 			logger.error("",e);
 			return resultFactory.getFailResultJSON();

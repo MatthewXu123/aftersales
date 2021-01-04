@@ -6,6 +6,11 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
+
+import com.alibaba.fastjson.JSONArray;
+import com.carel.controller.BaseController;
+import com.carel.util.JsonUtil;
 
 /**
  * Description:
@@ -14,7 +19,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
  */
 @Controller
 @RequestMapping("/product")
-public class ProductController {
+public class ProductController extends BaseController{
 
 	private final Logger logger = LoggerFactory.getLogger(ProductController.class);
 	
@@ -26,5 +31,17 @@ public class ProductController {
 			logger.error("",e);
 			return "/back/error";
 		}
+	}
+	
+	@GetMapping("/list")
+	@ResponseBody
+	public JSONArray getList(){
+		JSONArray listToJsonArray = new JSONArray();
+		try {
+			listToJsonArray = JsonUtil.listToJsonArray(productService.getAll());
+		} catch (Exception e) {
+			logger.error("",e);
+		}
+		return listToJsonArray;
 	}
 }

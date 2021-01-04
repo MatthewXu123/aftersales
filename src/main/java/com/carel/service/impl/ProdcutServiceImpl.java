@@ -52,4 +52,9 @@ public class ProdcutServiceImpl implements ProductService{
 		return productRepository.saveAll(productList);
 	}
 
+	@Override
+	public List<Product> getAll() {
+		return productRepository.findAll();
+	}
+
 }

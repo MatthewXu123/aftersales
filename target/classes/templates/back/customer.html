@@ -35,23 +35,18 @@
             <div class="col-sm-12">
                         <!-- Example Events -->
                         <div class="example-wrap">
-                            <h4 class="example-title">事件</h4>
+                            <h4 class="example-title">客户</h4>
                             <div class="example">
-                                <div class="alert alert-success" id="examplebtTableEventsResult" role="alert">
-                                  	  事件结果
-                                </div>
-                                <div class="btn-group hidden-xs" id="exampleTableEventsToolbar" role="group">
-                                    <button type="button" class="btn btn-outline btn-default">
-                                        <i class="glyphicon glyphicon-plus" aria-hidden="true"></i>
-                                    </button>
-                                    <button type="button" class="btn btn-outline btn-default">
-                                        <i class="glyphicon glyphicon-heart" aria-hidden="true"></i>
-                                    </button>
-                                    <button type="button" class="btn btn-outline btn-default">
-                                        <i class="glyphicon glyphicon-trash" aria-hidden="true"></i>
-                                    </button>
-                                </div>
-                                <table id="table" data-sortable="true" data-search="true" data-show-columns="true" data-toggle="table" th:data-url="@{/customer/list}" data-height="400" data-mobile-responsive="true">
+                                <table id="table"
+                                data-sortable="true"
+                                data-search="true" 
+                                data-show-columns="true" 
+                                data-toggle="table" 
+                                th:data-url="@{/customer/list}" 
+                                data-height="400" 
+                                data-pagination="true"
+                                data-toolbar="#toolbar"
+                                data-mobile-responsive="true">
                                     <thead>
                                         <tr>
                                             <th data-field="code" data-sortable="true">code</th>
@@ -79,8 +74,6 @@
     <script src="static/js/plugins/bootstrap-table/bootstrap-table.min.js"></script>
     <script src="static/js/plugins/bootstrap-table/bootstrap-table-mobile.min.js"></script>
     <script src="static/js/plugins/bootstrap-table/locale/bootstrap-table-zh-CN.min.js"></script>
-    <script th:inline="javascript">
-    </script>
 </body>
 
 </html>

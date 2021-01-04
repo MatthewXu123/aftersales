@@ -1,7 +1,6 @@
 
 package com.carel.controller.datamanage;
 
-import org.hibernate.sql.Update;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
@@ -47,13 +46,12 @@ public class ProductInfoController extends BaseController{
 	@GetMapping("/list")
 	@ResponseBody
 	public JSONArray getList(){
+		JSONArray listToJsonArray = new JSONArray();
 		try {
-			JSONArray listToJsonArray = JsonUtil.listToJsonArray(productInfoService.getAll());
-			return listToJsonArray;
+			listToJsonArray = JsonUtil.listToJsonArray(productInfoService.getAll());
 		} catch (Exception e) {
 			logger.error("",e);
-			return null;
 		}
-		
+		return listToJsonArray;
 	}
 }

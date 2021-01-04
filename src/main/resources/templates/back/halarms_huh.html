@@ -28,6 +28,30 @@
                             <button type="button" class="btn btn-default btn-submit">上传</button>
                         </form>
                     </div>
+                    <div class="col-sm-12">
+					<div class="example-wrap">
+					<h4 class="example-title">产品</h4>
+					<div class="example">
+                    	<table id="table" 
+							data-toggle="table"
+							data-url="/aftersales/halarms/huh/list"
+							data-search="true"
+  							data-show-refresh="true"
+  							data-show-columns="true"
+  							data-toolbar="#toolbar"
+  							data-pagination="true">
+							<thead>
+   								<tr>
+		   							<th data-field="productInfo.description">产品类型</th>
+		   							<th data-field="code">报警代码</th>
+		   							<th data-field="description">报警描述</th>
+		   							<th data-field="secDescription">报警描述2</th>
+      							</tr>
+      						</thead>
+						</table>
+                    </div>
+				</div>
+			</div>
                 </div>
             </div>
         </div>

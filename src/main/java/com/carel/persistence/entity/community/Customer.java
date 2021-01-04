@@ -17,15 +17,11 @@ import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 
 import org.hibernate.annotations.CreationTimestamp;
-import org.hibernate.annotations.Fetch;
-import org.hibernate.annotations.FetchMode;
 import org.hibernate.annotations.UpdateTimestamp;
 
 import com.alibaba.fastjson.annotation.JSONField;
 import com.carel.persistence.constant.CustomerCategory;
-import com.carel.persistence.entity.product.Order;
 import com.carel.persistence.entity.product.Product;
-import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 /**
@@ -50,7 +46,7 @@ public class Customer{
 //	private List<Order> orders;
     
     @OneToMany(mappedBy = "ownerCustomer")
-    @JsonIgnore
+    @JSONField(serialize = false)
 	private List<Product> ownedProductList;
     
 	private String code;

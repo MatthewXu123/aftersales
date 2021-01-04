@@ -17,7 +17,6 @@ import org.hibernate.annotations.UpdateTimestamp;
 
 import com.alibaba.fastjson.annotation.JSONField;
 import com.carel.persistence.jpa.postgres.arrays.PostgresStringArray;
-import com.fasterxml.jackson.annotation.JsonIgnore;
 
 /**
  * Description:

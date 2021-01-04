@@ -17,14 +17,12 @@ import javax.persistence.OneToOne;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
+import com.alibaba.fastjson.annotation.JSONField;
 import com.carel.persistence.entity.community.Customer;
 import com.carel.persistence.entity.main.InstallationInfo;
 import com.carel.persistence.entity.main.Issue;
 import com.carel.persistence.entity.main.MaintenanceRecord;
 import com.carel.util.DateUtil;
-import com.fasterxml.jackson.annotation.JsonIgnore;
-
-import net.bytebuddy.asm.Advice.This;
 
 /**
  * Description:
@@ -55,19 +53,18 @@ public class Product {
 	
 	@ManyToOne
 	@JoinColumn(name = "owner_customer_id", referencedColumnName = "id")
-	@JsonIgnore
 	private Customer ownerCustomer;
 	
 	@OneToMany(mappedBy = "product")
-	@JsonIgnore
+	@JSONField(serialize = false)
 	private List<Issue> issues;
 
 	@OneToOne(mappedBy = "product")
-	@JsonIgnore
+	@JSONField(serialize = false)
 	private InstallationInfo installationInfo;
 
 	@OneToMany(mappedBy = "product")
-	@JsonIgnore
+	@JSONField(serialize = false)
 	private List<MaintenanceRecord> maintenanceRecords;
 
 	@Column(updatable = false)

@@ -13,6 +13,10 @@ import com.carel.persistence.entity.community.Customer;
  */
 public interface CustomerService {
 
+	public static final String DEFAULT_CUS_CODE="CAREL";
+	
+	public static final String DEFAULT_CUS_DESC = "CAREL";
+
 	Customer getOneByLoginCode(String loginCode);
 	
 	Customer getOneByCode(String code);
@@ -26,5 +30,7 @@ public interface CustomerService {
 	List<Customer> saveAll(Collection<Customer> customers);
 	
 	List<Customer> getAll();
+	
+	void saveDefaultOne();
 	
 }

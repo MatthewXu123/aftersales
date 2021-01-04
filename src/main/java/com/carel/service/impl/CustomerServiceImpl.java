@@ -18,7 +18,7 @@ import com.carel.service.CustomerService;
  */
 @Service
 public class CustomerServiceImpl implements CustomerService{
-
+	
 	@Autowired
 	CustomerRepository customerRepository;
 	
@@ -57,4 +57,13 @@ public class CustomerServiceImpl implements CustomerService{
 		return customerRepository.findByWxcpDeptId(deptId);
 	}
 
+	@Override
+	public void saveDefaultOne() {
+		if(customerRepository.findByCode(DEFAULT_CUS_CODE) == null){
+			Customer customer = new Customer();
+			customer.setCode(DEFAULT_CUS_CODE);
+			customer.setPartyName(DEFAULT_CUS_DESC);
+			customerRepository.save(customer);
+		}
+	}
 }

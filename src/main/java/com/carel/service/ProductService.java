@@ -15,6 +15,8 @@ import com.carel.persistence.entity.product.Product;
 @Service
 public interface ProductService {
 
+	List<Product> getAll();
+	
 	Product getOneById(int pid);
 	
 	Product getOneBySN(String sn);
