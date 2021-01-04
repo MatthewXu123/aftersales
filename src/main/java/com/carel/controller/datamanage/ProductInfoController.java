@@ -22,7 +22,7 @@ import com.carel.util.JsonUtil;
  * @date Nov 4, 2020
  */
 @Controller
-@RequestMapping("/productInfo")
+@RequestMapping("/pinfo")
 public class ProductInfoController extends BaseController{
 
 	private final Logger logger = LoggerFactory.getLogger(ProductInfoController.class);
@@ -30,7 +30,7 @@ public class ProductInfoController extends BaseController{
 	@GetMapping("/manage")
 	public String getProduct(){
 		try {
-			return "/back/productInfo";
+			return "/back/pinfo";
 		} catch (Exception e) {
 			logger.error("",e);
 			return "/back/error";

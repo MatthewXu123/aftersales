@@ -75,7 +75,7 @@ public class UploadController extends BaseController {
 		}
 	}
 	
-	@PostMapping("/productinfo")
+	@PostMapping("/pinfo")
 	@ResponseBody
 	public JSONObject getProductInfo(@ModelAttribute("filepath")String filepath){
 		try {

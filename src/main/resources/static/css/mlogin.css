@@ -11,7 +11,7 @@
     height: 27rem;
     background-color: white;
     border-radius: 1.5rem;
-    margin-top: 95%;
+   `/* margin-top: 95%; */
 }
 .input-discode{
 	text-align:center;
@@ -26,6 +26,6 @@
     border-bottom: 2px solid #078B75;
 }
 .img-enter{
-    width: 3.8rem;
+    width: 4.8rem;
     margin-top: 2rem;
 }
