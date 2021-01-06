@@ -169,10 +169,10 @@ public class UploadController extends BaseController {
 				String customerCode = getCellString(row, 1);
 				newCustomer.setCode(customerCode);
 				newCustomer.setCustomerCategory(CustomerCategory.valueOf(getCellString(row, 2)));
-				newCustomer.setIsOwnerCustomer(Double.valueOf(getCellString(row, 3)).intValue() == 1);
+				newCustomer.setIsOwnerCustomer(StringUtils.isNotBlank(getCellString(row, 3)) ? (Double.valueOf(getCellString(row, 3)).intValue() == 1) : false);
 				newCustomer.setWxcpDeptId(StringUtils.isBlank(getCellString(row, 4)) ? "" : String.valueOf(Double.valueOf(getCellString(row, 4)).intValue()));
 				newCustomer.setLoginCode(StringUtils.isBlank(getCellString(row, 5)) ? "" : String.valueOf(Double.valueOf(getCellString(row,5)).intValue()));
-				newCustomer.setIsShownPolicy(StringUtils.isNotBlank(getCellString(row, 6)) ? Boolean.valueOf(getCellString(row, 6)) : false);
+				newCustomer.setIsShownPolicy(StringUtils.isNotBlank(getCellString(row, 6)) ? (Double.valueOf(getCellString(row, 6)).intValue() == 1) : false);
 				
 				Customer customer = customerService.getOneByCode(customerCode);
 				if(customer != null)

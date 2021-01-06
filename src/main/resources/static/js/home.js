@@ -1,5 +1,6 @@
 $(function() {
-	$(".span-home-system").css("display","none");
+	$("#div_home").css("display","none");
+	$(".div-home2").css("display","none");
 	// Verify the SN
 	var sn = $.cookie('sn');
 	/*var uri = document.referrer;
@@ -32,8 +33,12 @@ $(function() {
 				if (result.status == 200) {
 					$.cookie('sn', sn);
 					$(".display-none").css("display","none");
-					$("#div_home").attr("class", "fade-in-section.is-visible");
-					$(".span-home-system").css("display","");
+					//$("#div_home").attr("class", "fade-in-section.is-visible");
+					$("#div_home").css("display", "");
+					$(".div-home2").css("display","");
+					$(".div-home1").css("display","none");
+					$(".select-i18n").css("display","none");
+					$(".div-home-bg").css("height","85%");
 				} else {
 					$(".input-sn").addClass("border-red");
 				}

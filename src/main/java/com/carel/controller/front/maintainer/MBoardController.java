@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import com.carel.controller.BaseController;
 import com.carel.persistence.entity.community.Customer;
 import com.carel.persistence.entity.product.Product;
+import com.carel.util.JsonUtil;
 
 /**
  * Description:
@@ -32,6 +33,7 @@ public class MBoardController extends BaseController{
 			if(pid != null){
 				Product product = productService.getOneById(pid);
 				model.addAttribute("product", product);
+				model.addAttribute("pid", pid);
 			}
 			model.addAttribute("isShownPolicy", customer == null ? false : customer.getIsShownPolicy());
 			return "/front/mboard";

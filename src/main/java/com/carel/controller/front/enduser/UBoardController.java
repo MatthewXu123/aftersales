@@ -29,9 +29,11 @@ public class UBoardController extends BaseController{
 			Integer pid = getPid();
 			if(pid != null){
 				Product product = productService.getOneById(pid);
-				Issue issue = issueService.getOneByPid(pid);
-				model.addAttribute("issue", issue);
 				model.addAttribute("product", product);
+				
+				Issue issue = issueService.getOneByPid(pid);
+				if(issue != null)
+					model.addAttribute("issueCode", issue.getCode());
 			}
 			return "/front/uboard";
 		} catch (Exception e) {

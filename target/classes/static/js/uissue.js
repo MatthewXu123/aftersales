@@ -1,8 +1,8 @@
 $(function() {
 	var evaluationLevel = "";
-	if(issue != null && issue.hAlarm != null){
+	if(issueHalarmId != null){
 		$(".option-alarmCode").each(function(){
-			if($(this).val() == issue.hAlarm.id)
+			if($(this).val() == issueHalarmId)
 				$(this).attr("selected",true);
 		})
 	}
@@ -16,27 +16,27 @@ $(function() {
 
 function tabInit() {
 	$(".span-tab1").click(function(){
-		if(issue.processStatus != 'PENDING'){
+		if(issueStatus != 'PENDING'){
 			$(".div-submit").css("display", "none");
 		}else{
 			$(".div-submit").css("display", "");
 		}
 	});
 	$(".span-tab2").click(function(){
-		if(issue.processStatus != 'FINISHED'){
+		if(issueStatus != 'FINISHED'){
 			$(".div-submit").css("display", "none");
 		}else{
 			$(".div-submit").css("display", "");
 		}
 	});
 	$(".span-tab1").click();
-	if(issue != undefined && issue != null){
-		if(issue.processStatus != 'FINISHED'){
+	if(issueStatus != undefined && issueStatus != null){
+		if(issueStatus != 'FINISHED'){
 			$("#div-main-process").css("height","25%");
 			$(".div-evaluation").css("display", "none");
 			$(".span-issue2").css("display", "none");
 			$(".div-evaluation-description").css("display", "none");
-		}else if(issue.processStatus == 'FINISHED'){
+		}else if(issueStatus == 'FINISHED'){
 			$(".span-hint").css("display", "none");
 		}
 		
@@ -60,7 +60,7 @@ function formSubmit(){
 	    	}
 		})
 		if(flag){
-			if(issue == null || issue == undefined || $("#div-subtab-maintenance").hasClass("border-selected")){
+			if(issueId == null || issueId == undefined || $("#div-subtab-maintenance").hasClass("border-selected")){
 				photoVal();
 				$(".input-alarmCode").val($(".select-cause").find("option:selected").val());
 				$("#form_main").submit();
@@ -69,7 +69,7 @@ function formSubmit(){
 		
 		if($("#div-subtab-process").hasClass("border-selected")){
 			$.ajax({
-				url:"/aftersales/ueva/" + issue.id,
+				url:"/aftersales/ueva/" + issueId,
 				method:"POST",
 				data:{
 					"evaluationLevel":evaluationLevel,
@@ -78,7 +78,7 @@ function formSubmit(){
 				dataType:"json",
 				success:function(result){
 					if(result.status == 200){
-						if(i18nVal == 'zh_CN' || i18nVal == undefined){
+						if(i18nVal == 'zh-CN' || i18nVal == undefined){
 							$("#btn_form").text('已提交，即将跳转');
 						}else{
 							$("#btn_form").text('Submitting...');
@@ -97,16 +97,16 @@ function formSubmit(){
 }
 
 function photoRetrieve(){
-	if(issue != null){
+	if(issueId != null){
 		$(".img-plus").each(function(){
 			var $img = $(this);
 			var id = $img.attr("id");
 			$.ajax({
-				url: "/aftersales/uissue/" + issue.id + "/" + id,
+				url: "/aftersales/uissue/" + issueId + "/" + id,
 				method : "GET",
 				success:function(result){
 					if(result != null && result.length != 0){
-						$img.attr("src","/aftersales/uissue/" + issue.id + "/" + id);
+						$img.attr("src","/aftersales/uissue/" + issueId + "/" + id);
 						$img.css("width","100%");
 						$img.css("height","100%");
 					}

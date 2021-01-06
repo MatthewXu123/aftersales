@@ -1,9 +1,11 @@
 $(function(){
     //tabInit();
     formSubmit();
-    if(installationInfo!=null){
-    	$("#textarea_address").val(installationInfo.street);
-        $("#textarea_comment").val(installationInfo.comment);
+    if(installStreet != null){
+        $("#textarea_address").val(installStreet);
+    }
+    if(installComment != null){
+    	$("#textarea_comment").val(installComment);
     }
 })
 

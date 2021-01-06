@@ -1,20 +1,6 @@
 
 package com.carel.persistence.entity.product;
 
-import java.util.Date;
-import java.util.List;
-
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
-
-import com.carel.persistence.entity.community.Customer;
-import com.carel.persistence.entity.community.Sales;
-
 /**
  * Description:
  * @author Matthew Xu

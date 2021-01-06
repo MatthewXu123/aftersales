@@ -45,7 +45,8 @@ public class MIssueController extends BaseController{
 				Customer customer = customerService.getOneByLoginCode(loginCode);
 				Issue issue = issueService.getOneByPid(pid);
 				Issue issue2 = issueService.getOneByCustomerId(customer.getId());
-				if((issue != null && customer.getIsOwnerCustomer() && customer.getId() == product.getOwnerCustomer().getId()) || (issue != null && issue2 != null && issue.getCode().equals(issue2.getCode())))
+				if((issue != null && customer.getIsOwnerCustomer() && customer.getId() == product.getOwnerCustomer().getId()) 
+						|| (issue != null && issue2 != null && issue.getCode().equals(issue2.getCode())))
 					issueList.add(issue);
 				/*if(customerService.getOneByLoginCode(loginCode) != null){
 					Issue issue = issueService.getOneByPid(pid);

@@ -27,7 +27,7 @@ public class JsonUtil {
 	 * @date Sep 8, 2019
 	 */
 	public static String objectToJsonString(Object object){
-		return JSONObject.toJSONString(object, SerializerFeature.WriteMapNullValue);
+		return JSONObject.toJSONString(object, SerializerFeature.WriteMapNullValue, SerializerFeature.DisableCircularReferenceDetect);
 	}
 	
 	/**

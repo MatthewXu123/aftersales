@@ -3,7 +3,7 @@
 }
 .div-home-bg{
     background-image: url(../img/bg_home.png);
-    height: 85%;
+    height: 100%;
     background-repeat: round;
 }
 .div-home-user{
@@ -43,11 +43,12 @@
 .input-sn{
 	text-align: center;
     font-family: 'RG';
-    font-size: 2.5rem;
+    font-size: 3rem;
     width: 25rem;
     height: 6rem;
     border-radius: 0.5rem;
     border: 4px #078B75 solid;
+    background-color: transparent;
 }
 .a-snwhere{
 	margin-top: 0.5rem;
@@ -55,13 +56,25 @@
     font-family: 'RCB';
 }
 .img-question{
-	width: 3rem;
+	width: 3.6rem;
 	margin-left:0.5rem;
 }
 .img-enter{
-	width: 3.4rem;
+	width: 4rem;
 	margin-left:0.5rem;
 }
 .div-sn{
 	width:100%;
+	margin-top:2rem;
+}
+.div-home1{
+	height: 26rem;
+    width: 45rem;
+    border-radius: 1.5rem;
+    background-color: white;
+}
+.span-sn-hint{
+	font-size: 2rem;
+    text-decoration: underline;
+    margin-bottom: 0.5rem;
 }

@@ -22,7 +22,6 @@ import org.hibernate.annotations.UpdateTimestamp;
 import com.alibaba.fastjson.annotation.JSONField;
 import com.carel.persistence.constant.CustomerCategory;
 import com.carel.persistence.entity.product.Product;
-import com.fasterxml.jackson.annotation.JsonIgnore;
 
 /**
  * Description:

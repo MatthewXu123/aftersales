@@ -35,10 +35,16 @@ public class UIssueController extends BaseController{
 		try {
 			Integer pid = getPid();
 			if(pid != null){
-				Issue issue = issueCode == null ? null : issueService.getOneByCode(issueCode);
 				Product product = productService.getOneById(pid);
-				model.addAttribute("issue", issue);
 				model.addAttribute("product", product);
+				Issue issue = issueCode == null ? null : issueService.getOneByCode(issueCode);
+				if(issue != null ){
+					model.addAttribute("issue", issue);
+					model.addAttribute("issueId", issue.getId());
+					model.addAttribute("issueStatus", issue.getProcessStatus());
+					model.addAttribute("issueHalarmId", issue.gethAlarm().getId());
+				}
+				
 			}
 			
 			return "/front/uissue";
@@ -113,7 +119,7 @@ public class UIssueController extends BaseController{
 			return "redirect:/uissue/" + issueCode;
 		} catch (Exception e) {
 			logger.error("",e);
-			return null;
+			return "redirect:/front/error";
 		}
 	}
 	

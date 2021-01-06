@@ -104,7 +104,9 @@
     </div>
 
     <script th:inline="javascript">
-       var issue = /*[[${issue}]]*/;
+       var issueId = /*[[${issueId}]]*/;
+       var issueStatus = /*[[${issueStatus}]]*/;
+       var issueHalarmId = /*[[${issueHalarmId}]]*/;
        var i18nVal = $.cookie('i18n_cookie');
        $(".icon-return").click(function(){
     	   window.location.href = "/aftersales/uboard";

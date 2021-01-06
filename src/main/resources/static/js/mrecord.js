@@ -3,12 +3,12 @@ $(function(){
 	photoDeleteInit();
 	photoRetrieve();
 	formSubmit();
-	if(maintenanceRecord!=null){
+	if(mrecordId!=null){
     	$(".option-alarmCode").each(function(){
-			if($(this).val() == maintenanceRecord.alarmCode)
+			if($(this).val() == mrecordAlarmCode)
 				$(this).attr("selected",true);
 		})
-		$(".textarea-description").val(maintenanceRecord.comment);
+		$(".textarea-description").val(mrecordComment);
     }
 })
 
@@ -34,16 +34,16 @@ function formSubmit(){
 		
 }
 function photoRetrieve(){
-	if(maintenanceRecord != undefined && maintenanceRecord != null){
+	if(mrecordId != undefined && mrecordId != null){
 		$(".img-plus").each(function(){
 			var $img = $(this);
 			var id = $img.attr("id");
 			$.ajax({
-				url: "/aftersales/mrecord/" + maintenanceRecord.id + "/" + id,
+				url: "/aftersales/mrecord/" + mrecordId + "/" + id,
 				method : "GET",
 				success:function(result){
 					if(result != null && result.length != 0){
-						$img.attr("src","/aftersales/mrecord/" + maintenanceRecord.id + "/" + id);
+						$img.attr("src","/aftersales/mrecord/" + mrecordId + "/" + id);
 						$img.css("width","100%");
 						$img.css("height","100%");
 					}

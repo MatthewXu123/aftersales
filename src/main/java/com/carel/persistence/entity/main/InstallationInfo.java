@@ -13,8 +13,8 @@ import javax.persistence.OneToOne;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
+import com.alibaba.fastjson.annotation.JSONField;
 import com.carel.persistence.entity.product.Product;
-import com.fasterxml.jackson.annotation.JsonIgnore;
 
 /**
  * Description:
@@ -30,7 +30,7 @@ public class InstallationInfo{
 	
     @OneToOne
 	@JoinColumn(name = "pid", referencedColumnName = "id")
-	@JsonIgnore
+    @JSONField(serialize = false)
 	private Product product;
     
 	private String installerName;

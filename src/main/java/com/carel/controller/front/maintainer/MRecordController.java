@@ -32,10 +32,16 @@ public class MRecordController extends BaseController{
 	public String getSpecifiedRecord(@RequestParam(required = false) String issueCode, Model model){
 		try {
 			Issue issue = issueService.getOneByCode(issueCode);
-			MaintenanceRecord maintenanceRecord = maintenanceRecordService.getOneByIssueCode(issueCode);
 			model.addAttribute("issueCode", issueCode);
-			model.addAttribute("maintenanceRecord", maintenanceRecord);
+			
 			model.addAttribute("issue", issue);
+			MaintenanceRecord maintenanceRecord = maintenanceRecordService.getOneByIssueCode(issueCode);
+			if(maintenanceRecord != null){
+				model.addAttribute("maintenanceRecord", maintenanceRecord);
+				model.addAttribute("mrecordId", maintenanceRecord.getId());
+				model.addAttribute("mrecordAlarmCode", maintenanceRecord.getAlarmCode());
+				model.addAttribute("mrecordComment", maintenanceRecord.getComment());
+			}
 			return "/front/mrecord";
 		} catch (Exception e) {
 			logger.error("",e);

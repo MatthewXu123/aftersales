@@ -23,7 +23,6 @@ import com.carel.persistence.entity.main.InstallationInfo;
 import com.carel.persistence.entity.main.Issue;
 import com.carel.persistence.entity.main.MaintenanceRecord;
 import com.carel.util.DateUtil;
-import com.fasterxml.jackson.annotation.JsonIgnore;
 
 /**
  * Description:
@@ -40,8 +39,6 @@ public class Product {
 
 	@ManyToOne
 	@JoinColumn(name = "pinfo_id", referencedColumnName = "id")
-	@JSONField(serialize = false)
-	@JsonIgnore
 	private ProductInfo productInfo;
 
 	private String serialNumber;
@@ -56,23 +53,18 @@ public class Product {
 	
 	@ManyToOne
 	@JoinColumn(name = "owner_customer_id", referencedColumnName = "id")
-	@JSONField(serialize = false)
-	@JsonIgnore
 	private Customer ownerCustomer;
 	
 	@OneToMany(mappedBy = "product")
 	@JSONField(serialize = false)
-	@JsonIgnore
 	private List<Issue> issues;
 
 	@OneToOne(mappedBy = "product")
 	@JSONField(serialize = false)
-	@JsonIgnore
 	private InstallationInfo installationInfo;
 
 	@OneToMany(mappedBy = "product")
 	@JSONField(serialize = false)
-	@JsonIgnore
 	private List<MaintenanceRecord> maintenanceRecords;
 
 	@Column(updatable = false)

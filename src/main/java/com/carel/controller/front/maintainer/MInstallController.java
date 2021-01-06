@@ -33,7 +33,11 @@ public class MInstallController extends BaseController{
 			Integer pid = getPid();
 			if(pid != null){
 				InstallationInfo installationInfo = installationInfoService.getOneByPid(pid);
-				model.addAttribute("installationInfo", installationInfo);
+				if(installationInfo != null){
+					model.addAttribute("installationInfo", installationInfo);
+					model.addAttribute("installStreet", installationInfo.getStreet());
+					model.addAttribute("installComment", installationInfo.getComment());
+				}
 			}
 			return "/front/minstall";
 		} catch (Exception e) {

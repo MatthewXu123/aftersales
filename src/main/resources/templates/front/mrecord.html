@@ -93,8 +93,9 @@
     </div>
 
     <script th:inline="javascript">
-    	var issue = /*[[${issue}]]*/;
-    	var maintenanceRecord = /*[[${maintenanceRecord}]]*/;
+    	var mrecordId = /*[[${mrecordId}]]*/;
+    	var mrecordAlarmCode = /*[[${mrecordAlarmCode}]]*/;
+    	var mrecordComment = /*[[${mrecordComment}]]*/;
         $(".icon-return").click(function(){
         	window.location.href = "/aftersales/missue";
         })

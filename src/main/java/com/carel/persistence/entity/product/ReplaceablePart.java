@@ -14,6 +14,8 @@ import javax.persistence.ManyToOne;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
+import com.alibaba.fastjson.annotation.JSONField;
+
 /**
  * Description:
  * @author Matthew Xu

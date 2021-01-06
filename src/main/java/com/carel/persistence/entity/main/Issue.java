@@ -25,7 +25,6 @@ import com.carel.persistence.entity.community.Customer;
 import com.carel.persistence.entity.product.HumidifierAlarm;
 import com.carel.persistence.entity.product.Product;
 import com.carel.util.DateUtil;
-import com.fasterxml.jackson.annotation.JsonIgnore;
 
 /**
  * Description:
@@ -47,7 +46,6 @@ public class Issue{
 	private Customer customer;
 	
 	@OneToOne(mappedBy = "issue")
-	@JsonIgnore
 	private MaintenanceRecord maintenanceRecord;
 
 	private String code;

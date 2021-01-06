@@ -17,7 +17,19 @@
 				<option class="option-i18n" value="zh-CN">中文</option>
 				<option class="option-i18n" value="en-US">English</option>
 			</select>
-			<div id="div_home" class="fade-in-section">
+			<div class="div-home-system div-home1 flex-container-column">
+				<span class="span-home-system">
+					<span class="color-green">A</span>fter <span class="color-green">S</span>ales <span class="color-green">S</span>ystem</span>
+			<div class="flex-container display-none div-sn">
+				<input class="input-sn" type="text" th:placeholder="#{home.sn}">
+				<div class="flex-container-column">
+					<img class="img-enter" th:src="@{/static/icon/enter-icon.svg}">
+					<img class="img-question" th:src="@{/static/icon/question-icon.svg}">
+				</div>
+			</div>
+				
+			</div>
+			<div id="div_home" class="">
 				<div id="div_home_u" class="div-home-user flex-container-column">
 					<img class="img-home-user" th:src="@{/static/icon/user-icon.svg}">
 					<span class="span-home-user" th:text="#{home.user}"></span>
@@ -28,14 +40,7 @@
 				</div>
 			</div>
 		</div>
-		<div class="div-home-system flex-container-column">
-			<div class="flex-container display-none div-sn">
-				<input class="input-sn" type="text" th:placeholder="#{home.sn}">
-				<div class="flex-container-column">
-					<img class="img-enter" th:src="@{/static/icon/enter-icon4.svg}">
-					<img class="img-question" th:src="@{/static/icon/question-icon.svg}">
-				</div>
-			</div>
+		<div class="div-home-system div-home2 flex-container-column">
 			<span class="span-home-system">
 				<span class="color-green">A</span>fter <span class="color-green">S</span>ales <span class="color-green">S</span>ystem
 			</span>
@@ -64,7 +69,7 @@
 			}
 			
    		});
-		$(".img-question").click(function(){
+		$(".span-sn-hint").click(function(){
 			window.location.href = "/aftersales/static/img/sn.jpg"
 		})
 		</script>

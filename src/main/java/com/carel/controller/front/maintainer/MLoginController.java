@@ -34,11 +34,6 @@ public class MLoginController extends BaseController{
 	@GetMapping
 	public String getMLogin(Model model){
 		try {
-			Integer pid = getPid();
-			if(pid != null){
-				Product product = productService.getOneById(pid);
-				model.addAttribute("product", product);
-			}
 			return "/front/mlogin";
 		} catch (Exception e) {
 			logger.error("",e);
@@ -58,7 +53,8 @@ public class MLoginController extends BaseController{
 				// To bind the product with the owner customer.
 				Integer pid = getPid();
 				Product product = productService.getOneById(pid);
-				if(product.getOwnerCustomer() == null){
+				Customer ownerCustomer = product.getOwnerCustomer();
+				if(ownerCustomer == null || ownerCustomer.getCode().equals("CAREL")){
 					if(!customer.getIsOwnerCustomer()){
 						long customerId = Long.valueOf(customer.getWxcpDeptId());
 						List<WxCpDepart> list = wxCpDepartmentService.list(customerId);

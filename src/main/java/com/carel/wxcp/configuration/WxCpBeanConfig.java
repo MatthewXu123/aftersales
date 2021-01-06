@@ -5,7 +5,6 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 import com.carel.util.JsonUtil;
-import com.carel.wxcp.persistence.WxCpConfig;
 
 import me.chanjar.weixin.cp.api.WxCpDepartmentService;
 import me.chanjar.weixin.cp.api.WxCpService;
@@ -22,7 +21,7 @@ import me.chanjar.weixin.cp.config.impl.WxCpDefaultConfigImpl;
  * @date Oct 27, 2020
  */
 @Configuration
-public class BeanConfig {
+public class WxCpBeanConfig {
 
 	@Bean
 	WxCpConfigStorage wxCpConfigStorage(){
