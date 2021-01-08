@@ -20,11 +20,12 @@
 			<div class="div-home-system div-home1 flex-container-column">
 				<span class="span-home-system">
 					<span class="color-green">A</span>fter <span class="color-green">S</span>ales <span class="color-green">S</span>ystem</span>
-			<div class="flex-container display-none div-sn">
-				<input class="input-sn" type="text" th:placeholder="#{home.sn}">
+			<div class="flex-container-column display-none div-sn">
+				<input class="input-sn" type="text">
 				<div class="flex-container-column">
+					<span class="span-sn-hint" th:text="#{home.sn-hint}"></span>
 					<img class="img-enter" th:src="@{/static/icon/enter-icon.svg}">
-					<img class="img-question" th:src="@{/static/icon/question-icon.svg}">
+					<!-- <img class="img-question" th:src="@{/static/icon/question-icon.svg}"> -->
 				</div>
 			</div>
 				

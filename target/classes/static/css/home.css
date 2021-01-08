@@ -45,9 +45,11 @@
     font-family: 'RG';
     font-size: 3rem;
     width: 25rem;
-    height: 6rem;
-    border-radius: 0.5rem;
-    border: 4px #078B75 solid;
+    height: 4rem;
+    border-bottom: 4px #078B75 solid;
+    border-top: none;
+    border-right: none;
+    border-left: none;
     background-color: transparent;
 }
 .a-snwhere{
@@ -60,12 +62,10 @@
 	margin-left:0.5rem;
 }
 .img-enter{
-	width: 4rem;
-	margin-left:0.5rem;
+	width: 5rem;
 }
 .div-sn{
 	width:100%;
-	margin-top:2rem;
 }
 .div-home1{
 	height: 26rem;
@@ -77,4 +77,5 @@
 	font-size: 2rem;
     text-decoration: underline;
     margin-bottom: 0.5rem;
+    margin-top: 0.5rem;
 }
