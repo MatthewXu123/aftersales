@@ -2,6 +2,10 @@
     height: 55rem;
     background-color: #EEEEEE;
 }
+.div-product2{
+    height: 60%;
+    background-color: #EEEEEE;
+}
 .div-product-u{
     height: 68%;
     background-color: #EEEEEE;
@@ -39,6 +43,9 @@
     justify-content: flex-start;
     -webkit-justify-content: flex-start;
     margin-left: 5.5rem;
+}
+.div-container-fun2{
+    height: 33%;
 }
 .div-container-fun-u{
     height: 25%;

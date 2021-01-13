@@ -42,7 +42,8 @@ public class UIssueController extends BaseController{
 					model.addAttribute("issue", issue);
 					model.addAttribute("issueId", issue.getId());
 					model.addAttribute("issueStatus", issue.getProcessStatus());
-					model.addAttribute("issueHalarmId", issue.gethAlarm().getId());
+					if(issue.gethAlarm() != null)
+						model.addAttribute("issueHalarmId", issue.gethAlarm().getId());
 				}
 				
 			}

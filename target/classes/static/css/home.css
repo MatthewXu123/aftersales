@@ -6,6 +6,11 @@
     height: 100%;
     background-repeat: round;
 }
+.div-home-bg2{
+    background-image: url(../img/bg_home.png);
+    height: 78%;
+    background-repeat: round;
+}
 .div-home-user{
     width: 18rem;
     height: 23rem;

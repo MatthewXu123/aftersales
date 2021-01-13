@@ -10,6 +10,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.commons.lang3.RegExUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.poi.EncryptedDocumentException;
 import org.apache.poi.ss.usermodel.Cell;
@@ -37,6 +38,8 @@ import com.carel.persistence.entity.product.HumidifierAlarm;
 import com.carel.persistence.entity.product.Product;
 import com.carel.persistence.entity.product.ProductInfo;
 import com.carel.service.CustomerService;
+import com.carel.util.RegexUtil;
+import com.sun.xml.bind.v2.model.core.ID;
 
 /**
  * Description:
@@ -359,7 +362,13 @@ public class UploadController extends BaseController {
 	
 	private String getCellString(Row row, int cellnum){
 		Cell cell = row.getCell(cellnum);
-		return cell == null ? "" : cell.toString();
+		String str = "";
+		if(cell != null){
+			str += cell.toString();
+			if(RegexUtil.isPosOrNegFloat(str))
+				 str = String.valueOf(Double.valueOf(str).intValue());
+		}
+		return str;
 	}
 	
 	public ProductInfo getProductInfoType(String productCode){

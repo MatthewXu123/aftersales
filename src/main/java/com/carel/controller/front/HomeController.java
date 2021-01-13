@@ -44,6 +44,16 @@ public class HomeController extends BaseController{
 		}
 	}
 	
+	@GetMapping("/role")
+	public String getRole(){
+		try {
+			return getPid() != null ? "/front/role" : "/front/home";
+		} catch (Exception e) {
+			logger.error("",e);
+			return "/front/error";
+		}
+	}
+	
 	@PostMapping("/sn_verify")
 	@ResponseBody
 	public JSONObject getSNVerified(@RequestParam String sn){

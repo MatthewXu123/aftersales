@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<link th:href="@{/static/css/common.css}" rel="stylesheet" type="text/css" />
+<link th:href="@{/static/css/home.css?2}" rel="stylesheet" type="text/css" />
+<script th:src="@{/static/js/jquery/jquery.min.js}" type="text/javascript"></script>
+<script th:src="@{/static/js/jquery/jquery.cookie.js}" type="text/javascript"></script>
+<script th:src="@{/static/js/common.js}" type="text/javascript"></script>
+<title th:text="#{role.title}"></title>
+</head>
+<body>
+	<div class="div-home-container">
+	<div class="div-header flex-container">
+            <img class="icon-return" th:src="@{/static/icon/return.svg}">
+            <span class="span-header" th:text="#{role.title}"></span>
+        </div>
+		<div class="div-home-bg2 flex-container-column" >
+			<div id="div_home">
+				<div id="div_home_u" class="div-home-user flex-container-column">
+					<img class="img-home-user" th:src="@{/static/icon/user-icon.svg}">
+					<span class="span-home-user" th:text="#{home.user}"></span>
+				</div>
+				<div id="div_home_m" class="div-home-user flex-container-column">
+					<img class="img-home-user" th:src="@{/static/icon/maintainer-icon.svg}">
+					<span class="span-home-user" th:text="#{home.maintainer}"></span>
+				</div>
+			</div>
+		</div>
+		<div class="div-home-system div-home2 flex-container-column">
+			<span class="span-home-system">
+				<span class="color-green">A</span>fter <span class="color-green">S</span>ales <span class="color-green">S</span>ystem
+			</span>
+		</div>
+	</div>
+	<script th:inline="javascript">
+		$("#div_home_u").click(function(){
+			window.location.href = "/aftersales/uboard";
+		});
+		$("#div_home_m").click(function(){
+			window.location.href = "/aftersales/mlogin";
+		});
+		$(".icon-return").click(function(){
+        	window.location.href = "/aftersales/home";
+    	})
+	</script>
+</body>
+</html>

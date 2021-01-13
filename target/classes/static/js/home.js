@@ -32,13 +32,14 @@ $(function() {
 			success : function(result) {
 				if (result.status == 200) {
 					$.cookie('sn', sn);
-					$(".display-none").css("display","none");
+					//$(".display-none").css("display","none");
 					//$("#div_home").attr("class", "fade-in-section.is-visible");
-					$("#div_home").css("display", "");
+					/*$("#div_home").css("display", "");
 					$(".div-home2").css("display","");
 					$(".div-home1").css("display","none");
 					$(".select-i18n").css("display","none");
-					$(".div-home-bg").css("height","85%");
+					$(".div-home-bg").css("height","85%");*/
+					window.location.href = "/aftersales/home/role"
 				} else {
 					$(".input-sn").addClass("border-red");
 				}

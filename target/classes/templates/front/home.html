@@ -25,20 +25,8 @@
 				<div class="flex-container-column">
 					<span class="span-sn-hint" th:text="#{home.sn-hint}"></span>
 					<img class="img-enter" th:src="@{/static/icon/enter-icon.svg}">
-					<!-- <img class="img-question" th:src="@{/static/icon/question-icon.svg}"> -->
 				</div>
 			</div>
-				
-			</div>
-			<div id="div_home" class="">
-				<div id="div_home_u" class="div-home-user flex-container-column">
-					<img class="img-home-user" th:src="@{/static/icon/user-icon.svg}">
-					<span class="span-home-user" th:text="#{home.user}"></span>
-				</div>
-				<div id="div_home_m" class="div-home-user flex-container-column">
-					<img class="img-home-user" th:src="@{/static/icon/maintainer-icon.svg}">
-					<span class="span-home-user" th:text="#{home.maintainer}"></span>
-				</div>
 			</div>
 		</div>
 		<div class="div-home-system div-home2 flex-container-column">
@@ -50,12 +38,6 @@
 	<script th:inline="javascript">
 		var pid = /*[[${pid}]]*/;
 		var i18nVal = $.cookie('i18n_cookie');
-		$("#div_home_u").click(function(){
-			window.location.href = "/aftersales/uboard";
-		});
-		$("#div_home_m").click(function(){
-			window.location.href = "/aftersales/mlogin";
-		});
 		$(".option-i18n").each(function(){
 			if(i18nVal == $(this).val())
 				$(this).attr("selected",true);
