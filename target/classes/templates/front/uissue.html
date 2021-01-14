@@ -51,24 +51,30 @@
                 	<div class="div-form-photo flex-container-column">
                     	<span class="span-form-description testtxt" th:text="#{umain.photo}"></span>
                     	<div class="div-photo-group flex-container">
-                        	<div id="div_photo1" class="div-photo flex-container">
-                        		<img class="img-delete" th:src="@{/static/icon/delete-icon.svg}">
-                            	<img id="1"class="img-plus" th:src="@{/static/icon/plus-icon.svg}">
-                        		<input name="p1" id="photo1" class="input-photo" type="file" accept="image/*">
-                        		<input name="photo1Val" class="input-photoval" type="hidden">
-                        	</div>
-                        	<div id="div_photo2" class="div-photo flex-container">
-                        		<img class="img-delete" th:src="@{/static/icon/delete-icon.svg}">
-                            	<img id="2" name="photo2Val" class="img-plus" th:src="@{/static/icon/plus-icon.svg}">
-                        		<input name="p2" id="photo2" class="input-photo" type="file" accept="image/*">
-                        		<input name="photo2Val" class="input-photoval" type="hidden">
-                        	</div>
-                        	<div id="div_photo3" class="div-photo flex-container">
-                        		<img class="img-delete" th:src="@{/static/icon/delete-icon.svg}">
-                            	<img id="3" name="photo3Val" class="img-plus" th:src="@{/static/icon/plus-icon.svg}">
-                        		<input name="p3" id="photo3"  class="input-photo" type="file" accept="image/*">
-                        		<input name="photo3Val" class="input-photoval" type="hidden">
-                        	</div>
+                    		<div class="flex-container-column">
+                    			<div id="div_photo1" class="div-photo flex-container">
+                            		<img id="1"class="img-plus" th:src="@{/static/icon/plus-icon.svg}">
+                        			<input name="p1" id="photo1" class="input-photo" type="file" accept="image/*">
+                        			<input name="photo1Val" class="input-photoval" type="hidden">
+                        		</div>
+                    			<img class="img-delete" th:src="@{/static/icon/delete-icon.svg}">
+                    		</div>
+                    		<div class="flex-container-column">
+                    			<div id="div_photo2" class="div-photo flex-container">
+                            		<img id="2" class="img-plus" th:src="@{/static/icon/plus-icon.svg}">
+                        			<input name="p2" id="photo2" class="input-photo" type="file" accept="image/*">
+                        			<input name="photo2Val" class="input-photoval" type="hidden">
+                        		</div>
+                    			<img class="img-delete" th:src="@{/static/icon/delete-icon.svg}">
+                    		</div>
+                    		<div class="flex-container-column">
+                    			<div id="div_photo3" class="div-photo flex-container">
+                            		<img id="3"class="img-plus" th:src="@{/static/icon/plus-icon.svg}">
+                        			<input name="p3" id="photo3" class="input-photo" type="file" accept="image/*">
+                        			<input name="photo3Val" class="input-photoval" type="hidden">
+                        		</div>
+                    			<img class="img-delete" th:src="@{/static/icon/delete-icon.svg}">
+                    		</div>
                     	</div>
                 	</div>
                 	<div class="div-form-description flex-container-column">

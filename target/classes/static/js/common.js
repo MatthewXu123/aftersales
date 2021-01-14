@@ -40,21 +40,28 @@ function photoUpload(){
 				return;
 			}
 			var img = $(this).prev();
+			$(this).parent().siblings(".img-delete").css("visibility","visible");
 			img.attr('src', src);
 			img.css('width', '100%');
 			img.css('height', '100%');
 		});
 }
 function photoDeleteInit() {
-	$(".img-delete").css("display","none");
 	$(".img-delete").click(function(){
-		var $imgp = $(this).next(".img-plus");
+		var $imgp = $(this).siblings(".div-photo").children(".img-plus");
+		$(this).siblings(".div-photo").children(".input-photo").val("");
 		var id = $imgp.attr("id");
-		$(this).hide();
+		$(this).css("visibility","hidden");
 		$imgp.attr("src","/aftersales/static/icon/plus-icon.svg");
 		$imgp.css("width","3.5rem");
 	});
-	$(".img-plus").each(function(){
+	/*$(".input-photo").change(function(){
+		$(this).parent().siblings(".img-delete").css("visibility","visible");
+	});*/
+	$(".img-plus").click(function(){
+		$(this).siblings(".input-photo").click();
+	})
+	/*$(".img-plus").each(function(){
 		var $imgp = $(this);
 		$imgp.on({
 		touchstart : function(e){
@@ -83,7 +90,7 @@ function photoDeleteInit() {
 			return false;
 		}
 	})
-	})
+	})*/
 }
 function photoVal(){
 	$(".img-plus").each(function(){
