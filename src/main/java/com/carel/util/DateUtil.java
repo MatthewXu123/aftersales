@@ -24,7 +24,7 @@ public class DateUtil {
 	 */
 	public static final String DEFAULT_DATETIME_FORMAT = "yyyy-MM-dd HH:mm:ss";
 	
-	public static final String CUSTOMED_DATE_FORMET = "MMddss";
+	public static final String CUSTOMED_DATE_FORMET = "MMddmmss";
 
 	/**
 	 * 1s中的毫秒数

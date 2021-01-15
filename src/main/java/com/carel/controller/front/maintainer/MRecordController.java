@@ -101,7 +101,7 @@ public class MRecordController extends BaseController{
 					record.setProcessStatus(oldRecord.getProcessStatus());
 				maintenanceRecordService.saveOne(record);
 			}
-			return "redirect:/mrecord?issueCode=" + issueCode;
+			return "redirect:/missue";
 		} catch (Exception e) {
 			logger.error("",e);
 			return "/front/error";

@@ -26,7 +26,7 @@
             </div>
         </div>
         <div id="div-main-maintenance" class="div-main flex-container">
-            <form id="form_main" th:action="@{/uissue/} + ${issueId !=null ? issueId : ''}" method="post" enctype="multipart/form-data">
+            <form id="form_main" th:action="@{/uissue/} + ${issueCode !=null ? issueCode : ''}" method="post" enctype="multipart/form-data">
             	<div th:if="${issue} ne null">
             		<input name="id" type="hidden" th:value="${issue.id}">
             	</div>

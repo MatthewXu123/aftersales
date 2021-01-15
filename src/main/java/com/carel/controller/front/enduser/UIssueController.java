@@ -41,6 +41,7 @@ public class UIssueController extends BaseController{
 				if(issue != null ){
 					model.addAttribute("issue", issue);
 					model.addAttribute("issueId", issue.getId());
+					model.addAttribute("issueCode", issue.getCode());
 					model.addAttribute("issueStatus", issue.getProcessStatus());
 					if(issue.gethAlarm() != null)
 						model.addAttribute("issueHalarmId", issue.gethAlarm().getId());
@@ -120,7 +121,7 @@ public class UIssueController extends BaseController{
 			return "redirect:/uissue/" + issueCode;
 		} catch (Exception e) {
 			logger.error("",e);
-			return "redirect:/front/error";
+			return "/front/error";
 		}
 	}
 	

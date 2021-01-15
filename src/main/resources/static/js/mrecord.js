@@ -28,7 +28,16 @@ function formSubmit(){
 			photoVal();
 			$(".input-alarmCode").val($(".select-cause").find("option:selected").val());
 			$("#processStatus").val($(this).attr("status"));
-			$("#form_record").submit();
+			$("#div-submit-unfinish").hide();
+			var hint_btn = $("#div-submit-finish").children(".span-submit");
+			if(i18nVal == 'zh-CN' || i18nVal == undefined){
+				hint_btn.text('已提交，即将跳转');
+			}else{
+				hint_btn.text('Submitting...');
+			}
+			setTimeout(function(){
+				$("#form_record").submit();
+			},2000);
 		}
 	})
 		

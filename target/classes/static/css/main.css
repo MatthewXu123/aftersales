@@ -16,7 +16,6 @@
 .div-main-sub2{
     width: 55rem;
     background-color: #EEEEEE;
-    margin-top: 6rem; 
     border-radius: 1.5rem;
     justify-content: flex-start !important;
     -webkit-justify-content: flex-start !important;
@@ -146,7 +145,13 @@
 	font-family: 'RG';
 	font-size: 2.5rem;
 	margin-top: 1rem;
-	/* word-break: break-all; */
+	width:100%;
+}
+.span-issue2{
+	font-family: 'RG';
+	font-size: 2.5rem;
+	margin-top: 1rem;
+	width:40rem%;
 }
 .select-address{
     display: block;

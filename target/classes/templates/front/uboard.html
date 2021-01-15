@@ -28,30 +28,24 @@
             </div>
         </div>
         <div class="div-container-fun2 flex-container">
+        	<div id="div_maintainance" class="flex-container-column" th:if="${product.installationInfo != null}">
+                <div class="div-fun-button flex-container-column">
+                    <img class="img-fun" th:src="@{/static/icon/issue-icon.svg}">
+                </div>
+                <span class="span-fun" th:text="#{board.request}"></span>
+            </div>
             <div id="div_manual" class="flex-container-column">
                 <div class="div-fun-button flex-container-column">
                     <img class="img-fun" th:src="@{/static/icon/manual-icon.svg}">
                 </div>
                 <span class="span-fun" th:text="#{board.manual}"></span>
             </div>
-            <!-- <div id="div_video" class="flex-container-column">
-                <div class="div-fun-button flex-container-column">
-                    <img class="img-fun" th:src="@{/static/icon/video-icon.svg}">
-                </div>
-                <span class="span-fun" th:text="#{board.guide-video}"></span>
-            </div> -->
             <div id="div_policy" class="flex-container-column">
                <div class="div-fun-button flex-container-column">
                     <img class="img-fun" th:src="@{/static/icon/maintainance-policy-icon.svg}">
                </div>
                <span class="span-fun" th:text="#{board.maintenance-policy}"></span>
            </div>
-           <div id="div_maintainance" class="flex-container-column" th:if="${product.installationInfo != null}">
-                <div class="div-fun-button flex-container-column">
-                    <img class="img-fun" th:src="@{/static/icon/issue-icon.svg}">
-                </div>
-                <span class="span-fun" th:text="#{board.request}"></span>
-            </div>
         </div>
         <div class="div-container-fun flex-container">
            

@@ -13,20 +13,17 @@ $(function() {
 	photoDeleteInit();
 	evaluationSelect();
 })
-
 function tabInit() {
 	$(".span-tab1").click(function(){
-		if(issueStatus != 'PENDING'){
-			$(".div-submit").css("display", "none");
-		}else{
-			$(".div-submit").css("display", "");
+		if(issueId != null){
+			$(".div-submit").css("visibility", "hidden");
 		}
 	});
 	$(".span-tab2").click(function(){
 		if(issueStatus != 'FINISHED'){
-			$(".div-submit").css("display", "none");
+			$(".div-submit").css("visibility", "visible");
 		}else{
-			$(".div-submit").css("display", "");
+			$(".div-submit").css("visibility", "visible");
 		}
 	});
 	$(".span-tab1").click();
