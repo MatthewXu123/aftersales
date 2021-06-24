@@ -1,2 +1,0 @@
-insert into wx_cp_property values(1,'corpId', 'wx313037256a241104',now(),now());
-insert into wx_cp_property values(2,'corpSecret', 'e5ZfRrVsgu8hyljf_-SAxcPrS9I_jIsrjspCNN7Vj_zW5HcRBjHyQBHfVtTdXH-k',now(),now());

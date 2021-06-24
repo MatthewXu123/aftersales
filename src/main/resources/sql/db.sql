@@ -1,1 +1,0 @@
-CREATE DATABASE aftersales IF NOT EXISTS;

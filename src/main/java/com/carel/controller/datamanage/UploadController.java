@@ -302,6 +302,28 @@ public class UploadController extends BaseController {
 		return getHAlarmsSaved(filepath, "hut");
 	}
 	
+	@PostMapping("/spare_part")
+	@ResponseBody
+	public JSONObject getSpareParts(@ModelAttribute("filepath")String filepath){
+		try {
+			InputStream is = UploadController.class.getClassLoader().getResourceAsStream(filepath);
+			Workbook workbook = WorkbookFactory.create(is);
+			int numberOfSheets = workbook.getNumberOfSheets();
+			for(int i = 0; i < numberOfSheets; i++){
+				Sheet sheet = workbook.getSheetAt(i);
+				int rowNum = sheet.getLastRowNum();
+			}
+			Sheet sheet = workbook.getSheetAt(0);
+			int rowNum = sheet.getLastRowNum();
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
+		
+		
+		getHAlarmsSaved(filepath, "ue");
+		return getHAlarmsSaved(filepath, "hut");
+	}
+	
 	/**
 	 * 
 	 * Description:

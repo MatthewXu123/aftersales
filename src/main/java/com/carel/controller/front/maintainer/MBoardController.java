@@ -11,7 +11,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import com.carel.controller.BaseController;
 import com.carel.persistence.entity.community.Customer;
 import com.carel.persistence.entity.product.Product;
-import com.carel.util.JsonUtil;
 
 /**
  * Description:

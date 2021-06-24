@@ -31,10 +31,8 @@ public class ProductInfoRepositoryTest {
 	@Rollback(value = false)
 	public void testSaveOne() {
 		ProductInfo productInfo = new ProductInfo();
-		//productInfo.setPartlist(new String[]{"1","2","3"});
-		//productInfo.setErrorlist(new String[]{"4","5","6"});
-		productInfo.setCreateTime(new Date());
-		productInfo.setUpdateTime(new Date());
+		productInfo.setDescription("huh");
+		productInfo.setType("huh");
 		ProductInfo save = productInfoRepository.save(productInfo);
 	}
 	

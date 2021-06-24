@@ -37,10 +37,6 @@ public class ProductInfo{
     
 	@OneToMany(mappedBy = "productInfo")
 	@JSONField(serialize = false)
-	private List<ReplaceablePart> replaceableParts;
-	
-	@OneToMany(mappedBy = "productInfo")
-	@JSONField(serialize = false)
 	private List<HumidifierAlarm> humidifierAlarms;
 	
     @Column(updatable = false)
@@ -84,14 +80,6 @@ public class ProductInfo{
 
 	public void setHumidifierAlarms(List<HumidifierAlarm> humidifierAlarms) {
 		this.humidifierAlarms = humidifierAlarms;
-	}
-
-	public List<ReplaceablePart> getReplaceableParts() {
-		return replaceableParts;
-	}
-
-	public void setReplaceableParts(List<ReplaceablePart> replaceableParts) {
-		this.replaceableParts = replaceableParts;
 	}
 
 	public Date getCreateTime() {

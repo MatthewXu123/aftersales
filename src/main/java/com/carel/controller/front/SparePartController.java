@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
  */
 @Controller
 @RequestMapping("/partlist")
-public class PartlistController {
+public class SparePartController {
 
 	@GetMapping
 	public String getVideo(){
