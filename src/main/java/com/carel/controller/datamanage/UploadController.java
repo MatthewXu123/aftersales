@@ -34,9 +34,11 @@ import com.carel.controller.BaseController;
 import com.carel.persistence.constant.CustomerCategory;
 import com.carel.persistence.entity.community.Customer;
 import com.carel.persistence.entity.community.Sales;
+import com.carel.persistence.entity.pk.SparePartPK;
 import com.carel.persistence.entity.product.HumidifierAlarm;
 import com.carel.persistence.entity.product.Product;
 import com.carel.persistence.entity.product.ProductInfo;
+import com.carel.persistence.entity.product.SparePart;
 import com.carel.service.CustomerService;
 import com.carel.util.RegexUtil;
 import com.sun.xml.bind.v2.model.core.ID;
@@ -309,19 +311,30 @@ public class UploadController extends BaseController {
 			InputStream is = UploadController.class.getClassLoader().getResourceAsStream(filepath);
 			Workbook workbook = WorkbookFactory.create(is);
 			int numberOfSheets = workbook.getNumberOfSheets();
+			List<SparePart> spareParts = new ArrayList<>();
 			for(int i = 0; i < numberOfSheets; i++){
 				Sheet sheet = workbook.getSheetAt(i);
 				int rowNum = sheet.getLastRowNum();
+				// Get the productCode for every sheet.
+				String productCode = getCellString(sheet.getRow(0), 0);
+				for(int j = 1; j < rowNum; j++){
+					Row row = sheet.getRow(j);
+					SparePartPK pk = new SparePartPK();
+					pk.setProductCode(productCode);
+					pk.setPartCode(getCellString(row, 1));
+					SparePart sparePart = new SparePart();
+					sparePart.setPk(pk);
+					sparePart.setDescription(getCellString(row, 0));
+					sparePart.setRequiredNum(getCellString(row, 2));
+					spareParts.add(sparePart);
+				}
 			}
-			Sheet sheet = workbook.getSheetAt(0);
-			int rowNum = sheet.getLastRowNum();
+			sparePartService.saveAll(spareParts);
 		} catch (Exception e) {
-			// TODO: handle exception
+			logger.error("", e);
+			return resultFactory.getFailResultJSON();
 		}
-		
-		
-		getHAlarmsSaved(filepath, "ue");
-		return getHAlarmsSaved(filepath, "hut");
+		return resultFactory.getSuccessResultJSON();
 	}
 	
 	/**

@@ -18,6 +18,7 @@ import com.carel.service.PhotoService;
 import com.carel.service.ProductInfoService;
 import com.carel.service.ProductService;
 import com.carel.service.SalesService;
+import com.carel.service.SparePartService;
 import com.carel.wxcp.service.WxCpMsgService;
 
 import me.chanjar.weixin.cp.api.WxCpDepartmentService;
@@ -67,6 +68,9 @@ public class BaseController {
 	
 	@Autowired
 	protected ProductInfoService productInfoService;
+	
+	@Autowired
+	protected SparePartService sparePartService;
 	
 	@Autowired 
 	protected WxCpConfigStorage wxCpConfigStorage;

@@ -1,6 +1,9 @@
 
 package com.carel.repository;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,7 +28,6 @@ public class SparePartRepositoryTest {
 	@Test
 	public void testSaveOne() {
 		try {
-			
 			SparePartPK pk = new SparePartPK();
 			pk.setProductCode("HUT001YDCC2");
 			pk.setPartCode("KITVC11006");
@@ -33,8 +35,37 @@ public class SparePartRepositoryTest {
 			SparePart sparePart = new SparePart();
 			sparePart.setPk(pk);
 			sparePart.setDescription("进水阀");
-			sparePart.setRequiredNum(1);
 			sparePartRepository.save(sparePart);
+		} catch (Exception e) {
+			System.out.println(e);
+		}
+	}
+	
+	@Test
+	public void testSaveAll(){
+		try {
+			SparePartPK pk = new SparePartPK();
+			pk.setProductCode("HUT001YDCC3");
+			pk.setPartCode("KITVC11007");
+			
+			SparePart sparePart = new SparePart();
+			sparePart.setPk(pk);
+			sparePart.setDescription("进水阀2");
+			
+			SparePartPK pk2 = new SparePartPK();
+			pk2.setProductCode("HUT001YDCC3");
+			pk2.setPartCode("KITVC11006");
+			
+			SparePart sparePart2 = new SparePart();
+			sparePart2.setPk(pk2);
+			sparePart2.setDescription("进水阀3");
+			
+			
+			List<SparePart> list = new ArrayList<>();
+			list.add(sparePart);
+			list.add(sparePart2);
+			
+			sparePartRepository.saveAll(list);
 		} catch (Exception e) {
 			System.out.println(e);
 		}

@@ -28,7 +28,7 @@ public class SparePart implements Serializable{
 	
 	private String description;
 	
-	private int requiredNum;
+	private String requiredNum;
 	
 	@Column(updatable = false)
     @CreationTimestamp
@@ -37,7 +37,7 @@ public class SparePart implements Serializable{
     @UpdateTimestamp
     private Date updateTime;
 
-	public SparePart(SparePartPK pk, String description, int requiredNum, Date createTime, Date updateTime) {
+	public SparePart(SparePartPK pk, String description, String requiredNum, Date createTime, Date updateTime) {
 		super();
 		this.pk = pk;
 		this.description = description;
@@ -58,11 +58,11 @@ public class SparePart implements Serializable{
 		this.description = description;
 	}
 
-	public int getRequiredNum() {
+	public String getRequiredNum() {
 		return requiredNum;
 	}
 
-	public void setRequiredNum(int requiredNum) {
+	public void setRequiredNum(String requiredNum) {
 		this.requiredNum = requiredNum;
 	}
 

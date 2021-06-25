@@ -1,6 +1,8 @@
 
 package com.carel.service;
 
+import java.util.Collection;
+
 import com.carel.persistence.entity.product.SparePart;
 
 /**
@@ -11,4 +13,6 @@ import com.carel.persistence.entity.product.SparePart;
 public interface SparePartService {
 
 	public SparePart saveOne(SparePart sparePart);
+	
+	public void saveAll(Collection<SparePart> spareParts);
 }

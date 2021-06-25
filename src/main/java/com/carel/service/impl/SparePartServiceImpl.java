@@ -1,6 +1,8 @@
 
 package com.carel.service.impl;
 
+import java.util.Collection;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -22,6 +24,11 @@ public class SparePartServiceImpl implements SparePartService{
 	@Override
 	public SparePart saveOne(SparePart sparePart) {
 		return sparePartRepository.save(sparePart);
+	}
+
+	@Override
+	public void saveAll(Collection<SparePart> spareParts) {
+		sparePartRepository.saveAll(spareParts);
 	}
 	
 	
