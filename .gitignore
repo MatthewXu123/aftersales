@@ -125,3 +125,5 @@ local.properties
 # .idea/gradle.xml
 # .idea/libraries
 # Mongo Explo
+target/m2e-wtp/web-resources/META-INF/maven/com.carel/aftersales/pom.properties
+target/classes/application.properties
