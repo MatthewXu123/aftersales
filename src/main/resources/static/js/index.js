@@ -26,6 +26,7 @@ $(function(){
 			success : function(result) {
 				if(result.status == 200){
 					addNotification('btn-success','上传成功',true);
+					$("#table").bootstrapTable('refresh');
 					$('#fileCover').val("");
 				}
 			}

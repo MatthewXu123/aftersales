@@ -7,18 +7,20 @@ $(function() {
 		if (confirm("确认要删除吗？")) {
 			var ids = "";
 			$("input[name='btSelectItem']:checked").each(function() {
-				ids += $(this).parents("tr").attr("data-uniqueid") + ",";
+				var tds = $(this).parents("tr").children();
+				ids += tds[1].innerText + "," + tds[2].innerText + ";";
 			})
 			$.ajax({
 				type : "post",
-				url : "/aftersales/saprepart/delete",
+				url : "/aftersales/sparepart/delete",
 				data : {
 					"ids": ids,
 				},
 				dataType : 'JSON',
 				success : function(data, status) {
 					if (status == "success") {
-						alert('提交数据成功');
+						alert('操作成功');
+						$("#table").bootstrapTable('refresh');
 					}
 				},
 				error : function() {
@@ -53,7 +55,7 @@ $(function() {
 	        dataType : 'JSON',
 			success : function(data, status) {
 				if (data.msg == "success") {
-					alert('提交数据成功');
+					alert('操作成功');
 					$("#addModal").modal('hide');
 				}else{
 					alert('编辑失败');
@@ -92,7 +94,7 @@ var TableInit = function() {
 			//minimumCountColumns : 1, // 最少允许的列数
 			clickToSelect : true, // 是否启用点击选中行
 			//height : 700, // 行高，如果没有设置height属性，表格自动根据记录条数觉得表格高度
-			uniqueId : "id", // 每一行的唯一标识，一般为主键列
+			//uniqueId : "pk", // 每一行的唯一标识，一般为主键列
 			showToggle : true, // 是否显示详细视图和列表视图的切换按钮
 			cardView : false, // 是否显示详细视图
 			detailView : false, // 是否显示父子表
@@ -158,7 +160,7 @@ var TableInit = function() {
 					dataType : 'JSON',
 					success : function(data, status) {
 						if (status == "success") {
-							alert('提交数据成功');
+							alert('操作成功');
 						}
 					},
 					error : function() {
@@ -174,100 +176,9 @@ var TableInit = function() {
 		});
 	};
 
-	// 得到查询的参数
-	/*oTableInit.queryParams = function(params) {
-		var temp = { // 这里的键的名字和控制器的变量名必须一直，这边改动，控制器也需要改成一样的
-			limit : params.limit, // 页面大小
-			offset : params.offset, // 页码
-		};
-		return temp;
-	};*/
 	return oTableInit;
 };
 
-// (2)关键字检索
-/*$("#btn_query").click(function() {
-	// 点击查询是 使用刷新 处理刷新参数
-	var opt = {
-		url : "/index/GetDepartment",
-		silent : true,
-		query : {
-			text1 : $("#txt_search_departmentname").val(), // 条件1
-			text2 : $("#txt_search_statu").val()
-		// 条件2 ....
-		}
-	};
-	$('#tb_departments').bootstrapTable('refresh', opt);
-
-});
-
-// (3)修改一、获取编号进入下一页
-$("#btn_edit").click(function() {
-	var i = 0;
-	var id;
-	$("input[name='btSelectItem']:checked").each(function() {
-		i++;
-		id = $(this).parents("tr").attr("data-uniqueid");
-	})
-	if (i > 1) {
-		alert("编辑只支持单一操作")
-	} else {
-		if (i != 0) {
-			alert("获取选中的id为" + id);
-			window.location.href = "/aftersales/sales/manage";
-		} else {
-			alert("请选中要编辑的数据");
-		}
-
-	}
-
-})
-*/
-
-// (4)删除及批量删除
-
-var ButtonInit = function () {
-    var oInit = new Object();
-    var postdata = {};
-
-    oInit.Init = function () {
-
-         $("#btn_delete").click(function () {
-             var arrselections = $("#table").bootstrapTable('getSelections');
-             if (arrselections.length <= 0) {
-                 toastr.warning('请选择有效数据');
-                 return;
-             }
-
-             Ewin.confirm({ message: "确认要删除选择的数据吗？" }).on(function (e) {
-                 if (!e) {
-                     return;
-                 }
-                 $.ajax({
-                     type: "post",
-                     url: "/Home/Delete",
-                     data: { "": JSON.stringify(arrselections) },
-                     success: function (data, status) {
-                         if (status == "success") {
-                             toastr.success('提交数据成功');
-                             $("#tb_departments").bootstrapTable('refresh');
-                         }
-                     },
-                     error: function () {
-                         toastr.error('Error');
-                     },
-                     complete: function () {
-
-                     }
-
-                 });
-             });
-         });
-
-    };
-
-    return oInit;
-};
 
 $.fn.serializeObject = function() {
     var o = {};

@@ -1,6 +1,8 @@
 
 package com.carel.controller.datamanage;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 
 import org.slf4j.Logger;
@@ -10,6 +12,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.alibaba.fastjson.JSONArray;
@@ -76,6 +79,29 @@ public class SparePartDMController extends BaseController {
 			sparePart.setDescription(_sparePart.get("description"));
 			sparePart.setRequiredNum(_sparePart.get("requiredNum"));
 			sparePartService.saveOne(sparePart);
+		} catch (Exception e) {
+			logger.error("", e);
+			return resultFactory.getFailResultJSON();
+		}
+		return resultFactory.getSuccessResultJSON();
+	}
+	
+	@PostMapping("/delete")
+	@ResponseBody
+	public JSONObject delete(@RequestParam String ids){
+		try {
+			String[] idsArray = ids.split(";");
+			List<SparePart> deletedList = new ArrayList<>();
+			for (String id : idsArray) {
+				SparePartPK pk = new SparePartPK();
+				String[] idSplit = id.split(",");
+				pk.setProductCode(idSplit[0]);
+				pk.setPartCode(idSplit[1]);
+				SparePart sparePart = new SparePart();
+				sparePart.setPk(pk);
+				deletedList.add(sparePart);
+			}
+			sparePartService.deleteBatch(deletedList);
 		} catch (Exception e) {
 			logger.error("", e);
 			return resultFactory.getFailResultJSON();

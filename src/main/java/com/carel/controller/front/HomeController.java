@@ -4,6 +4,7 @@ package com.carel.controller.front;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -25,24 +26,24 @@ public class HomeController extends BaseController{
 	
 	private static final Logger logger = LoggerFactory.getLogger(HomeController.class);
 
-	/*@GetMapping
-	public String getHome(@RequestParam String sn, @RequestParam String pcode, Model model){
-		Product product = productService.getOneBySNAndPCode(sn, pcode);
+	@GetMapping
+	public String getHome(@RequestParam String sn, @RequestParam String pc, Model model){
+		Product product = productService.getOneBySNAndPCode(sn, pc);
 		int pid = product.getId();
 		httpSession.setAttribute("pid", pid);
 		model.addAttribute("pid", pid);
 		return "/front/home";
-	}*/
-	
-	@GetMapping
-	public String getHome(){
-		try {
-			return "/front/home";
-		} catch (Exception e) {
-			logger.error("",e);
-			return "/front/error";
-		}
 	}
+	
+//	@GetMapping
+//	public String getHome(){
+//		try {
+//			return "/front/home";
+//		} catch (Exception e) {
+//			logger.error("",e);
+//			return "/front/error";
+//		}
+//	}
 	
 	@GetMapping("/role")
 	public String getRole(){

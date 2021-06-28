@@ -1,6 +1,8 @@
 
 package com.carel.repository;
 
+import java.util.List;
+
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
@@ -17,4 +19,5 @@ public interface SparePartRepository extends JpaRepository<SparePart, SparePartP
 
 	SparePart findByPkProductCodeAndPkPartCode(String productCode, String partCode);
 	
+	List<SparePart> findByPkProductCode(String productCode);
 }

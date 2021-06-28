@@ -18,4 +18,8 @@ public interface SparePartService {
 	public void saveAll(Collection<SparePart> spareParts);
 	
 	List<SparePart> getAll();
+	
+	void deleteBatch(Collection<SparePart> spareParts);
+	
+	List<SparePart> getAllByProductCode(String productCode);
 }

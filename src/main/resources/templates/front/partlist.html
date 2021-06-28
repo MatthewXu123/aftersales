@@ -11,6 +11,13 @@
             <img class="icon-return" th:src="@{static/icon/return.svg}">
             <span class="span-header" th:text="#{partlist.title}"></span>
         </div>
+        <div th:if="${partlist != null && partlist.size() != 0}" >
+        <div class="div-issue-container flex-container" th:each="part : ${partlist}">
+            <div class="div-issue div-issue2 flex-container-column">
+                <span class="span-issue2" th:text="${part.partCode + part.description + part.requiredNum}"></span>
+            </div>
+        </div>
+        </div>
 		
 	</div>
     <script th:src="@{static/js/jquery/jquery.min.js}" type="text/javascript"></script>

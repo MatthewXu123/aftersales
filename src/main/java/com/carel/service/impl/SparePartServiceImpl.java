@@ -36,6 +36,16 @@ public class SparePartServiceImpl implements SparePartService{
 	public List<SparePart> getAll() {
 		return sparePartRepository.findAll();
 	}
+
+	@Override
+	public void deleteBatch(Collection<SparePart> spareParts) {
+		sparePartRepository.deleteInBatch(spareParts);
+	}
+
+	@Override
+	public List<SparePart> getAllByProductCode(String productCode) {
+		return sparePartRepository.findByPkProductCode(productCode);
+	}
 	
 	
 }
