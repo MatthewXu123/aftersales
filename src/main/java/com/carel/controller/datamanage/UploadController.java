@@ -5,12 +5,10 @@ import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import org.apache.commons.lang3.RegExUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.poi.EncryptedDocumentException;
 import org.apache.poi.ss.usermodel.Cell;
@@ -41,7 +39,6 @@ import com.carel.persistence.entity.product.ProductInfo;
 import com.carel.persistence.entity.product.SparePart;
 import com.carel.service.CustomerService;
 import com.carel.util.RegexUtil;
-import com.sun.xml.bind.v2.model.core.ID;
 
 /**
  * Description:
@@ -59,9 +56,9 @@ public class UploadController extends BaseController {
 	
 	private static final String[] params = { "SERIAL NUMBER", "ITEM CODE"};
 	
-	private static final List<String> HUH_LIST = Arrays.asList("UE","HUT");
+	//private static final List<String> HUH_LIST = Arrays.asList("UE","HUT");
 	
-	private static final List<String> HUT_LIST = Arrays.asList("UR","HUH");
+	//private static final List<String> HUT_LIST = Arrays.asList("UR","HUH");
 	
 	@ModelAttribute
 	public void getFile(@RequestParam MultipartFile file, Model model) {

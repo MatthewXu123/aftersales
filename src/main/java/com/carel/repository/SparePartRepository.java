@@ -16,4 +16,5 @@ import com.carel.persistence.entity.product.SparePart;
 public interface SparePartRepository extends JpaRepository<SparePart, SparePartPK>{
 
 	SparePart findByPkProductCodeAndPkPartCode(String productCode, String partCode);
+	
 }
