@@ -148,7 +148,7 @@ var TableInit = function() {
 				// 可进行异步操作
 				$.ajax({
 					type : "post",
-					url : "/aftersales/sparepart/save",
+					url : "/aftersales/sparepart/update",
 //					data : {
 //						"sparePart": JSON.stringify(row),
 //					},
