@@ -28,6 +28,8 @@ public class SparePart implements Serializable{
 	
 	private String description;
 	
+	private String alternativeDescription;
+	
 	private String requiredNum;
 	
 	@Column(updatable = false)
@@ -36,15 +38,6 @@ public class SparePart implements Serializable{
 
     @UpdateTimestamp
     private Date updateTime;
-
-	public SparePart(SparePartPK pk, String description, String requiredNum, Date createTime, Date updateTime) {
-		super();
-		this.pk = pk;
-		this.description = description;
-		this.requiredNum = requiredNum;
-		this.createTime = createTime;
-		this.updateTime = updateTime;
-	}
 
 	public SparePart() {
 		super();
@@ -90,6 +83,14 @@ public class SparePart implements Serializable{
 		this.pk = pk;
 	}
 	
+	public String getAlternativeDescription() {
+		return alternativeDescription;
+	}
+
+	public void setAlternativeDescription(String alternativeDescription) {
+		this.alternativeDescription = alternativeDescription;
+	}
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -117,8 +118,9 @@ public class SparePart implements Serializable{
 
 	@Override
 	public String toString() {
-		return "SparePart [pk=" + pk + ", description=" + description + ", requiredNum=" + requiredNum + ", createTime="
-				+ createTime + ", updateTime=" + updateTime + "]";
+		return "SparePart [pk=" + pk + ", description=" + description + ", alternativeDescription="
+				+ alternativeDescription + ", requiredNum=" + requiredNum + ", createTime=" + createTime
+				+ ", updateTime=" + updateTime + "]";
 	}
-	
+
 }

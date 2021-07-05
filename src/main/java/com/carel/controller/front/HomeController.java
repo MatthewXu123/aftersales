@@ -28,11 +28,16 @@ public class HomeController extends BaseController{
 
 	@GetMapping
 	public String getHome(@RequestParam String sn, @RequestParam String pc, Model model){
-		Product product = productService.getOneBySNAndPCode(sn, pc);
-		int pid = product.getId();
-		httpSession.setAttribute("pid", pid);
-		model.addAttribute("pid", pid);
-		return "/front/home";
+		try {
+			Product product = productService.getOneBySNAndPCode(sn, pc);
+			int pid = product.getId();
+			httpSession.setAttribute("pid", pid);
+			model.addAttribute("pid", pid);
+			return "/front/role";
+		} catch (Exception e) {
+			logger.error("",e);
+			return "/front/error";
+		}
 	}
 	
 //	@GetMapping

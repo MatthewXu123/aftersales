@@ -1,0 +1,21 @@
+.table-partlist{
+	font-family: 'RG';
+    font-size: 2.5rem;
+    margin-top: 1rem;
+    width: 92%;
+    background-color: #EEEEEE;
+    padding: 2.5rem;
+    border-radius: 1rem;
+}
+.td-partcode{
+	width:40%;
+}
+.td-desc{
+	width:40%;
+}
+.td-num{
+	width:20%;
+}
+.tr-head{
+	text-align:left;
+}

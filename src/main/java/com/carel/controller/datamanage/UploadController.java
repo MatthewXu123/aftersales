@@ -318,11 +318,12 @@ public class UploadController extends BaseController {
 					Row row = sheet.getRow(j);
 					SparePartPK pk = new SparePartPK();
 					pk.setProductCode(productCode);
-					pk.setPartCode(getCellString(row, 1));
+					pk.setPartCode(getCellString(row, 2));
 					SparePart sparePart = new SparePart();
 					sparePart.setPk(pk);
 					sparePart.setDescription(getCellString(row, 0));
-					sparePart.setRequiredNum(getCellString(row, 2));
+					sparePart.setAlternativeDescription(getCellString(row, 1));
+					sparePart.setRequiredNum(getCellString(row, 3));
 					spareParts.add(sparePart);
 				}
 			}

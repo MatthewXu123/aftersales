@@ -129,6 +129,21 @@ var TableInit = function() {
 				}
 			}, 
 			{
+				field : 'alternativeDescription',
+				title : '备用说明',
+				sortable:true,
+				editable : {
+					type : 'text',
+					title : '备用说明',
+					mode: "inline",  
+					emptytext:'暂无',
+					validate : function(v) {
+						if (!v)
+							return '不能为空';
+					}
+				}
+			}, 
+			{
 				field : 'requiredNum',
 				title : '1台所需数量',
 				sortable:true,

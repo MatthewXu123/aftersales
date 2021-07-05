@@ -11,10 +11,15 @@
 </head>
 <body>
 	<div class="div-home-container">
-	<div class="div-header flex-container">
+	<!-- <div class="div-header flex-container">
             <img class="icon-return" th:src="@{/static/icon/return.svg}">
             <span class="span-header" th:text="#{role.title}"></span>
-        </div>
+            
+        </div> -->
+        <select class="select-i18n">
+			<option class="option-i18n" value="zh-CN">中文</option>
+			<option class="option-i18n" value="en-US">English</option>
+		</select>
 		<div class="div-home-bg2 flex-container-column" >
 			<div id="div_home">
 				<div id="div_home_u" class="div-home-user flex-container-column">
@@ -34,6 +39,23 @@
 		</div>
 	</div>
 	<script th:inline="javascript">
+		var i18nVal = $.cookie('i18n_cookie');
+		$(".option-i18n").each(function(){
+			if(i18nVal == $(this).val())
+				$(this).attr("selected",true);
+		});
+		$(".select-i18n").change(function(){
+			var url = window.location.href;
+			var selectLang = $(this).children('option:selected').val();
+			if(url.indexOf("lang") != -1){
+				window.location.href = url.substring(0,url.indexOf("lang")) + "lang=" + selectLang;
+			}else{
+				if(url.indexOf("&") != -1)
+					window.location.href = window.location.href + "&lang=" + selectLang;
+				else
+					window.location.href = window.location.href + "?lang=" + selectLang;
+			}
+		});
 		$("#div_home_u").click(function(){
 			window.location.href = "/aftersales/uboard";
 		});
