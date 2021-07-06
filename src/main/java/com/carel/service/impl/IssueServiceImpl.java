@@ -8,8 +8,8 @@ import org.springframework.stereotype.Service;
 
 import com.carel.persistence.constant.ProcessStatus;
 import com.carel.persistence.entity.main.Issue;
-import com.carel.repository.ProductInfoRepository;
 import com.carel.repository.IssueRepository;
+import com.carel.repository.ProductInfoRepository;
 import com.carel.service.IssueService;
 
 /**
@@ -28,8 +28,12 @@ public class IssueServiceImpl implements IssueService{
 
 	@Override
 	public Issue saveNewPendingIssue(Issue userIssue) {
-		userIssue.setProcessStatus(ProcessStatus.PENDING);
-		return issueRepository.save(userIssue);
+		Issue existedIssue = issueRepository.findByProductIdAndProcessStatus(userIssue.getProduct().getId(), ProcessStatus.PENDING);
+		if(existedIssue == null){
+			userIssue.setProcessStatus(ProcessStatus.PENDING);
+			return issueRepository.save(userIssue);
+		}
+		return existedIssue;
 	}
 	
 	@Override
@@ -61,5 +65,6 @@ public class IssueServiceImpl implements IssueService{
 	public Issue getOneByCustomerId(int customerId) {
 		return issueRepository.findByCustomerIdAndProcessStatusNot(customerId, ProcessStatus.EVALUATED);
 	}
+	
 	
 }

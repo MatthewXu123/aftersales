@@ -5,7 +5,7 @@ $(function(){
 	formSubmit();
 	if(mrecordId!=null){
     	$(".option-alarmCode").each(function(){
-			if($(this).val() == mrecordAlarmCode)
+			if($(this).val() == mrecordAlarmId)
 				$(this).attr("selected",true);
 		})
 		$(".textarea-description").val(mrecordComment);

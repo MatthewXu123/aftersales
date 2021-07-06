@@ -55,7 +55,7 @@ public class Issue{
 	
 	private String userPhone;
 	
-	@OneToOne
+	@ManyToOne
 	@JoinColumn(name = "halarm_id", referencedColumnName = "id")
 	private HumidifierAlarm hAlarm;
 	

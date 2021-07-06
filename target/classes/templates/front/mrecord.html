@@ -47,10 +47,10 @@
             </div>
             <div th:if="${issue.product.productInfo != null}" class="div-form-special flex-container">
                 <span class="span-form" th:text="#{umain.failure}"></span>
-                <input name="alarmCode" class="input-alarmCode" type="hidden">
-                <select class="select-cause" th:value="${maintenanceRecord != null ? maintenanceRecord.alarmCode : ''}">
+                <input name="alarmId" class="input-alarmCode" type="hidden">
+                <select class="select-cause" th:value="${maintenanceRecord != null && maintenanceRecord.hAlarm != null ? maintenanceRecord.hAlarm.id : ''}">
                     <div th:each="alarm : ${issue.product.productInfo.humidifierAlarms}">
-                        <option class="option-alarmCode" th:value="${alarm.code}" th:text="${alarm.code} + ' ' + ${alarm.secDescription}"></option>
+                        <option class="option-alarmCode" th:value="${alarm.id}" th:text="${alarm.code} + ' ' + ${alarm.secDescription}"></option>
                     </div>
                 </select>
             </div>
@@ -101,7 +101,7 @@
 
     <script th:inline="javascript">
     	var mrecordId = /*[[${mrecordId}]]*/;
-    	var mrecordAlarmCode = /*[[${mrecordAlarmCode}]]*/;
+    	var mrecordAlarmId = /*[[${mrecordAlarmId}]]*/;
     	var mrecordComment = /*[[${mrecordComment}]]*/;
     	var i18nVal = $.cookie('i18n_cookie');
         $(".icon-return").click(function(){

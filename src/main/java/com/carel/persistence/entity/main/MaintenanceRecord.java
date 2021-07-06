@@ -20,6 +20,7 @@ import org.hibernate.annotations.TypeDef;
 import org.hibernate.annotations.UpdateTimestamp;
 
 import com.carel.persistence.constant.ProcessStatus;
+import com.carel.persistence.entity.product.HumidifierAlarm;
 import com.carel.persistence.entity.product.Product;
 import com.carel.persistence.jpa.postgres.arrays.PostgresStringArray;
 
@@ -50,7 +51,9 @@ public class MaintenanceRecord implements Serializable{
 	
 	private String maintainerPhone;
 	
-	private String alarmCode;
+	@ManyToOne
+	@JoinColumn(name = "halarm_id", referencedColumnName = "id")
+	private HumidifierAlarm hAlarm;
 	
 	private byte[] photo1;
 	
@@ -118,12 +121,12 @@ public class MaintenanceRecord implements Serializable{
 		this.maintainerPhone = maintainerPhone;
 	}
 
-	public String getAlarmCode() {
-		return alarmCode;
+	public HumidifierAlarm gethAlarm() {
+		return hAlarm;
 	}
 
-	public void setAlarmCode(String alarmCode) {
-		this.alarmCode = alarmCode;
+	public void sethAlarm(HumidifierAlarm hAlarm) {
+		this.hAlarm = hAlarm;
 	}
 
 	public byte[] getPhoto1() {

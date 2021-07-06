@@ -167,4 +167,8 @@ public class InstallationInfo{
 		this.updateTime = updateTime;
 	}
 	
+	public String getDetailedAddress(){
+		return this.province + this.city + this.district + this.street + this.address;
+	}
+
 }

@@ -39,7 +39,7 @@ public class MRecordController extends BaseController{
 			if(maintenanceRecord != null){
 				model.addAttribute("maintenanceRecord", maintenanceRecord);
 				model.addAttribute("mrecordId", maintenanceRecord.getId());
-				model.addAttribute("mrecordAlarmCode", maintenanceRecord.getAlarmCode());
+				model.addAttribute("mrecordAlarmId", maintenanceRecord.gethAlarm().getId());
 				model.addAttribute("mrecordComment", maintenanceRecord.getComment());
 			}
 			return "/front/mrecord";
@@ -56,6 +56,7 @@ public class MRecordController extends BaseController{
 			@RequestParam MultipartFile p1,
 			@RequestParam MultipartFile p2,
 			@RequestParam MultipartFile p3,
+			@RequestParam(required = false) Integer alarmId,
 			@RequestParam Integer photo1Val,
 			@RequestParam Integer photo2Val,
 			@RequestParam Integer photo3Val){
@@ -72,6 +73,8 @@ public class MRecordController extends BaseController{
 				record.setPhoto3(p3.getBytes());
 				record.setProduct(product);
 				record.setIssue(issue);
+				if(alarmId != null)
+					record.sethAlarm(humidifierAlarmService.getOneById(alarmId));
 				if(record.getProcessStatus().equals(ProcessStatus.FINISHED))
 					issue.setProcessStatus(ProcessStatus.FINISHED);
 				maintenanceRecordService.saveOne(record);
@@ -95,6 +98,8 @@ public class MRecordController extends BaseController{
 				record.setId(oldRecord.getId());
 				record.setIssue(issue);
 				record.setProduct(product);
+				if(alarmId != null)
+					record.sethAlarm(humidifierAlarmService.getOneById(alarmId));
 				if(record.getProcessStatus().equals(ProcessStatus.FINISHED))
 					issue.setProcessStatus(ProcessStatus.FINISHED);
 				else

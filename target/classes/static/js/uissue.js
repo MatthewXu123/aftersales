@@ -28,6 +28,8 @@ function tabInit() {
 	});
 	$(".span-tab1").click();
 	if(issueStatus != undefined && issueStatus != null){
+		if(issueStatus == 'IN_PROGRESS' || issueStatus == 'PENDING')
+			$(".div-submit").css("display", "none");
 		if(issueStatus != 'FINISHED'){
 			$("#div-main-process").css("height","25%");
 			$(".div-evaluation").css("display", "none");

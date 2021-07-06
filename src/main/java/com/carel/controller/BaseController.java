@@ -8,11 +8,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import com.carel.component.ResultFactory;
+import com.carel.property.mailmsg.MailMsgProperty;
 import com.carel.property.wxcpmsg.WxCpMsgProperty;
 import com.carel.service.CustomerService;
 import com.carel.service.HumidifierAlarmService;
 import com.carel.service.InstallationInfoService;
 import com.carel.service.IssueService;
+import com.carel.service.MailService;
 import com.carel.service.MaintenanceRecordService;
 import com.carel.service.PhotoService;
 import com.carel.service.ProductInfoService;
@@ -82,10 +84,16 @@ public class BaseController {
 	protected WxCpMsgService wxCpMsgService;
 	
 	@Autowired
+	protected MailService mailService;
+	
+	@Autowired
 	protected WxCpDepartmentService wxCpDepartmentService;
 	
 	@Autowired
 	protected WxCpMsgProperty wxCpMsgProperty;
+	
+	@Autowired
+	protected MailMsgProperty mailMsgProperty;
 	
 	protected Integer getPid(){
 		return (Integer) httpSession.getAttribute("pid");

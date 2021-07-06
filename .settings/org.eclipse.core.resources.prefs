@@ -5,6 +5,7 @@ encoding//src/main/resources/application.properties=UTF-8
 encoding//src/main/resources/i18n/messages.properties=UTF-8
 encoding//src/main/resources/i18n/messages_en_US.properties=UTF-8
 encoding//src/main/resources/i18n/messages_zh_CN.properties=UTF-8
+encoding//src/main/resources/property/mailmsg/mailmsg.properties=UTF-8
 encoding//src/main/resources/property/wxcpmsg/wxcpmsg.properties=UTF-8
 encoding//src/test/java=UTF-8
 encoding/<project>=UTF-8
