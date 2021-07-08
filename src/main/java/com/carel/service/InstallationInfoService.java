@@ -1,6 +1,8 @@
 
 package com.carel.service;
 
+import java.util.List;
+
 import com.carel.persistence.entity.main.InstallationInfo;
 
 /**
@@ -13,4 +15,6 @@ public interface InstallationInfoService {
 	InstallationInfo getOneByPid(Integer pid);
 	
 	InstallationInfo saveOne(InstallationInfo installationInfo);
+	
+	List<InstallationInfo> getAll();
 }

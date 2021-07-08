@@ -65,6 +65,11 @@ public class IssueServiceImpl implements IssueService{
 	public Issue getOneByCustomerId(int customerId) {
 		return issueRepository.findByCustomerIdAndProcessStatusNot(customerId, ProcessStatus.EVALUATED);
 	}
+
+	@Override
+	public List<Issue> getAll() {
+		return issueRepository.findAll();
+	}
 	
 	
 }

@@ -1,6 +1,8 @@
 
 package com.carel.service.impl;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -27,6 +29,11 @@ public class InstallationInfoServiceImpl implements InstallationInfoService{
 	@Override
 	public InstallationInfo saveOne(InstallationInfo installationInfo) {
 		return installationInfoRepository.save(installationInfo);
+	}
+
+	@Override
+	public List<InstallationInfo> getAll() {
+		return installationInfoRepository.findAll();
 	}
 
 }

@@ -1,6 +1,8 @@
 
 package com.carel.service;
 
+import java.util.List;
+
 import com.carel.persistence.entity.main.MaintenanceRecord;
 
 /**
@@ -15,4 +17,6 @@ public interface MaintenanceRecordService {
 	MaintenanceRecord saveOne(MaintenanceRecord maintenanceRecord);
 	
 	MaintenanceRecord getOneById(Integer id);
+	
+	List<MaintenanceRecord> getAll();
 }

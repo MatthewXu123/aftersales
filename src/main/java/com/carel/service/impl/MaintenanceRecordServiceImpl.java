@@ -1,6 +1,8 @@
 
 package com.carel.service.impl;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -32,6 +34,11 @@ public class MaintenanceRecordServiceImpl implements MaintenanceRecordService{
 	@Override
 	public MaintenanceRecord getOneById(Integer id) {
 		return maintenanceRecordRepository.findById(id).orElse(null);
+	}
+
+	@Override
+	public List<MaintenanceRecord> getAll() {
+		return maintenanceRecordRepository.findAll();
 	}
 
 }

@@ -22,6 +22,8 @@ public interface IssueService {
 	
 	List<Issue> getAllByPid(int pid);
 	
+	List<Issue> getAll();
+	
 	Issue getOneById(int id);
 	
 	Issue getOneByCode(String code);
