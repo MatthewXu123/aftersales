@@ -46,7 +46,14 @@ function formSubmit() {
 					"comment" : $("#textarea_comment").val()
 				},
 				success : function(result) {
-					window.location.href="/aftersales/minstall";
+					if(i18nVal == 'zh-CN' || i18nVal == undefined){
+						$("#btn_form").text('信息已提交');
+					}else{
+						$("#btn_form").text('Submitting...');
+					}
+					setTimeout(function(){
+						window.location.href="/aftersales/minstall";
+					},2000);
 				}
 			})
 		}

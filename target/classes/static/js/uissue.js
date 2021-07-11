@@ -62,7 +62,15 @@ function formSubmit(){
 			if(issueId == null || issueId == undefined || $("#div-subtab-maintenance").hasClass("border-selected")){
 				photoVal();
 				$(".input-alarmCode").val($(".select-cause").find("option:selected").val());
-				$("#form_main").submit();
+				if(i18nVal == 'zh-CN' || i18nVal == undefined){
+					$("#btn_form").text('您的需求已提交');
+				}else{
+					$("#btn_form").text('Submitting...');
+				}
+				setTimeout(function(){
+					$("#form_main").submit();
+				},2000);
+				
 			}
 		}
 		
@@ -78,9 +86,9 @@ function formSubmit(){
 				success:function(result){
 					if(result.status == 200){
 						if(i18nVal == 'zh-CN' || i18nVal == undefined){
-							$("#btn_form").text('已提交，即将跳转');
+							$("#btn_form").text('谢谢您的评价');
 						}else{
-							$("#btn_form").text('Submitting...');
+							$("#btn_form").text('Thank you!');
 						}
 						setTimeout(function(){
 							window.location.href = "/aftersales/uboard";
