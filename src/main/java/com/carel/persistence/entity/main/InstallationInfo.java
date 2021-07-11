@@ -30,7 +30,7 @@ public class InstallationInfo{
 	
     @OneToOne
 	@JoinColumn(name = "pid", referencedColumnName = "id")
-    @JSONField(serialize = false)
+    //@JSONField(serialize = false)
 	private Product product;
     
 	private String installerName;

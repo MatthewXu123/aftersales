@@ -8,7 +8,10 @@ import org.springframework.stereotype.Service;
 
 import com.carel.persistence.entity.main.InstallationInfo;
 import com.carel.repository.InstallationInfoRepository;
+import com.carel.repository.IssueRepository;
+import com.carel.repository.MaintenanceRecordRepository;
 import com.carel.service.InstallationInfoService;
+import com.carel.service.IssueService;
 
 /**
  * Description:
@@ -20,6 +23,12 @@ public class InstallationInfoServiceImpl implements InstallationInfoService{
 
 	@Autowired
 	InstallationInfoRepository installationInfoRepository;
+	
+	@Autowired
+	IssueRepository issueRepository;
+	
+	@Autowired
+	MaintenanceRecordRepository maintenanceRecordRepository;
 	
 	@Override
 	public InstallationInfo getOneByPid(Integer pid) {
@@ -34,6 +43,15 @@ public class InstallationInfoServiceImpl implements InstallationInfoService{
 	@Override
 	public List<InstallationInfo> getAll() {
 		return installationInfoRepository.findAll();
+	}
+
+	@Override
+	public void deleteInstallationInfoAndIssueAndMRecordById(int id) {
+		InstallationInfo installationInfo = installationInfoRepository.findById(id).get();
+		int pid = installationInfo.getProduct().getId();
+		maintenanceRecordRepository.deleteByProductId(pid);
+		issueRepository.deleteByProductId(pid);
+		installationInfoRepository.deleteByProductId(pid);
 	}
 
 }

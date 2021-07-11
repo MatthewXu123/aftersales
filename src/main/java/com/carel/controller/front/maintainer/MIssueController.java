@@ -105,12 +105,10 @@ public class MIssueController extends BaseController{
 				Product product = productService.getOneById(pid);
 				String ownerCustomerId = product.getOwnerCustomer().getWxcpDeptId();
 				Customer repairCustomer = customerService.getOneByDeptId(String.valueOf(repairCustomerId));
-				if(!String.valueOf(repairCustomerId).equals(ownerCustomerId)){
-					wxCpMsgService.sendNewIssueMsg(wxCpMsgProperty.getNewIssue(),
-							repairCustomer.getWxcpDeptId(), 
-							issue, 
-							product);
-				}
+				wxCpMsgService.sendNewIssueMsg(wxCpMsgProperty.getNewIssue(),
+						repairCustomer.getWxcpDeptId(), 
+						issue, 
+						product);
 				issue.setCustomer(repairCustomer);
 				issue.setProcessStatus(ProcessStatus.IN_PROGRESS);
 				issueService.saveIssue(issue);

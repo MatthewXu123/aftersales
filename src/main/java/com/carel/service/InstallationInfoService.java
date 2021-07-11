@@ -17,4 +17,6 @@ public interface InstallationInfoService {
 	InstallationInfo saveOne(InstallationInfo installationInfo);
 	
 	List<InstallationInfo> getAll();
+	
+	void deleteInstallationInfoAndIssueAndMRecordById(int id);
 }

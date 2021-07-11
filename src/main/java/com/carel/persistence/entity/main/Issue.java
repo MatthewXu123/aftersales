@@ -16,9 +16,11 @@ import javax.persistence.OneToOne;
 import javax.validation.constraints.NotBlank;
 
 import org.apache.commons.lang3.StringUtils;
+import org.apache.xmlbeans.impl.xb.xsdschema.Facet;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
+import com.alibaba.fastjson.annotation.JSONField;
 import com.carel.persistence.constant.EvaluationLevel;
 import com.carel.persistence.constant.ProcessStatus;
 import com.carel.persistence.entity.community.Customer;
@@ -46,6 +48,7 @@ public class Issue{
 	private Customer customer;
 	
 	@OneToOne(mappedBy = "issue")
+	@JSONField(serialize = false)
 	private MaintenanceRecord maintenanceRecord;
 
 	private String code;

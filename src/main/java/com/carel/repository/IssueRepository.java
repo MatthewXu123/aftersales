@@ -5,6 +5,7 @@ import java.util.List;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.carel.persistence.constant.ProcessStatus;
 import com.carel.persistence.entity.main.Issue;
@@ -33,5 +34,8 @@ public interface IssueRepository extends JpaRepository<Issue, Integer>{
 	List<Issue> findByProductId(int pid);
 	
 	Issue findByCode(String code);
+	
+	@Transactional
+	void deleteByProductId(int id);
 	
 }

@@ -27,4 +27,6 @@ public interface IssueService {
 	Issue getOneById(int id);
 	
 	Issue getOneByCode(String code);
+	
+	void deleteIssueAndMRecordById(int id);
 }

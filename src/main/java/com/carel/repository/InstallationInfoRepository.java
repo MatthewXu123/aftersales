@@ -3,6 +3,7 @@ package com.carel.repository;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.carel.persistence.entity.main.InstallationInfo;
 
@@ -15,4 +16,8 @@ import com.carel.persistence.entity.main.InstallationInfo;
 public interface InstallationInfoRepository extends JpaRepository<InstallationInfo, Integer>{
 
 	InstallationInfo findByProductId(Integer pid);
+	
+	@Transactional
+	void deleteByProductId(int id);
+	
 }

@@ -41,4 +41,9 @@ public class MaintenanceRecordServiceImpl implements MaintenanceRecordService{
 		return maintenanceRecordRepository.findAll();
 	}
 
+	@Override
+	public void deleteById(int id) {
+		maintenanceRecordRepository.deleteById(id);
+	}
+
 }

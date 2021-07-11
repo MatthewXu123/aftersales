@@ -8,7 +8,9 @@ import org.springframework.stereotype.Service;
 
 import com.carel.persistence.constant.ProcessStatus;
 import com.carel.persistence.entity.main.Issue;
+import com.carel.persistence.entity.product.Product;
 import com.carel.repository.IssueRepository;
+import com.carel.repository.MaintenanceRecordRepository;
 import com.carel.repository.ProductInfoRepository;
 import com.carel.service.IssueService;
 
@@ -25,6 +27,9 @@ public class IssueServiceImpl implements IssueService{
 	
 	@Autowired
 	ProductInfoRepository productInfoRepository;
+	
+	@Autowired
+	MaintenanceRecordRepository maintenanceRecordRepository;
 
 	@Override
 	public Issue saveNewPendingIssue(Issue userIssue) {
@@ -69,6 +74,12 @@ public class IssueServiceImpl implements IssueService{
 	@Override
 	public List<Issue> getAll() {
 		return issueRepository.findAll();
+	}
+
+	@Override
+	public void deleteIssueAndMRecordById(int id) {
+		maintenanceRecordRepository.deleteByIssueId(id);
+		issueRepository.deleteById(id);
 	}
 	
 	

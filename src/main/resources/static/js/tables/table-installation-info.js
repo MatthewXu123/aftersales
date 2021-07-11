@@ -2,14 +2,14 @@ $(function() {
 	var oTable = new TableInit();
 	oTable.Init();
 	$("#btn_delete").click(function() {
-		if (confirm("确认要删除吗？")) {
+		if (confirm("确认要删除安装信息以及相应issue和维修记录吗？")) {
 			var ids = "";
 			$("input[name='btSelectItem']:checked").each(function() {
 				ids += $(this).parents("tr").attr("data-uniqueid") + ",";
 			})
 			$.ajax({
 				type : "post",
-				url : "/watchDog/dsites/delete",
+				url : "/aftersales/dm_installationinfo/delete",
 				data : {
 					"ids": ids,
 				},
@@ -17,6 +17,7 @@ $(function() {
 				success : function(data, status) {
 					if (status == "success") {
 						alert('提交数据成功');
+						$("#table").bootstrapTable('refresh');
 					}
 				},
 				error : function() {
@@ -61,21 +62,20 @@ var TableInit = function() {
 				checkbox : true
 			}, 
 			{
-				field : 'pk.productCode',
-				title : '产品料号',
+				field : 'product.serialNumber',
+				title : '序列号',
 				sortable:true
 			},
 			{
-				field : 'pk.partCode',
-				title : '备件料号'
+				field : 'product.productCode',
+				title : '产品代码'
 			}, 
 			{
-				field : 'description',
-				title : '说明',
+				field : 'installerName',
+				title : '安装人员',
 				sortable:true,
 				editable : {
 					type : 'text',
-					title : '说明',
 					mode: "inline",  
 					emptytext:'暂无',
 					validate : function(v) {
@@ -85,8 +85,92 @@ var TableInit = function() {
 				}
 			}, 
 			{
-				field : 'alternativeDescription',
-				title : '备用说明',
+				field : 'installerPhone',
+				title : '安装人员电话',
+				sortable:true,
+				editable : {
+					type : 'text',
+					mode: "inline",  
+					emptytext:'暂无',
+					validate : function(v) {
+						if (!v)
+							return '不能为空';
+					}
+				}
+			}, 
+			{
+				field : 'province',
+				title : '省份',
+				sortable:true,
+				editable : {
+					type : 'text',
+					mode: "inline",  
+					emptytext:'暂无',
+					validate : function(v) {
+						if (!v)
+							return '不能为空';
+					}
+				}
+			}, 
+			{
+				field : 'city',
+				title : '城市',
+				sortable:true,
+				editable : {
+					type : 'text',
+					mode: "inline",  
+					emptytext:'暂无',
+					validate : function(v) {
+						if (!v)
+							return '不能为空';
+					}
+				}
+			}, 
+			{
+				field : 'district',
+				title : '区',
+				sortable:true,
+				editable : {
+					type : 'text',
+					mode: "inline",  
+					emptytext:'暂无',
+					validate : function(v) {
+						if (!v)
+							return '不能为空';
+					}
+				}
+			}, 
+			{
+				field : 'street',
+				title : '街道',
+				sortable:true,
+				editable : {
+					type : 'text',
+					mode: "inline",  
+					emptytext:'暂无',
+					validate : function(v) {
+						if (!v)
+							return '不能为空';
+					}
+				}
+			}, 
+			{
+				field : 'address',
+				title : '地址',
+				sortable:true,
+				editable : {
+					type : 'text',
+					mode: "inline",  
+					emptytext:'暂无',
+					validate : function(v) {
+						if (!v)
+							return '不能为空';
+					}
+				}
+			}, 
+			{
+				field : 'comment',
+				title : '说明',
 				sortable:true,
 				editable : {
 					type : 'text',
@@ -98,40 +182,20 @@ var TableInit = function() {
 							return '不能为空';
 					}
 				}
-			}, 
-			{
-				field : 'requiredNum',
-				title : '1台所需数量',
-				sortable:true,
-				editable : {
-					type : 'number',
-					title : '1台所需数量',
-					mode: "inline",  
-					emptytext:'暂无',
-					validate: function (v) {
-						if (isNaN(v)) return '数量必须是数字';
-						var age = parseInt(v);
-						if (age <= 0) return '数量必须是正整数';
-					}
-				}
 			}
 			
 			],
 			onEditableSave:function(field, row, oldValue, $el) {
-				// 可进行异步操作
 				$.ajax({
 					type : "post",
-					url : "/aftersales/sparepart/update",
-//					data : {
-//						"sparePart": JSON.stringify(row),
-//					},
+					url : "/aftersales/dm_installationinfo/save",
 					data: JSON.stringify(row),
 					contentType: 'application/json;charset=utf-8',
-					//contentType : 'application/json',
 					dataType : 'JSON',
 					success : function(data, status) {
 						if (status == "success") {
 							alert('操作成功');
+							$("#table").bootstrapTable('refresh');
 						}
 					},
 					error : function() {

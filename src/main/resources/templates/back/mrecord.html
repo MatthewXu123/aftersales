@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <base th:href="${#request.getContextPath()}+'/'">
+    <link href="static/css/bootstrap.min.css" rel="stylesheet">
+    <link href="static/css/font-awesome.min.css" rel="stylesheet">
+    <link href="static/css/animate.css" rel="stylesheet">
+    <link href="static/css/style.css" rel="stylesheet">
+    <link href="static/css/upload.css" rel="stylesheet">
+    <link href="static/css/plugins/bootstrap-table/bootstrap-table.min.css" rel="stylesheet">
+    
+    <!-- 全局js -->
+    <script src="static/js/jquery/jquery.min.js"></script>
+    <script src="static/js/bootstrap/popper.min.js"></script>
+    <script src="static/js/bootstrap/bootstrap.min.js"></script>
+    <script th:src="@{static/js/index.js}" type="text/javascript"></script>
+    <script th:src="@{static/js/tables/table-mrecord.js}" type="text/javascript"></script>
+    <!-- Bootstrap table -->
+    <script src="static/js/plugins/bootstrap-table/bootstrap-table.min.js"></script>
+    <script src="static/js/plugins/bootstrap-table/locale/bootstrap-table-zh-CN.min.js"></script>
+    <script src="static/js/bootstrap/bootstrap-editable.min.js"></script>
+    <script src="static/js/bootstrap/bootstrap-table-editable.js"></script>
+    <script src="static/js/plugins/bootstrap-table/bootstrap-table-mobile.min.js"></script>
+</head>
+<body class="gray-bg">
+    <div class="wrapper wrapper-content animated fadeIn">
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="ibox float-e-margins">
+                	<div class="div-alert"></div>
+                    <div id="modal-header" class="ibox-title">
+                        <h5>Issue</h5>
+                    </div>
+                    <div class="col-sm-12">
+                    	<div id="toolbar" class="btn-group">
+							<button id="btn_delete" type="button" class="btn btn-default">
+								<span class="glyphicon glyphicon-remove" aria-hidden="true">删除</span>
+							</button>
+						</div>
+						<div class="example-wrap">
+							<table id="table"></table>
+						</div>
+					</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

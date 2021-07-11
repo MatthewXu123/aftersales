@@ -19,4 +19,6 @@ public interface MaintenanceRecordService {
 	MaintenanceRecord getOneById(Integer id);
 	
 	List<MaintenanceRecord> getAll();
+	
+	void deleteById(int id);
 }
