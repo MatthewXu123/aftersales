@@ -83,7 +83,7 @@ public class ReportServiceImpl implements ReportService{
 			}
 			mailContent += mrs.size() == 0 ? "暂无" : "";
 			
-			mailService.sendSimpleMail("916415285@qq.com", mailTitle, mailContent);
+			mailService.sendSimpleMail(null, mailTitle, mailContent);
 		} catch (Exception e) {
 			logger.error("" ,e);
 		}
