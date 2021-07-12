@@ -1,6 +1,7 @@
 
 package com.carel.service;
 
+import java.util.Date;
 import java.util.List;
 
 import com.carel.persistence.entity.main.InstallationInfo;
@@ -19,4 +20,6 @@ public interface InstallationInfoService {
 	List<InstallationInfo> getAll();
 	
 	void deleteInstallationInfoAndIssueAndMRecordById(int id);
+	
+	List<InstallationInfo> getByCreateTimeBetween(Date start, Date end);
 }

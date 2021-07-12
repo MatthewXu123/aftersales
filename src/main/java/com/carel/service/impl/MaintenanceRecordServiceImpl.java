@@ -1,6 +1,7 @@
 
 package com.carel.service.impl;
 
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -44,6 +45,11 @@ public class MaintenanceRecordServiceImpl implements MaintenanceRecordService{
 	@Override
 	public void deleteById(int id) {
 		maintenanceRecordRepository.deleteById(id);
+	}
+
+	@Override
+	public List<MaintenanceRecord> getByCreateTimeBetween(Date start, Date end) {
+		return maintenanceRecordRepository.findByCreateTimeBetween(start, end);
 	}
 
 }

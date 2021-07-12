@@ -1,8 +1,6 @@
 
 package com.carel.repository;
 
-import java.util.Date;
-
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,7 +31,7 @@ public class ProductInfoRepositoryTest {
 		ProductInfo productInfo = new ProductInfo();
 		productInfo.setDescription("huh");
 		productInfo.setType("huh");
-		ProductInfo save = productInfoRepository.save(productInfo);
+		productInfoRepository.save(productInfo);
 	}
 	
 	

@@ -13,7 +13,6 @@ import javax.persistence.OneToOne;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
-import com.alibaba.fastjson.annotation.JSONField;
 import com.carel.persistence.entity.product.Product;
 
 /**
@@ -171,4 +170,14 @@ public class InstallationInfo{
 		return this.province + this.city + this.district + this.street + this.address;
 	}
 
+	@Override
+	public String toString() {
+		return "安装人员：" + installerName +
+				"；\n联系方式：" + installerPhone +
+				"；\n安装地点：" + getDetailedAddress() + 
+				"；\n说明：" + comment + 
+				"；\n安装时间：" + createTime + 
+				"；\n产品代码：" + product.getProductCode() + 
+				"；\n产品序列号：" + product.getSerialNumber();
+	}
 }

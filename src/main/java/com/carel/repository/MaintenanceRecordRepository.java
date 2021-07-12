@@ -1,6 +1,9 @@
 
 package com.carel.repository;
 
+import java.util.Date;
+import java.util.List;
+
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
@@ -22,4 +25,6 @@ public interface MaintenanceRecordRepository extends JpaRepository<MaintenanceRe
 	
 	@Transactional
 	void deleteByIssueId(int id);
+	
+	List<MaintenanceRecord> findByCreateTimeBetween(Date start, Date end);
 }

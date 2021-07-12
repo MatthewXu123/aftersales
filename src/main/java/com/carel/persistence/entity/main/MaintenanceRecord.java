@@ -192,5 +192,18 @@ public class MaintenanceRecord implements Serializable{
 	public void setUpdateTime(Date updateTime) {
 		this.updateTime = updateTime;
 	}
+	
+	@Override
+	public String toString() {
+		return "Issue Code：" + issue.getCode() +
+				"；\n维修人员：" + maintainerName +
+				"；\n联系方式：" + maintainerPhone +
+				"；\n故障原因：" + (hAlarm != null ? (hAlarm.getCode() + "-" + hAlarm.getSecDescription()) : "") +
+				"；\n维修状态：" + processStatus + 
+				"；\n说明：" + comment + 
+				"；\n维修起始时间：" + createTime + 
+				"；\n产品代码：" + product.getProductCode() + 
+				"；\n产品序列号：" + product.getSerialNumber();
+	}
 
 }

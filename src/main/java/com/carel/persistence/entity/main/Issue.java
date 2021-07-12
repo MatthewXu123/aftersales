@@ -16,7 +16,6 @@ import javax.persistence.OneToOne;
 import javax.validation.constraints.NotBlank;
 
 import org.apache.commons.lang3.StringUtils;
-import org.apache.xmlbeans.impl.xb.xsdschema.Facet;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
@@ -229,11 +228,19 @@ public class Issue{
 
 	@Override
 	public String toString() {
-		return "用户名：" + username +
+		return "代码：" + code +
+				"；\n维保公司：" + customer.getPartyName() +
+				"；\n用户名：" + username +
 				"；\n联系方式：" + userPhone + 
-				"；\n安装地点：" + product.getInstallationInfo().getAddress() + 
+				"；\n安装地点：" + product.getInstallationInfo().getDetailedAddress() + 
 				"；\n故障原因：" + (hAlarm != null ? (hAlarm.getCode() + "-" + hAlarm.getSecDescription()) : "") + 
-				"；\n其他：" + comment;
+				"；\n说明：" + comment + 
+				"；\n状态：" + processStatus + 
+				"；\n评价：" + evaluationLevel.toString() + 
+				"；\n评价内容：" + evaluationComment + 
+				"；\n创建时间：" + createTime + 
+				"；\n产品代码：" + product.getProductCode() + 
+				"；\n产品序列号：" + product.getSerialNumber();
 	}
 
 }

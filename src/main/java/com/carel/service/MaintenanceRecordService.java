@@ -1,6 +1,7 @@
 
 package com.carel.service;
 
+import java.util.Date;
 import java.util.List;
 
 import com.carel.persistence.entity.main.MaintenanceRecord;
@@ -21,4 +22,6 @@ public interface MaintenanceRecordService {
 	List<MaintenanceRecord> getAll();
 	
 	void deleteById(int id);
+	
+	List<MaintenanceRecord> getByCreateTimeBetween(Date start, Date end);
 }

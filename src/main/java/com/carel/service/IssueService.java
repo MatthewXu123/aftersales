@@ -1,6 +1,7 @@
 
 package com.carel.service;
 
+import java.util.Date;
 import java.util.List;
 
 import com.carel.persistence.entity.main.Issue;
@@ -29,4 +30,6 @@ public interface IssueService {
 	Issue getOneByCode(String code);
 	
 	void deleteIssueAndMRecordById(int id);
+	
+	List<Issue> getIssueBetween(Date start, Date end);
 }

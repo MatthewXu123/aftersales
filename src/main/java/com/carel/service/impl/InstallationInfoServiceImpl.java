@@ -1,6 +1,7 @@
 
 package com.carel.service.impl;
 
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,7 +12,6 @@ import com.carel.repository.InstallationInfoRepository;
 import com.carel.repository.IssueRepository;
 import com.carel.repository.MaintenanceRecordRepository;
 import com.carel.service.InstallationInfoService;
-import com.carel.service.IssueService;
 
 /**
  * Description:
@@ -52,6 +52,11 @@ public class InstallationInfoServiceImpl implements InstallationInfoService{
 		maintenanceRecordRepository.deleteByProductId(pid);
 		issueRepository.deleteByProductId(pid);
 		installationInfoRepository.deleteByProductId(pid);
+	}
+
+	@Override
+	public List<InstallationInfo> getByCreateTimeBetween(Date start, Date end) {
+		return installationInfoRepository.getByCreateTimeBetween(start, end);
 	}
 
 }

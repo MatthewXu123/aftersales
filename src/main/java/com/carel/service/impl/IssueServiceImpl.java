@@ -1,6 +1,8 @@
 
 package com.carel.service.impl;
 
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,11 +10,11 @@ import org.springframework.stereotype.Service;
 
 import com.carel.persistence.constant.ProcessStatus;
 import com.carel.persistence.entity.main.Issue;
-import com.carel.persistence.entity.product.Product;
 import com.carel.repository.IssueRepository;
 import com.carel.repository.MaintenanceRecordRepository;
 import com.carel.repository.ProductInfoRepository;
 import com.carel.service.IssueService;
+import com.carel.util.DateUtil;
 
 /**
  * Description:
@@ -80,6 +82,11 @@ public class IssueServiceImpl implements IssueService{
 	public void deleteIssueAndMRecordById(int id) {
 		maintenanceRecordRepository.deleteByIssueId(id);
 		issueRepository.deleteById(id);
+	}
+
+	@Override
+	public List<Issue> getIssueBetween(Date start, Date end) {
+		return issueRepository.findByCreateTimeBetween(start, end);
 	}
 	
 	
