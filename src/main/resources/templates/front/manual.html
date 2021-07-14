@@ -20,6 +20,14 @@
         		<img class="img-tutorial" th:src="@{/static/img/pdf_ur.jpg}">
         		<span class="span-tutorial">电热型加湿器前所未有的精密控制与高可靠性</span>
         	</div>
+        	<div th:case="hut" class="flex-container-column div-tutorial" id="ur">
+        		<img class="img-tutorial" th:src="@{/static/img/pdf_hut_huh.jpg}">
+        		<span class="span-tutorial">来自欧洲的高端住宅加湿器健康解决方案</span>
+        	</div>
+        	<div th:case="huh" class="flex-container-column div-tutorial" id="ur">
+        		<img class="img-tutorial" th:src="@{/static/img/pdf_hut_hut.jpg}">
+        		<span class="span-tutorial">来自欧洲的高端住宅加湿器健康解决方案</span>
+        	</div>
         	<span class="span-notutorial" th:case="*" th:text="#{manual.nopdf}"></span>
         </div>
 		
