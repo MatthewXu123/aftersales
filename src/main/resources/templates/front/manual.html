@@ -20,12 +20,12 @@
         		<img class="img-tutorial" th:src="@{/static/img/pdf_ur.jpg}">
         		<span class="span-tutorial">电热型加湿器前所未有的精密控制与高可靠性</span>
         	</div>
-        	<div th:case="hut" class="flex-container-column div-tutorial" id="ur">
+        	<div th:case="hut" class="flex-container-column div-tutorial" id="hut">
         		<img class="img-tutorial" th:src="@{/static/img/pdf_hut_huh.jpg}">
         		<span class="span-tutorial">来自欧洲的高端住宅加湿器健康解决方案</span>
         	</div>
-        	<div th:case="huh" class="flex-container-column div-tutorial" id="ur">
-        		<img class="img-tutorial" th:src="@{/static/img/pdf_hut_hut.jpg}">
+        	<div th:case="huh" class="flex-container-column div-tutorial" id="huh">
+        		<img class="img-tutorial" th:src="@{/static/img/pdf_hut_huh.jpg}">
         		<span class="span-tutorial">来自欧洲的高端住宅加湿器健康解决方案</span>
         	</div>
         	<span class="span-notutorial" th:case="*" th:text="#{manual.nopdf}"></span>
@@ -42,10 +42,10 @@
 			var id = $(this).attr("id");
 			if(id == "ue")
 				window.open("http://wei.hvacrhome.cn/kale/web/viewer.html?file=http://wei.hvacrhome.cn/file/upload/202004/22/1535543829.pdf");
-				//window.location.href = "http://wei.hvacrhome.cn/kale/web/viewer.html?file=http://wei.hvacrhome.cn/file/upload/202004/22/1535543829.pdf";
 			else if(id == "ur")
 				window.open("http://wei.hvacrhome.cn/kale/web/viewer.html?file=http://wei.hvacrhome.cn/file/upload/202004/21/1445015229.pdf");
-				//window.location.href = "http://wei.hvacrhome.cn/kale/web/viewer.html?file=http://wei.hvacrhome.cn/file/upload/202004/21/1445015229.pdf";
+			else if(id == "huh" || id == "hut")
+				window.open("http://wei.hvacrhome.cn/kale/web/viewer.html?file=http://wei.hvacrhome.cn/file/upload/202102/07/1123439429.pdf");
 		})
 	</script>
 </body>
